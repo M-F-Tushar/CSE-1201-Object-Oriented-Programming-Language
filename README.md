@@ -32,8 +32,8 @@ This book is the primary reference used throughout the course for understanding 
 
 ## 🛠 Languages Used
 
-- **C++** (primary focus)
-- **Java** (used for comparison and threads)
+- **C++** 
+- **Java** 
 
 
 Each folder includes:
