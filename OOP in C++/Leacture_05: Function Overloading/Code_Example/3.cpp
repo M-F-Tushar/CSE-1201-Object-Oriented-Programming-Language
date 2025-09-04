@@ -20,6 +20,7 @@ public:
     {
         cout << "Date: " << day << "/" << month << "/" << year << endl;
     }
+
 };
 
 int main()
@@ -31,4 +32,5 @@ int main()
     s2.show();
 
     return 0;
+
 }
