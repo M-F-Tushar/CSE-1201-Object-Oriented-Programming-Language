@@ -3,7 +3,7 @@ using namespace std;
 
 class Matrix {
 private:
-    double data[2][2];  // Simple 2x2 matrix for demonstration
+    double data[2][2];  // Simple 2x2 matrix 
 public:
     // Default constructor
     Matrix(double a=0, double b=0, double c=0, double d=0) 
@@ -107,3 +107,4 @@ int main() {
 
     return 0;
 }
+
