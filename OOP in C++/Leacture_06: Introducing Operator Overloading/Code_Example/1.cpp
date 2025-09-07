@@ -1,6 +1,5 @@
 #include<iostream>
 using namespace std;
-
 class Counter 
 {
 private:
@@ -41,4 +40,5 @@ int main()
     cout << "c3: " << c3.getvalue() << endl;
 
     return 0;
+
 }
