@@ -1,6 +1,5 @@
 #include <iostream>
 using namespace std;
-
 class Matrix {
 private:
     double data[2][2];  // Simple 2x2 matrix 
@@ -107,4 +106,5 @@ int main() {
 
     return 0;
 }
+
 
