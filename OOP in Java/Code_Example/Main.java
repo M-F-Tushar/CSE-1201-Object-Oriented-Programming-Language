@@ -1,46 +1,49 @@
-package For_Final;
+package Polymorphism;
 
-abstract class Vehicle 
+// Parent Class
+class Parent 
 {
-    // Abstract methods (what it can do, but no details here)
-    abstract void accelerate();
-    abstract void brake();
-
-    // Concrete method (common to all vehicles)
-    void startEngine() 
+    // Overloaded method (compile-time polymorphism)
+    public void func() 
     {
-        System.out.println("Engine started!");
+        System.out.println("Parent.func()");
+    }
+
+    // Overloaded method (same name, different parameter)
+    public void func(int a) 
+    {
+        System.out.println("Parent.func(int): " + a);
     }
 }
 
-// Concrete implementation: Car is a type of Vehicle
-class Car extends Vehicle 
+// Child Class
+class Child extends Parent 
 {
+    // Overrides Parent.func(int) (runtime polymorphism)
     @Override
-    void accelerate() 
+    public void func(int a) 
     {
-        System.out.println("Car: Pressing gas pedal...");
-        // Hidden logic: fuel injection, gear shifting, etc.
-    }
-
-    @Override
-    void brake() 
-    {
-        System.out.println("Car: Applying brakes...");
-        // Hidden logic: hydraulic pressure, brake pads, etc.
+        System.out.println("Child.func(int): " + a);
     }
 }
 
-// Main class where the program starts
 public class Main 
 {
-    public static void main(String[] args) {
-        // Using polymorphism: Vehicle reference, Car object
-        Vehicle myCar = new Car();
+    public static void main(String[] args) 
+    {
+        Parent parent = new Parent();
+        Child child = new Child();
+        // Dynamic dispatch
+        Parent polymorphicObj = new Child();
 
-        myCar.startEngine();   // Calls Vehicle's method
-        myCar.accelerate();    // Calls Car's overridden method
-        myCar.brake();         // Calls Car's overridden method
+        // Method Overloading (compile-time)
+        parent.func();       // calls func()
+        parent.func(10);     // calls func(int)
+
+        // Method Overriding (runtime)
+        child.func(20);      // calls Child's func(int)
+
+        // Polymorphism in action
+        polymorphicObj.func(30); // calls Child's func(int) because of runtime polymorphism
     }
 }
-
