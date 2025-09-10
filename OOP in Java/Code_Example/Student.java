@@ -1,17 +1,28 @@
-package For_Final;
+package Inheritance;
 
-// create a Student class
-public class Student 
+// Base class for all students
+class Person
 {
-    // Declaring private attributes (Encapsulation)
-    private String name;
-    private int rollNo;
-    private String section;
+    String name;
 
-    // Constructor to initialize attributes
-    Student(String name, int rollNo, String section) 
+    // Constructor to initialize name
+    Person(String name)
     {
         this.name = name;
+    }
+}
+
+// Student class extending Person
+public class Student extends Person 
+{
+    // Additional attributes
+    int rollNo;
+    String section;
+
+    // Constructor to initialize all attributes
+    Student(String name, int rollNo, String section)
+    {
+        super(name); // call parent class constructor
         this.rollNo = rollNo;
         this.section = section;
     }
@@ -20,10 +31,10 @@ public class Student
     public void printDetails() 
     {
         System.out.print("Student Details: ");
-        System.out.println(this.name + ", " + this.rollNo + ", " + section);
+        System.out.println(this.name + ", " + this.rollNo + ", " + this.section);
     }
 
-    // Main method to run program
+    // Main method
     public static void main(String[] args) 
     {
         // Create student objects
