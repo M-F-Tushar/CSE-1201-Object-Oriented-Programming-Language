@@ -1,51 +1,23 @@
-package For_Final;
+package Polymorphism;
 
-// Define the Employee class
-public class Employee 
-{
+public class Employee {
     private String name;
-    private float salary;
+    private String address;
+    private int number;
 
-    public Employee(String name, float salary)
-    {
+    public Employee(String name, String address, int number) {
+        System.out.println("Constructing an Employee");
         this.name = name;
-        this.salary = salary;
+        this.address = address;
+        this.number = number;
     }
 
-    public String getName()
-    {
-        return name;
+    public void mailCheck() {
+        System.out.println("Mailing a check to " + this.name + " " + this.address);
     }
 
-    public float getSalary()
-    {
-        return salary;
-    }
-
-    public void setName(String name)
-    {
-        this.name = name;
-    }
-
-    public void setSalary(float salary)
-    {
-        this.salary = salary;
-    }
-
-    public void display()
-    {
-        System.out.println("Name: " + name);
-        System.out.println("Salary: " + salary);
-    }
-
-    public static void main(String[] args)
-    {
-        Employee emp = new Employee("Tusher", 50000.0f);
-        emp.display();
-        emp.setName("Mahir Faysal Tushar");
-        emp.setSalary(60000.0f);
-        emp.display();
-    }
+    public String getName() { return name; }
+    public String getAddress() { return address; }
+    public void setAddress(String newAddress) { address = newAddress; }
+    public int getNumber() { return number; }
 }
-
-
