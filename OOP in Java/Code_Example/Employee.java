@@ -1,6 +1,7 @@
 package Polymorphism;
 
-public class Employee {
+public class Employee 
+{
     private String name;
     private String address;
     private int number;
@@ -21,3 +22,4 @@ public class Employee {
     public void setAddress(String newAddress) { address = newAddress; }
     public int getNumber() { return number; }
 }
+
