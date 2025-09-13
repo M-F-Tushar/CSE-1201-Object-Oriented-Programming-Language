@@ -23,10 +23,13 @@ public class Employee
         return name; 
     }
     public String getAddress() 
-    { return address; }
+    { 
+        return address; 
+    }
     public void setAddress(String newAddress) { address = newAddress; }
     public int getNumber() { return number; }
 }
+
 
 
 
