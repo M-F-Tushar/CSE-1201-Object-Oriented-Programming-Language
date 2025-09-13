@@ -32,8 +32,10 @@ public class Employee
     }
     public int getNumber() 
     { 
-        return number; }
+        return number; 
+    }
 }
+
 
 
 
