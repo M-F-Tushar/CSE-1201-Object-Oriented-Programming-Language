@@ -31,8 +31,10 @@ public class Employee
         address = newAddress; 
     }
     public int getNumber() 
-    { return number; }
+    { 
+        return number; }
 }
+
 
 
 
