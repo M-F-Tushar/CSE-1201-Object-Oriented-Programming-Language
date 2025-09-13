@@ -1,6 +1,7 @@
 package Polymorphism;
 
-public class Salary extends Employee {
+public class Salary extends Employee 
+{
     private double salary;
 
     public Salary(String name, String address, int number, double salary) {
@@ -18,3 +19,4 @@ public class Salary extends Employee {
     public void setSalary(double newSalary) { if (newSalary >= 0.0) salary = newSalary; }
     public double computePay() { return salary / 52; }
 }
+
