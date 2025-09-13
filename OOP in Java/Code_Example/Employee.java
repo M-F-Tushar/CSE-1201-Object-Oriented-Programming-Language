@@ -19,11 +19,14 @@ public class Employee
     }
 
     public String getName() 
-    { return name; }
+    { 
+        return name; 
+    }
     public String getAddress() { return address; }
     public void setAddress(String newAddress) { address = newAddress; }
     public int getNumber() { return number; }
 }
+
 
 
 
