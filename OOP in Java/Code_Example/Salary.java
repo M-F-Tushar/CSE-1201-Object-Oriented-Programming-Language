@@ -27,8 +27,10 @@ public class Salary extends Employee
     }
     public double computePay() 
     { 
-        return salary / 52; }
+        return salary / 52; 
+    }
 }
+
 
 
 
