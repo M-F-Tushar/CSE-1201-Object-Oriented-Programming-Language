@@ -11,7 +11,8 @@ public class Salary extends Employee
     }
 
     @Override
-    public void mailCheck() {
+    public void mailCheck() 
+    {
         System.out.println("Within mailCheck of Salary class");
         System.out.println("Mailing check to " + getName() + " with salary " + salary);
     }
@@ -20,5 +21,6 @@ public class Salary extends Employee
     public void setSalary(double newSalary) { if (newSalary >= 0.0) salary = newSalary; }
     public double computePay() { return salary / 52; }
 }
+
 
 
