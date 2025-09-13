@@ -6,7 +6,8 @@ public class Employee
     private String address;
     private int number;
 
-    public Employee(String name, String address, int number) {
+    public Employee(String name, String address, int number) 
+    {
         System.out.println("Constructing an Employee");
         this.name = name;
         this.address = address;
@@ -35,6 +36,7 @@ public class Employee
         return number; 
     }
 }
+
 
 
 
