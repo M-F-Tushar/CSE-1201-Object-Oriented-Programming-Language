@@ -18,10 +18,12 @@ public class Employee
         System.out.println("Mailing a check to " + this.name + " " + this.address);
     }
 
-    public String getName() { return name; }
+    public String getName() 
+    { return name; }
     public String getAddress() { return address; }
     public void setAddress(String newAddress) { address = newAddress; }
     public int getNumber() { return number; }
 }
+
 
 
