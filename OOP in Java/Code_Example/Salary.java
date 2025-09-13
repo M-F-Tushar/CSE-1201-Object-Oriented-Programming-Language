@@ -26,8 +26,10 @@ public class Salary extends Employee
         if (newSalary >= 0.0) salary = newSalary; 
     }
     public double computePay() 
-    { return salary / 52; }
+    { 
+        return salary / 52; }
 }
+
 
 
 
