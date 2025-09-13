@@ -21,9 +21,11 @@ public class Salary extends Employee
     { 
         return salary; 
     }
-    public void setSalary(double newSalary) { if (newSalary >= 0.0) salary = newSalary; }
+    public void setSalary(double newSalary) 
+    { if (newSalary >= 0.0) salary = newSalary; }
     public double computePay() { return salary / 52; }
 }
+
 
 
 
