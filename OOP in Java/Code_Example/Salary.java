@@ -17,10 +17,12 @@ public class Salary extends Employee
         System.out.println("Mailing check to " + getName() + " with salary " + salary);
     }
 
-    public double getSalary() { return salary; }
+    public double getSalary() 
+    { return salary; }
     public void setSalary(double newSalary) { if (newSalary >= 0.0) salary = newSalary; }
     public double computePay() { return salary / 52; }
 }
+
 
 
 
