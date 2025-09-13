@@ -28,9 +28,11 @@ public class Employee
     }
     public void setAddress(String newAddress) 
     { 
-        address = newAddress; }
+        address = newAddress; 
+    }
     public int getNumber() { return number; }
 }
+
 
 
 
