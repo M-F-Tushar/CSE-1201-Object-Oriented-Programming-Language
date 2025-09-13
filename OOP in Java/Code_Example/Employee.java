@@ -13,7 +13,8 @@ public class Employee
         this.number = number;
     }
 
-    public void mailCheck() {
+    public void mailCheck() 
+    {
         System.out.println("Mailing a check to " + this.name + " " + this.address);
     }
 
@@ -22,4 +23,5 @@ public class Employee
     public void setAddress(String newAddress) { address = newAddress; }
     public int getNumber() { return number; }
 }
+
 
