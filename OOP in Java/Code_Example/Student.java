@@ -1,6 +1,5 @@
 package Inheritance;
 
-// Base class for all students
 class Person
 {
     String name;
@@ -48,3 +47,4 @@ public class Student extends Person
         student3.printDetails();
     }
 }
+
