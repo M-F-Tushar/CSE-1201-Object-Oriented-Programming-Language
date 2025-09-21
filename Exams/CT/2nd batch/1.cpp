@@ -20,6 +20,7 @@ a) Design a class hierarchy to represent this HR system, using all five types of
 b) Implement appropriate constructors, destructors, and functions to display employee details.
 c) Use virtual inheritance where necessary to avoid ambiguity.
 
+
 */
 #include<iostream>
 #include<string>
@@ -155,4 +156,5 @@ int main()
     delete e6;
 
     return 0;
+
 }
