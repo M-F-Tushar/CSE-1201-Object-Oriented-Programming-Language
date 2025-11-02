@@ -36,7 +36,7 @@ This course introduces the fundamental principles of **Object-Oriented Programmi
 
 ## Instructors 👨‍🏫
 **Md. Jahidul Islam**  
-Chairman 
+Chairman,
 Department of Computer Science and Engineering  
 Chandpur Science and Technology University
 
