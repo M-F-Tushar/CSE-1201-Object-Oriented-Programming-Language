@@ -2,7 +2,6 @@
 Q1 (a) How many access modifiers? Explain accessibility. [5 marks]
 
 C++ has three standard access modifiers:
-
 public
 
 Members declared public are accessible from anywhere the object is visible (inside member functions, non-member functions, other classes, main, etc.).
@@ -34,5 +33,6 @@ public:
 
 
 secret → only inside A, halfSecret → inside A and classes derived from A, visible → anywhere.
+
 
 */
