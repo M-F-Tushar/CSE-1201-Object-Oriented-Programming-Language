@@ -50,6 +50,9 @@ Chandpur Science and Technology University(Previously)
 **Herbert Schildt – Teach Yourself C++**  
 This book is the primary reference used throughout the course for understanding OOP concepts and syntax in C++.
 
+**Y. Daniel Liang - Introduction to Java programming**
+This book is the primary reference used for Learning Java and OOP in Java
+
 ## 🧠 Topics Covered
 
 - Philosophy of OOP vs. Structured Programming
