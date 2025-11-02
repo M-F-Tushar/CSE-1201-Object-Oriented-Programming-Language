@@ -1,0 +1,27 @@
+name: Markdown Link Check
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - '**.md'
+  pull_request:
+    branches: [ main, develop ]
+    paths:
+      - '**.md'
+
+jobs:
+  markdown-check:
+    name: Check Markdown Links
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Check Markdown Links
+      uses: gaurav-nelson/github-action-markdown-link-check@v1
+      with:
+        use-quiet-mode: 'yes'
+        config-file: '.github/markdown-link-check-config.json'
+        continue-on-error: true

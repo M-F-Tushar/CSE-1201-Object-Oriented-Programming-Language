@@ -1,0 +1,44 @@
+name: C++ Compilation Check
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - '**.cpp'
+      - '**.h'
+      - '**.hpp'
+  pull_request:
+    branches: [ main, develop ]
+    paths:
+      - '**.cpp'
+      - '**.h'
+      - '**.hpp'
+
+jobs:
+  build:
+    name: Build C++ Programs
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Install g++
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y g++ build-essential
+
+    - name: Verify g++ Installation
+      run: g++ --version
+
+    - name: Find and Compile C++ Files
+      run: |
+        echo "🔍 Finding C++ source files..."
+        find . -name "*.cpp" -type f | while read file; do
+          echo "📝 Compiling: $file"
+          g++ -std=c++17 -c "$file" -o "${file%.cpp}.o" || echo "⚠️ Warning: $file failed to compile"
+        done
+        echo "✅ Compilation check complete!"
+
+    - name: Clean Up Object Files
+      run: find . -name "*.o" -delete

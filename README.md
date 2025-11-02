@@ -21,6 +21,10 @@ This repository contains all the programs, practicals, and assignments for **CSE
 - [Contributing](#-contributing)
 - [License](#-license)
 
+> 📚 **New to this repository?** Check out the [Getting Started Guide](GETTING_STARTED.md) for setup instructions!
+>
+> 🗺️ **Looking for specific topics?** See the [Complete Content Index](CONTENT_INDEX.md) for a detailed catalog of all materials!
+
 ## 📘 About the Course
 
 **Course Code:** CSE 1201  

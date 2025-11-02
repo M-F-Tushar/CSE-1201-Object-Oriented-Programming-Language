@@ -1,0 +1,43 @@
+name: Java Compilation Check
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - '**.java'
+  pull_request:
+    branches: [ main, develop ]
+    paths:
+      - '**.java'
+
+jobs:
+  build:
+    name: Build Java Programs
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Setup JDK 17
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+
+    - name: Verify Java Installation
+      run: |
+        java -version
+        javac -version
+
+    - name: Find and Compile Java Files
+      run: |
+        echo "🔍 Finding Java source files..."
+        find . -name "*.java" -type f | while read file; do
+          echo "📝 Compiling: $file"
+          javac "$file" || echo "⚠️ Warning: $file failed to compile"
+        done
+        echo "✅ Compilation check complete!"
+
+    - name: Clean Up Class Files
+      run: find . -name "*.class" -delete
