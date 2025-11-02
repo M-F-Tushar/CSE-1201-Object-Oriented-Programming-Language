@@ -35,13 +35,11 @@ This repository contains all the programs, practicals, and assignments for **CSE
 This course introduces the fundamental principles of **Object-Oriented Programming (OOP)**. Students learn to design modular, reusable, and maintainable code using C++ and Java.
 
 ## Instructors 👨‍🏫
-**For C++**
 **Md. Jahidul Islam**  
 Chairman 
 Department of Computer Science and Engineering  
 Chandpur Science and Technology University
 
-**For Java**
 **Mostafiz Ahammed**  
 Lecturer  
 Department of Computer Science and Engineering  
