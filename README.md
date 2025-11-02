@@ -153,8 +153,6 @@ java ClassName
 
 ## 🛠 Languages & Tools
 
-## 🛠 Languages & Tools
-
 - **C++** - Primary OOP language
 - **Java** - Secondary OOP language  
 - **g++** - C++ compiler
@@ -193,8 +191,6 @@ This repository helps you:
 - ✨ Practice with hands-on examples
 - ✨ Prepare for exams and practicals
 - ✨ Build a strong foundation for advanced programming
-
-## 🤝 Contributing
 
 ## 🤝 Contributing
 
