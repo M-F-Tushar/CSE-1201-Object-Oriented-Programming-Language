@@ -3,23 +3,232 @@
 ## Table of Contents
 
 1. [Fundamental Structure and Lifetime](#fundamental-structure-and-lifetime)
+   - Object
+   - Class
+   - Member Function
+   - Constructor
+   - Destructor
+   - Copy Constructor
+   - Converting Constructor
+   - explicit Keyword
+   - this Pointer
+   - Scope Resolution Operator (::)
+   - Parameterized Constructor
+   - Default Constructor
+   - Constructor Chaining
+   - Constructor/Destructor Order (Inheritance)
+   - Object Lifecycle
+   - Instantiation
+   - Main Class
+   - Main Method
+   - Instance Variable/Method
+   - Static Variable/Method
+   - Anonymous Object
+   - Immutable Object/Class
+   - Garbage Collection
+
 2. [Access Control and Inheritance](#access-control-and-inheritance)
+   - Private Member
+   - Public Member
+   - Protected Member
+   - Base Class (Superclass)
+   - Derived Class (Subclass)
+   - Public Inheritance
+   - Private Inheritance
+   - Protected Inheritance
+   - Multiple Inheritance
+   - Virtual Base Class
+   - Single Inheritance
+   - Interface Inheritance
+   - Access Modifiers
+   - Data Field Encapsulation
+   - default (Package-private)
+   - Getter (Accessor) Method
+   - Setter (Mutator) Method
+   - final Modifier
+
 3. [Polymorphism and Virtual Functions](#polymorphism-and-virtual-functions)
+   - Function Overloading (Method Overloading)
+   - Virtual Function
+   - Pure Virtual Function
+   - Abstract Class
+   - Method Overriding
+   - Compile-Time Polymorphism (Early Binding/Static)
+   - Run-Time Polymorphism (Late Binding/Dynamic)
+   - Dynamic Binding
+   - Polymorphic Call
+   - @Override Annotation
+
 4. [Friends and Operators](#friends-and-operators)
+   - Friend Function
+   - Operator Overloading
+   - Inserter (<<)
+   - Extractor (>>)
+   - Binary Operator Overloading (Member)
+   - Unary Operator Overloading (Member)
+   - Assignment Operator (=)
+   - Subscript Operator ([])
+   - Relational/Logical Operators
+   - Friend Operator Function
+   - Postfix/Prefix Operators
+
 5. [Memory and Pointers](#memory-and-pointers)
+   - new Operator
+   - delete Operator
+   - Reference
+   - Reference Parameter
+   - Object Pointer
+   - Pointers to Derived Classes
+   - Arrow Operator (->)
+   - Dot Operator (.)
+
 6. [Special Functions and Modifiers](#special-functions-and-modifiers)
-7. [C++ and Java Advanced Concepts](#c-and-java-advanced-concepts)
-8. [Object-Oriented Programming Concepts Guide](#object-oriented-programming-concepts-guide)
-   - [Exception Handling](#exception-handling)
-   - [Interfaces and Abstract Classes](#interfaces-and-abstract-classes)
-   - [Relationships and Design](#relationships-and-design)
-9. [Object-Oriented Programming Concepts Reference](#object-oriented-programming-concepts-reference)
-   - [Object Methods and Utilities](#object-methods-and-utilities)
-   - [Advanced Features](#advanced-features)
+   - In-line Function
+   - const Member Function
+   - mutable Keyword
+   - Static Member Variable
+   - Static Member Function
+   - super Keyword
+
+7. [RTTI and Casting](#rtti-and-casting)
+   - Run-Time Type Identification (RTTI)
+   - typeid Operator
+   - dynamic_cast
+   - const_cast
+   - static_cast
+   - reinterpret_cast
+   - Upcasting (Implicit)
+   - Downcasting (Explicit)
+   - instanceof Operator
+   - type_info Object
+
+8. [Templates and Generics](#templates-and-generics)
+   - Generic Function (Template)
+   - Generic Class (Template Class)
+   - Namespace
+   - using Statement
+   - Formal Generic Type
+   - Wildcard Generic Type
+   - Template Instantiation
+
+9. [Standard Template Library (STL)](#standard-template-library-stl)
+   - STL
+   - Containers
+   - Algorithms
+   - Iterators
+   - vector
+   - list
+   - queue
+   - stack
+   - map
+   - Random-access Iterator
+   - Bidirectional Iterator
+   - Forward Iterator
+   - Input Iterator
+   - Output Iterator
+   - size_type
+   - iterator type
+   - value_type
+
+10. [Exception Handling](#exception-handling)
+    - Exception Handling
+    - try Block
+    - throw Statement
+    - catch Block
+    - Checked Exception
+    - Unchecked Exception
+    - RuntimeException
+    - Error
+    - Chained Exceptions
+    - Throwable
+
+11. [Interfaces and Abstract Classes](#interfaces-and-abstract-classes)
+    - Interface
+    - Abstract Method
+    - Interface Contents
+    - Implementation (implements Keyword)
+    - Comparable Interface
+    - Cloneable Interface
+    - Marker Interface
+    - Functional Interface
+    - Subinterface
+    - extends Keyword
+
+12. [Relationships and Design](#relationships-and-design)
+    - Encapsulation
+    - Inheritance
+    - Polymorphism
+    - Abstraction
+    - Association
+    - Aggregation
+    - Composition
+    - "is-a" Relationship
+    - "has-a" Relationship
+    - "is-kind-of" Relationship
+    - Hierarchical Classification
+    - Code Reusability
+    - Data Hiding
+    - Information Hiding
+    - Class Abstraction
+
+13. [Object Methods and Utilities](#object-methods-and-utilities)
+    - equals Method
+    - toString Method
+    - clone() Method
+    - compareTo Method
+    - Wrapper Class
+    - Integer
+    - Double
+    - Autoboxing
+    - Autounboxing
+
+14. [Advanced Features](#advanced-features)
+    - Inner Class
+    - Anonymous Inner Class
+    - Lambda Expression
+    - UML Class Diagram
+    - State (attributes)
+    - Behavior (methods)
+    - Identity (unique name)
+    - Object Identity
+    - Black Box
+    - Contract (class contract)
+    - No-arg Constructor
+    - Protective Shield
+    - Controlled Interface
+    - Formal Generic Type Parameter
+    - Generic Type Argument
 
 ---
 
 ## Fundamental Structure and Lifetime
+
+### Table of Contents
+1. [Object](#1-object)
+2. [Class](#2-class)
+3. [Member Function](#3-member-function)
+4. [Constructor](#4-constructor)
+5. [Destructor](#5-destructor)
+6. [Copy Constructor](#6-copy-constructor)
+7. [Converting Constructor](#7-converting-constructor)
+8. [explicit Keyword](#8-explicit-keyword)
+9. [this Pointer](#9-this-pointer)
+10. [Scope Resolution Operator (::)](#10-scope-resolution-operator-)
+11. [Parameterized Constructor](#11-parameterized-constructor)
+12. [Default Constructor](#12-default-constructor)
+13. [Constructor Chaining](#13-constructor-chaining)
+14. [Constructor/Destructor Order (Inheritance)](#14-constructordestructor-order-inheritance)
+15. [Object Lifecycle](#15-object-lifecycle)
+16. [Instantiation](#16-instantiation)
+17. [Main Class](#17-main-class)
+18. [Main Method](#18-main-method)
+19. [Instance Variable/Method](#19-instance-variablemethod)
+20. [Static Variable/Method](#20-static-variablemethod)
+21. [Anonymous Object](#21-anonymous-object)
+22. [Immutable Object/Class](#22-immutable-objectclass)
+23. [Garbage Collection](#23-garbage-collection)
+
+---
 
 ### 1. Object
 
@@ -1025,6 +1234,28 @@ public class Main {
 
 ## Access Control and Inheritance
 
+### Table of Contents
+24. [Private Member](#24-private-member)
+25. [Public Member](#25-public-member)
+26. [Protected Member](#26-protected-member)
+27. [Base Class (Superclass)](#27-base-class-superclass)
+28. [Derived Class (Subclass)](#28-derived-class-subclass)
+29. [Public Inheritance](#29-public-inheritance)
+30. [Private Inheritance](#30-private-inheritance)
+31. [Protected Inheritance](#31-protected-inheritance)
+32. [Multiple Inheritance](#32-multiple-inheritance)
+33. [Virtual Base Class](#33-virtual-base-class)
+34. [Single Inheritance](#34-single-inheritance)
+35. [Interface Inheritance](#35-interface-inheritance)
+36. [Access Modifiers](#36-access-modifiers)
+37. [Data Field Encapsulation](#37-data-field-encapsulation)
+38. [default (Package-private)](#38-default-package-private)
+39. [Getter (Accessor) Method](#39-getter-accessor-method)
+40. [Setter (Mutator) Method](#40-setter-mutator-method)
+41. [final Modifier](#41-final-modifier)
+
+---
+
 ### 24. Private Member
 
 **Definition:** Class members accessible only within the class itself.
@@ -1963,6 +2194,20 @@ void example() {
 
 ## Polymorphism and Virtual Functions
 
+### Table of Contents
+42. [Function Overloading (Method Overloading)](#42-function-overloading-method-overloading)
+43. [Virtual Function](#43-virtual-function)
+44. [Pure Virtual Function](#44-pure-virtual-function)
+45. [Abstract Class](#45-abstract-class)
+46. [Method Overriding](#46-method-overriding)
+47. [Compile-Time Polymorphism (Early Binding/Static)](#47-compile-time-polymorphism-early-bindingstatic)
+48. [Run-Time Polymorphism (Late Binding/Dynamic)](#48-run-time-polymorphism-late-bindingdynamic)
+49. [Dynamic Binding](#49-dynamic-binding)
+50. [Polymorphic Call](#50-polymorphic-call)
+51. [@Override Annotation](#51-override-annotation)
+
+---
+
 ### 42. Function Overloading (Method Overloading)
 
 **Definition:** Defining multiple functions with the same name but different parameter lists.
@@ -2532,6 +2777,21 @@ class Derived extends Base {
 ---
 
 ## Friends and Operators
+
+### Table of Contents
+52. [Friend Function](#52-friend-function)
+53. [Operator Overloading](#53-operator-overloading)
+54. [Inserter (<<)](#54-inserter-)
+55. [Extractor (>>)](#55-extractor-)
+56. [Binary Operator Overloading (Member)](#56-binary-operator-overloading-member)
+57. [Unary Operator Overloading (Member)](#57-unary-operator-overloading-member)
+58. [Assignment Operator (=)](#58-assignment-operator-)
+59. [Subscript Operator ([])](#59-subscript-operator-)
+60. [Relational/Logical Operators](#60-relationallogical-operators)
+61. [Friend Operator Function](#61-friend-operator-function)
+62. [Postfix/Prefix Operators](#62-postfixprefix-operators)
+
+---
 
 ### 52. Friend Function
 
@@ -3181,6 +3441,18 @@ class Integer {
 
 ## Memory and Pointers
 
+### Table of Contents
+63. [new Operator](#63-new-operator)
+64. [delete Operator](#64-delete-operator)
+65. [Reference](#65-reference)
+66. [Reference Parameter](#66-reference-parameter)
+67. [Object Pointer](#67-object-pointer)
+68. [Pointers to Derived Classes](#68-pointers-to-derived-classes)
+69. [Arrow Operator (->)](#69-arrow-operator--)
+70. [Dot Operator (.)](#70-dot-operator-)
+
+---
+
 ### 63. new Operator
 
 **Definition:** An operator that dynamically allocates memory on the heap.
@@ -3651,6 +3923,16 @@ class Person {
 
 ## Special Functions and Modifiers
 
+### Table of Contents
+71. [In-line Function](#71-in-line-function)
+72. [const Member Function](#72-const-member-function)
+73. [mutable Keyword](#73-mutable-keyword)
+74. [Static Member Variable](#74-static-member-variable)
+75. [Static Member Function](#75-static-member-function)
+76. [super Keyword](#76-super-keyword)
+
+---
+
 ### 71. In-line Function
 
 **Definition:** A function whose code is inserted at each call site rather than being called via jump instruction.
@@ -4011,13 +4293,25 @@ class Child extends Parent {
 
 **C++ vs Java Difference:** Java has super keyword for parent class access. C++ uses BaseClassName:: syntax. Java super() must be first in constructor; C++ uses initializer list. Java's super is simpler; C++ requires class name.
 
+---
 
-**C++ vs Java Difference:** C++ static_cast is compile-time only, no runtime checks. Java casting includes runtime type checking. C++ has multiple cast operators; Java has one cast syntax with automatic checking. Java is safer; C++ offers more control.
+## RTTI and Casting
+
+### Table of Contents
+77. [Run-Time Type Identification (RTTI)](#77-run-time-type-identification-rtti)
+78. [typeid Operator](#78-typeid-operator)
+79. [dynamic_cast](#79-dynamic_cast)
+80. [const_cast](#80-const_cast)
+81. [static_cast](#81-static_cast)
+82. [reinterpret_cast](#82-reinterpret_cast)
+83. [Upcasting (Implicit)](#83-upcasting-implicit)
+84. [Downcasting (Explicit)](#84-downcasting-explicit)
+85. [instanceof Operator](#85-instanceof-operator)
+86. [type_info Object](#86-type_info-object)
 
 ---
-## C++ and Java Advanced Concepts
 
-### 1. Run-Time Type Identification (RTTI)
+### 77. Run-Time Type Identification (RTTI)
 
 **Definition:** A mechanism that allows the type of an object to be determined during program execution.
 
@@ -4056,7 +4350,7 @@ public class Main {
 
 ---
 
-### 2. typeid Operator
+### 78. typeid Operator
 
 **Definition:** A C++ operator that returns type information about an expression.
 
@@ -4094,7 +4388,7 @@ public class Main {
 
 ---
 
-### 3. dynamic_cast
+### 79. dynamic_cast
 
 **Definition:** A C++ casting operator that performs safe downcasting with runtime type checking.
 
@@ -4139,7 +4433,7 @@ public class Main {
 
 ---
 
-### 4. const_cast
+### 80. const_cast
 
 **Definition:** A C++ casting operator that adds or removes const or volatile qualifiers.
 
@@ -4180,7 +4474,7 @@ public class Main {
 
 ---
 
-### 5. static_cast
+### 81. static_cast
 
 **Definition:** A C++ casting operator that performs compile-time type conversions.
 
@@ -4215,7 +4509,7 @@ public class Main {
 
 ---
 
-### 6. reinterpret_cast
+### 82. reinterpret_cast
 
 **Definition:** A C++ casting operator that performs low-level reinterpretation of bit patterns.
 
@@ -4256,7 +4550,7 @@ public class Main {
 
 ---
 
-### 7. Upcasting (Implicit)
+### 83. Upcasting (Implicit)
 
 **Definition:** Converting a derived class reference/pointer to a base class reference/pointer.
 
@@ -4296,7 +4590,7 @@ public class Main {
 
 ---
 
-### 8. Downcasting (Explicit)
+### 84. Downcasting (Explicit)
 
 **Definition:** Converting a base class reference/pointer to a derived class reference/pointer.
 
@@ -4338,7 +4632,7 @@ public class Main {
 
 ---
 
-### 9. instanceof Operator
+### 85. instanceof Operator
 
 **Definition:** A Java operator that tests whether an object is an instance of a specific class or interface.
 
@@ -4382,7 +4676,7 @@ public class Main {
 
 ---
 
-### 10. type_info Object
+### 86. type_info Object
 
 **Definition:** A C++ class that holds implementation-specific information about a type.
 
@@ -4424,11 +4718,24 @@ public class Main {
 
 ---
 
-### 11. Templates and Generics
+## Templates and Generics
 
-**Definition:** Mechanisms for writing code that works with any data type without sacrificing type safety.
+### Table of Contents
+87. [Generic Function (Template)](#87-generic-function-template)
+88. [Generic Class (Template Class)](#88-generic-class-template-class)
+89. [Namespace](#89-namespace)
+90. [using Statement](#90-using-statement)
+91. [Formal Generic Type](#91-formal-generic-type)
+92. [Wildcard Generic Type](#92-wildcard-generic-type)
+93. [Template Instantiation](#93-template-instantiation)
 
-**Explanation:** Templates (C++) and Generics (Java) allow creation of classes and functions that can operate on different types. They enable code reuse and type-safe generic programming.
+---
+
+### 87. Generic Function (Template)
+
+**Definition:** A function template that can work with any data type without sacrificing type safety.
+
+**Explanation:** Templates (C++) and Generics (Java) allow creation of functions that can operate on different types. They enable code reuse and type-safe generic programming.
 
 **C++ Code Example:**
 ```cpp
@@ -4512,7 +4819,7 @@ public class Main {
 
 ---
 
-### 13. Generic Class (Template Class)
+### 88. Generic Class (Template Class)
 
 **Definition:** A class that can work with any data type specified as a type parameter.
 
@@ -4568,7 +4875,7 @@ public class Main {
 
 ---
 
-### 14. Namespace
+### 89. Namespace
 
 **Definition:** A declarative region that provides scope to identifiers to prevent name conflicts.
 
@@ -4610,7 +4917,7 @@ class MathUtils {
 
 ---
 
-### 15. using Statement
+### 90. using Statement
 
 **Definition:** A C++ statement that introduces names from a namespace into the current scope.
 
@@ -4644,7 +4951,7 @@ public class Main {
 
 ---
 
-### 16. Formal Generic Type
+### 91. Formal Generic Type
 
 **Definition:** The type parameter declared in a generic class or method definition.
 
@@ -4698,7 +5005,7 @@ public class Main {
 
 ---
 
-### 17. Wildcard Generic Type
+### 92. Wildcard Generic Type
 
 **Definition:** A special generic type parameter in Java that represents an unknown type.
 
@@ -4753,7 +5060,7 @@ public class Main {
 
 ---
 
-### 18. Template Instantiation
+### 93. Template Instantiation
 
 **Definition:** The process of generating concrete code from a template by substituting type parameters with actual types.
 
@@ -4806,9 +5113,32 @@ public class Main {
 
 ---
 
-### 19. Standard Template Library (STL)
+## Standard Template Library (STL)
 
-**Definition:** A C++ library providing generic container classes, algorithms, and iterators.
+### Table of Contents
+94. [STL](#94-stl)
+95. [Containers](#95-containers)
+96. [Algorithms](#96-algorithms)
+97. [Iterators](#97-iterators)
+98. [vector](#98-vector)
+99. [list](#99-list)
+100. [queue](#100-queue)
+101. [stack](#101-stack)
+102. [map](#102-map)
+103. [Random-access Iterator](#103-random-access-iterator)
+104. [Bidirectional Iterator](#104-bidirectional-iterator)
+105. [Forward Iterator](#105-forward-iterator)
+106. [Input Iterator](#106-input-iterator)
+107. [Output Iterator](#107-output-iterator)
+108. [size_type](#108-size_type)
+109. [iterator type](#109-iterator-type)
+110. [value_type](#110-value_type)
+
+---
+
+### 94. STL
+
+**Definition:** The Standard Template Library - A C++ library providing generic container classes, algorithms, and iterators.
 
 **Explanation:** STL is a powerful collection of template-based data structures and algorithms that provides efficient, reusable components for common programming tasks.
 
@@ -4849,7 +5179,7 @@ public class Main {
 
 ---
 
-### 20. STL Containers
+### 95. Containers
 
 **Definition:** Template classes in STL that store collections of objects.
 
@@ -4892,7 +5222,7 @@ public class Main {
 
 ---
 
-### 21. Algorithms
+### 96. Algorithms
 
 **Definition:** Template functions in STL that perform operations on containers.
 
@@ -4940,7 +5270,7 @@ public class Main {
 
 ---
 
-### 22. Iterators
+### 97. Iterators
 
 **Definition:** Objects that allow traversal through container elements.
 
@@ -4984,7 +5314,7 @@ public class Main {
 
 ---
 
-### 23. vector
+### 98. vector
 
 **Definition:** A dynamic array container that can grow or shrink in size.
 
@@ -5029,7 +5359,7 @@ public class Main {
 
 ---
 
-### 24. list
+### 99. list
 
 **Definition:** A doubly-linked list container.
 
@@ -5076,7 +5406,7 @@ public class Main {
 
 ---
 
-### 25. queue
+### 100. queue
 
 **Definition:** A FIFO (First-In-First-Out) container adapter.
 
@@ -5123,7 +5453,7 @@ public class Main {
 
 ---
 
-### 26. stack
+### 101. stack
 
 **Definition:** A LIFO (Last-In-First-Out) container adapter.
 
@@ -5170,7 +5500,7 @@ public class Main {
 
 ---
 
-### 27. map
+### 102. map
 
 **Definition:** An associative container that stores key-value pairs with unique keys.
 
@@ -5213,7 +5543,7 @@ public class Main {
 
 ---
 
-### 28. Random-access Iterator
+### 103. Random-access Iterator
 
 **Definition:** An iterator that provides random access to elements with constant time complexity.
 
@@ -5257,7 +5587,7 @@ public class Main {
 
 ---
 
-### 29. Bidirectional Iterator
+### 104. Bidirectional Iterator
 
 **Definition:** An iterator that can move both forward and backward through elements.
 
@@ -5300,7 +5630,7 @@ public class Main {
 
 ---
 
-### 30. Forward Iterator
+### 105. Forward Iterator
 
 **Definition:** An iterator that can only move forward through elements.
 
@@ -5343,7 +5673,7 @@ public class Main {
 
 ---
 
-### 31. Input Iterator
+### 106. Input Iterator
 
 **Definition:** An iterator that can read elements sequentially in a single pass.
 
@@ -5391,7 +5721,7 @@ public class Main {
 
 ---
 
-### 32. Output Iterator
+### 107. Output Iterator
 
 **Definition:** An iterator that can write elements sequentially in a single pass.
 
@@ -5438,7 +5768,7 @@ public class Main {
 
 ---
 
-### 33. size_type
+### 108. size_type
 
 **Definition:** An unsigned integer type representing the size of a container.
 
@@ -5486,7 +5816,7 @@ public class Main {
 
 ---
 
-### 34. iterator Type
+### 109. iterator type
 
 **Definition:** A typedef representing the iterator type for a container.
 
@@ -5531,7 +5861,7 @@ public class Main {
 
 ---
 
-### 35. value_type
+### 110. value_type
 
 **Definition:** A typedef representing the type of elements stored in a container.
 
@@ -5576,9 +5906,23 @@ public class Main {
 
 **Differences:** C++ containers define `value_type` typedef for element type. Java uses the generic type parameter directly (no separate typedef). Both achieve type safety but with different mechanisms.
 
-## Object-Oriented Programming Concepts Guide
+## Exception Handling
 
-### Exception Handling
+### Table of Contents
+111. [Exception Handling](#111-exception-handling)
+112. [try Block](#112-try-block)
+113. [throw Statement](#113-throw-statement)
+114. [catch Block](#114-catch-block)
+115. [Checked Exception](#115-checked-exception)
+116. [Unchecked Exception](#116-unchecked-exception)
+117. [RuntimeException](#117-runtimeexception)
+118. [Error](#118-error)
+119. [Chained Exceptions](#119-chained-exceptions)
+120. [Throwable](#120-throwable)
+
+---
+
+### 111. Exception Handling
 
 **Definition:** A mechanism to handle runtime errors and maintain normal program flow.
 
@@ -5626,7 +5970,7 @@ public class Main {
 
 ---
 
-### try block
+### 112. try Block
 
 **Definition:** A code block that contains statements which might throw exceptions.
 
@@ -5652,7 +5996,7 @@ try {
 
 ---
 
-### throw statement
+### 113. throw Statement
 
 **Definition:** A keyword used to explicitly throw an exception.
 
@@ -5680,7 +6024,7 @@ void checkAge(int age) {
 
 ---
 
-### catch block
+### 114. catch Block
 
 **Definition:** A code block that handles exceptions thrown from a try block.
 
@@ -5712,7 +6056,7 @@ try {
 
 ---
 
-### Checked Exception
+### 115. Checked Exception
 
 **Definition:** Exceptions that must be declared or caught at compile time.
 
@@ -5739,7 +6083,7 @@ void readFile(String path) throws IOException {
 
 ---
 
-### Unchecked Exception
+### 116. Unchecked Exception
 
 **Definition:** Exceptions that are not checked at compile time.
 
@@ -5763,7 +6107,7 @@ public void process(String text) {
 
 ---
 
-### RuntimeException
+### 117. RuntimeException
 
 **Definition:** Base class for unchecked exceptions in Java.
 
@@ -5790,7 +6134,7 @@ public void divide(int a, int b) {
 
 ---
 
-### Error
+### 118. Error
 
 **Definition:** Serious problems that applications should not try to catch.
 
@@ -5816,7 +6160,7 @@ public void causeStackOverflow() {
 
 ---
 
-### Chained Exceptions
+### 119. Chained Exceptions
 
 **Definition:** Linking one exception to another to preserve the cause of an error.
 
@@ -5859,7 +6203,7 @@ public void process() throws Exception {
 
 ---
 
-### Throwable
+### 120. Throwable
 
 **Definition:** The superclass of all errors and exceptions in Java.
 
@@ -5891,9 +6235,23 @@ public class CustomException extends Throwable {
 
 ---
 
-### Interfaces and Abstract Classes
+## Interfaces and Abstract Classes
 
-### Interface
+### Table of Contents
+121. [Interface](#121-interface)
+122. [Abstract Method](#122-abstract-method)
+123. [Interface Contents](#123-interface-contents)
+124. [Implementation (implements Keyword)](#124-implementation-implements-keyword)
+125. [Comparable Interface](#125-comparable-interface)
+126. [Cloneable Interface](#126-cloneable-interface)
+127. [Marker Interface](#127-marker-interface)
+128. [Functional Interface](#128-functional-interface)
+129. [Subinterface](#129-subinterface)
+130. [extends Keyword](#130-extends-keyword)
+
+---
+
+### 121. Interface
 
 **Definition:** A contract that defines methods a class must implement, containing only abstract methods and constants.
 
@@ -5932,7 +6290,7 @@ class Circle implements Drawable {
 
 ---
 
-### Abstract Method
+### 122. Abstract Method
 
 **Definition:** A method declared without an implementation that must be overridden in subclasses.
 
@@ -5970,7 +6328,7 @@ class Dog extends Animal {
 
 ---
 
-### Interface Contents
+### 123. Interface Contents
 
 **Definition:** The members allowed within an interface definition.
 
@@ -6005,7 +6363,7 @@ interface Device {
 
 ---
 
-### Implementation (implements keyword)
+### 124. Implementation (implements Keyword)
 
 **Definition:** The keyword used to declare that a class provides the behavior specified by an interface.
 
@@ -6035,7 +6393,7 @@ class Printer implements Printable {
 
 ---
 
-### Comparable Interface
+### 125. Comparable Interface
 
 **Definition:** An interface that defines a natural ordering for objects of a class.
 
@@ -6069,7 +6427,7 @@ class Student implements Comparable<Student> {
 
 ---
 
-### Cloneable Interface
+### 126. Cloneable Interface
 
 **Definition:** A marker interface indicating that a class allows object cloning.
 
@@ -6104,7 +6462,7 @@ class Person implements Cloneable {
 
 ---
 
-### Marker Interface
+### 127. Marker Interface
 
 **Definition:** An interface with no methods that serves as a flag to provide metadata about a class.
 
@@ -6135,7 +6493,7 @@ class Data implements Serializable {
 
 ---
 
-### Functional Interface
+### 128. Functional Interface
 
 **Definition:** An interface with exactly one abstract method, used for lambda expressions.
 
@@ -6168,7 +6526,7 @@ int result = add.calculate(5, 3); // 8
 
 ---
 
-### Subinterface
+### 129. Subinterface
 
 **Definition:** An interface that extends another interface, inheriting its methods.
 
@@ -6202,7 +6560,7 @@ interface Editable extends Readable {
 
 ---
 
-### extends keyword
+### 130. extends Keyword
 
 **Definition:** A keyword used to create inheritance relationships between classes or interfaces.
 
@@ -6234,9 +6592,28 @@ class Car extends Vehicle {
 
 ---
 
-### Relationships and Design
+## Relationships and Design
 
-### Encapsulation
+### Table of Contents
+131. [Encapsulation](#131-encapsulation)
+132. [Inheritance](#132-inheritance)
+133. [Polymorphism](#133-polymorphism)
+134. [Abstraction](#134-abstraction)
+135. [Association](#135-association)
+136. [Aggregation](#136-aggregation)
+137. [Composition](#137-composition)
+138. ["is-a" Relationship](#138-is-a-relationship)
+139. ["has-a" Relationship](#139-has-a-relationship)
+140. ["is-kind-of" Relationship](#140-is-kind-of-relationship)
+141. [Hierarchical Classification](#141-hierarchical-classification)
+142. [Code Reusability](#142-code-reusability)
+143. [Data Hiding](#143-data-hiding)
+144. [Information Hiding](#144-information-hiding)
+145. [Class Abstraction](#145-class-abstraction)
+
+---
+
+### 131. Encapsulation
 
 **Definition:** Bundling data and methods that operate on that data within a single unit, hiding internal details.
 
@@ -6271,7 +6648,7 @@ class BankAccount {
 
 ---
 
-### Inheritance
+### 132. Inheritance
 
 **Definition:** A mechanism where a new class derives properties and behaviors from an existing class.
 
@@ -6305,7 +6682,7 @@ class Dog extends Animal {
 
 ---
 
-### Polymorphism
+### 133. Polymorphism
 
 **Definition:** The ability of objects to take multiple forms, allowing methods to behave differently based on the object type.
 
@@ -6345,7 +6722,7 @@ shape.draw(); // Outputs: Drawing circle
 
 ---
 
-### Abstraction
+### 134. Abstraction
 
 **Definition:** Hiding complex implementation details and showing only essential features of an object.
 
@@ -6383,7 +6760,7 @@ class MySQL extends Database {
 
 ---
 
-### Association
+### 135. Association
 
 **Definition:** A relationship where objects are independent but can interact with each other.
 
@@ -6419,7 +6796,7 @@ class Student {
 
 ---
 
-### Aggregation
+### 136. Aggregation
 
 **Definition:** A special form of association representing a "has-a" relationship where parts can exist independently of the whole.
 
@@ -6459,7 +6836,7 @@ class University {
 
 ---
 
-### Composition
+### 137. Composition
 
 **Definition:** A strong "has-a" relationship where the contained object cannot exist independently of the container.
 
@@ -6496,7 +6873,7 @@ class Car {
 
 ---
 
-### "is-a" Relationship
+### 138. "is-a" Relationship
 
 **Definition:** An inheritance relationship where a subclass is a type of its superclass.
 
@@ -6524,7 +6901,7 @@ Vehicle v = new Car(); // Valid
 
 ---
 
-### "has-a" Relationship
+### 139. "has-a" Relationship
 
 **Definition:** A composition or aggregation relationship where one class contains another as a member.
 
@@ -6552,7 +6929,7 @@ class Car {
 
 ---
 
-### "is-kind-of" Relationship
+### 140. "is-kind-of" Relationship
 
 **Definition:** A classification relationship similar to inheritance but emphasizing categorization.
 
@@ -6576,7 +6953,7 @@ class Apple extends Fruit {} // Apple IS-KIND-OF Fruit
 
 ---
 
-### Hierarchical Classification
+### 141. Hierarchical Classification
 
 **Definition:** Organizing classes in a tree-like structure based on generalization and specialization.
 
@@ -6604,7 +6981,7 @@ class Cat extends Mammal {}
 
 ---
 
-### Code Reusability
+### 142. Code Reusability
 
 **Definition:** The ability to use existing code in new contexts without rewriting it.
 
@@ -6649,7 +7026,7 @@ class Application {
 
 ---
 
-### Data Hiding
+### 143. Data Hiding
 
 **Definition:** Restricting access to object data by making it private and providing controlled access through methods.
 
@@ -6682,7 +7059,7 @@ class Account {
 
 ---
 
-### Information Hiding
+### 144. Information Hiding
 
 **Definition:** Concealing implementation details and internal workings of a module from external code.
 
@@ -6722,7 +7099,7 @@ class Encryptor {
 
 ---
 
-### Class Abstraction
+### 145. Class Abstraction
 
 **Definition:** Separating the interface (what a class does) from implementation (how it does it).
 
@@ -6768,11 +7145,22 @@ This comprehensive guide covers essential OOP concepts including exception handl
 - Relationships (association, aggregation, composition) model real-world interactions between objects
 - Both C++ and Java support core OOP concepts with syntax and semantic variations
 
-## Object-Oriented Programming Concepts Reference
+## Object Methods and Utilities
 
-### Object Methods and Utilities
+### Table of Contents
+146. [equals Method](#146-equals-method)
+147. [toString Method](#147-tostring-method)
+148. [clone() Method](#148-clone-method)
+149. [compareTo Method](#149-compareto-method)
+150. [Wrapper Class](#150-wrapper-class)
+151. [Integer](#151-integer)
+152. [Double](#152-double)
+153. [Autoboxing](#153-autoboxing)
+154. [Autounboxing](#154-autounboxing)
 
-### equals Method
+---
+
+### 146. equals Method
 
 **Definition:** A method used to compare two objects for equality based on their content rather than memory reference.
 
@@ -6820,7 +7208,7 @@ if (p1.equals(p2)) { /* equal */ }
 
 ---
 
-### toString Method
+### 147. toString Method
 
 **Definition:** A method that returns a string representation of an object.
 
@@ -6864,7 +7252,7 @@ System.out.println(p.toString());
 
 ---
 
-### clone() Method
+### 148. clone() Method
 
 **Definition:** A method that creates and returns a copy of an object.
 
@@ -6907,7 +7295,7 @@ Person p2 = p1.clone();
 
 ---
 
-### compareTo Method
+### 149. compareTo Method
 
 **Definition:** A method that compares two objects to determine their ordering.
 
@@ -6954,7 +7342,7 @@ int result = p1.compareTo(p2); // returns -1
 
 ---
 
-### Wrapper Class
+### 150. Wrapper Class
 
 **Definition:** A class that encapsulates a primitive data type as an object.
 
@@ -6991,7 +7379,7 @@ String str = num2.toString();
 
 ---
 
-### Integer
+### 151. Integer
 
 **Definition:** A wrapper class that encapsulates an int primitive value as an object.
 
@@ -7031,7 +7419,7 @@ String binary = Integer.toBinaryString(10);
 
 ---
 
-### Double
+### 152. Double
 
 **Definition:** A wrapper class that encapsulates a double primitive value as an object.
 
@@ -7071,7 +7459,7 @@ double inf = Double.POSITIVE_INFINITY;
 
 ---
 
-### Autoboxing
+### 153. Autoboxing
 
 **Definition:** The automatic conversion of primitive types to their corresponding wrapper class objects.
 
@@ -7106,7 +7494,7 @@ Integer y = x; // autoboxing: int to Integer
 
 ---
 
-### Autounboxing
+### 154. Autounboxing
 
 **Definition:** The automatic conversion of wrapper class objects back to their corresponding primitive types.
 
@@ -7139,9 +7527,28 @@ int sum = a + b; // both autounboxed for addition
 
 ---
 
-### Advanced Features
+## Advanced Features
 
-### Inner Class
+### Table of Contents
+155. [Inner Class](#155-inner-class)
+156. [Anonymous Inner Class](#156-anonymous-inner-class)
+157. [Lambda Expression](#157-lambda-expression)
+158. [UML Class Diagram](#158-uml-class-diagram)
+159. [State (attributes)](#159-state-attributes)
+160. [Behavior (methods)](#160-behavior-methods)
+161. [Identity (unique name)](#161-identity-unique-name)
+162. [Object Identity](#162-object-identity)
+163. [Black Box](#163-black-box)
+164. [Contract (class contract)](#164-contract-class-contract)
+165. [No-arg Constructor](#165-no-arg-constructor)
+166. [Protective Shield](#166-protective-shield)
+167. [Controlled Interface](#167-controlled-interface)
+168. [Formal Generic Type Parameter](#168-formal-generic-type-parameter)
+169. [Generic Type Argument](#169-generic-type-argument)
+
+---
+
+### 155. Inner Class
 
 **Definition:** A class defined within another class, having access to the outer class's members.
 
@@ -7199,7 +7606,7 @@ inner.display();
 
 ---
 
-### Anonymous Inner Class
+### 156. Anonymous Inner Class
 
 **Definition:** A nameless inner class defined and instantiated in a single expression.
 
@@ -7249,7 +7656,7 @@ btn.setClickHandler(new ClickHandler() {
 
 ---
 
-### Lambda Expression
+### 157. Lambda Expression
 
 **Definition:** A concise way to represent an anonymous function that can be passed as an argument.
 
@@ -7290,7 +7697,7 @@ long count = numbers.stream()
 
 ---
 
-### UML Class Diagram
+### 158. UML Class Diagram
 
 **Definition:** A visual representation of classes, their attributes, methods, and relationships in a system.
 
@@ -7336,7 +7743,7 @@ class Student extends Person {
 
 ---
 
-### State (attributes)
+### 159. State (attributes)
 
 **Definition:** The data or properties that define the current condition of an object.
 
@@ -7382,7 +7789,7 @@ BankAccount acc2 = new BankAccount(); // balance=0
 
 ---
 
-### Behavior (methods)
+### 160. Behavior (methods)
 
 **Definition:** The actions or operations that an object can perform, defined by its methods.
 
@@ -7435,7 +7842,7 @@ dog.eat("bone"); // behavior
 
 ---
 
-### Identity (unique name)
+### 161. Identity (unique name)
 
 **Definition:** The unique characteristic that distinguishes one object from another, typically its memory address or reference.
 
@@ -7477,7 +7884,7 @@ boolean sameIdentity = (p1 == p2); // false
 
 ---
 
-### Object Identity
+### 162. Object Identity
 
 **Definition:** The property that makes each object instance unique and distinguishable from others.
 
@@ -7522,7 +7929,7 @@ boolean sameIdentity = (r1 == r2); // true
 
 ---
 
-### Black Box
+### 163. Black Box
 
 **Definition:** A concept where an object's internal implementation is hidden, exposing only its interface.
 
@@ -7575,7 +7982,7 @@ double result = calc.calculate(5);
 
 ---
 
-### Contract (class contract)
+### 164. Contract (class contract)
 
 **Definition:** The agreement between a class and its users defining what the class guarantees and what it expects.
 
@@ -7627,7 +8034,7 @@ class Stack {
 
 ---
 
-### No-arg Constructor
+### 165. No-arg Constructor
 
 **Definition:** A constructor that takes no parameters, used to create objects with default values.
 
@@ -7683,7 +8090,7 @@ Person p2 = new Person("Alice", 25); // parameterized
 
 ---
 
-### Protective Shield
+### 166. Protective Shield
 
 **Definition:** The encapsulation mechanism that protects object data from unauthorized or harmful access.
 
@@ -7735,7 +8142,7 @@ class BankAccount {
 
 ---
 
-### Controlled Interface
+### 167. Controlled Interface
 
 **Definition:** The public methods of a class that provide regulated access to its functionality.
 
@@ -7791,7 +8198,7 @@ class TemperatureController {
 
 ---
 
-### Formal Generic Type Parameter
+### 168. Formal Generic Type Parameter
 
 **Definition:** A placeholder type used in generic class or method declarations, to be replaced with actual types later.
 
@@ -7844,7 +8251,7 @@ class Pair<K, V> {
 
 ---
 
-### Generic Type Argument
+### 169. Generic Type Argument
 
 **Definition:** The actual concrete type provided when instantiating a generic class or calling a generic method.
 
