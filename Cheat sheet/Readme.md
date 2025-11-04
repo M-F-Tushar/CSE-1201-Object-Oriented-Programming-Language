@@ -9,11 +9,13 @@
 5. [Memory and Pointers](#memory-and-pointers)
 6. [Special Functions and Modifiers](#special-functions-and-modifiers)
 7. [C++ and Java Advanced Concepts](#c-and-java-advanced-concepts)
-8. [Exception Handling](#exception-handling)
-9. [Interfaces and Abstract Classes](#interfaces-and-abstract-classes)
-10. [Relationships and Design](#relationships-and-design)
-11. [Object Methods and Utilities](#object-methods-and-utilities)
-12. [Advanced Features](#advanced-features)
+8. [Object-Oriented Programming Concepts Guide](#object-oriented-programming-concepts-guide)
+   - [Exception Handling](#exception-handling)
+   - [Interfaces and Abstract Classes](#interfaces-and-abstract-classes)
+   - [Relationships and Design](#relationships-and-design)
+9. [Object-Oriented Programming Concepts Reference](#object-oriented-programming-concepts-reference)
+   - [Object Methods and Utilities](#object-methods-and-utilities)
+   - [Advanced Features](#advanced-features)
 
 ---
 
@@ -6755,7 +6757,7 @@ class Stack {
 
 ---
 
-## Summary
+## Summary: Object-Oriented Programming Concepts Guide
 
 This comprehensive guide covers essential OOP concepts including exception handling mechanisms, interface design patterns, and fundamental object-oriented design principles. The examples demonstrate how these concepts are implemented in both C++ and Java, highlighting similarities and key differences between the languages.
 
@@ -7896,7 +7898,7 @@ Container<Person> personContainer = new Container<>(new Person("Alice", 30));
 
 ---
 
-## Summary
+## Summary: Complete OOP Concepts Reference
 
 This reference guide covers essential object-oriented programming concepts used in both C++ and Java. Key differences between the languages include:
 
