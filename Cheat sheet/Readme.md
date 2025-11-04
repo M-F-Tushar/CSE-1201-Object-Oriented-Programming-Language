@@ -5558,3 +5558,1197 @@ public class Main {
 ```
 
 **Differences:** C++ containers define `value_type` typedef for element type. Java uses the generic type parameter directly (no separate typedef). Both achieve type safety but with different mechanisms.
+
+# Object-Oriented Programming Concepts Guide
+
+## Exception Handling
+
+### Exception Handling
+
+**Definition:** A mechanism to handle runtime errors and maintain normal program flow.
+
+**Explanation:** Exception handling allows programs to catch and respond to errors gracefully instead of crashing. It separates error-handling code from regular code, making programs more robust and maintainable.
+
+**C++ Example:**
+```cpp
+#include <iostream>
+using namespace std;
+
+int divide(int a, int b) {
+    if (b == 0) throw "Division by zero!";
+    return a / b;
+}
+
+int main() {
+    try {
+        int result = divide(10, 0);
+    } catch (const char* msg) {
+        cout << "Error: " << msg << endl;
+    }
+    return 0;
+}
+```
+
+**Java Example:**
+```java
+public class Main {
+    public static int divide(int a, int b) {
+        if (b == 0) throw new ArithmeticException("Division by zero!");
+        return a / b;
+    }
+    
+    public static void main(String[] args) {
+        try {
+            int result = divide(10, 0);
+        } catch (ArithmeticException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+}
+```
+
+**Differences:** Java has a more structured exception hierarchy with checked and unchecked exceptions. C++ doesn't distinguish between checked/unchecked exceptions and allows throwing any type.
+
+---
+
+### try block
+
+**Definition:** A code block that contains statements which might throw exceptions.
+
+**Explanation:** The try block wraps code that may produce errors. If an exception occurs within the try block, control immediately transfers to the corresponding catch block.
+
+**C++ Example:**
+```cpp
+try {
+    int* arr = new int[1000000000000]; // May throw bad_alloc
+    delete[] arr;
+}
+```
+
+**Java Example:**
+```java
+try {
+    int[] arr = new int[1000000000];
+    System.out.println("Array created");
+}
+```
+
+**Differences:** Both work similarly, but Java's try block can be used with resources (try-with-resources) for automatic resource management.
+
+---
+
+### throw statement
+
+**Definition:** A keyword used to explicitly throw an exception.
+
+**Explanation:** The throw statement signals that an error has occurred. It creates an exception object and transfers control to the nearest catch block that can handle it.
+
+**C++ Example:**
+```cpp
+void checkAge(int age) {
+    if (age < 18) {
+        throw runtime_error("Age must be 18 or older");
+    }
+}
+```
+
+**Java Example:**
+```java
+void checkAge(int age) {
+    if (age < 18) {
+        throw new IllegalArgumentException("Age must be 18 or older");
+    }
+}
+```
+
+**Differences:** C++ can throw any type (int, string, custom objects). Java typically throws objects that inherit from Throwable.
+
+---
+
+### catch block
+
+**Definition:** A code block that handles exceptions thrown from a try block.
+
+**Explanation:** The catch block specifies the type of exception it handles and contains code to respond to that error. Multiple catch blocks can handle different exception types.
+
+**C++ Example:**
+```cpp
+try {
+    throw 404;
+} catch (int errorCode) {
+    cout << "Error code: " << errorCode << endl;
+} catch (...) {
+    cout << "Unknown error" << endl;
+}
+```
+
+**Java Example:**
+```java
+try {
+    throw new FileNotFoundException("File not found");
+} catch (FileNotFoundException e) {
+    System.out.println("Error: " + e.getMessage());
+} catch (Exception e) {
+    System.out.println("General error");
+}
+```
+
+**Differences:** C++ uses `catch(...)` to catch all exceptions. Java uses `catch(Exception e)` for general exceptions but cannot catch Errors this way.
+
+---
+
+### Checked Exception
+
+**Definition:** Exceptions that must be declared or caught at compile time.
+
+**Explanation:** Checked exceptions are verified by the compiler. Methods that throw checked exceptions must declare them using 'throws' keyword, forcing the caller to handle them.
+
+**C++ Example:**
+```cpp
+// C++ does not have checked exceptions
+// All exceptions are unchecked
+```
+
+**Java Example:**
+```java
+import java.io.*;
+
+void readFile(String path) throws IOException {
+    FileReader file = new FileReader(path);
+    // File operations
+    file.close();
+}
+```
+
+**Differences:** Checked exceptions exist only in Java. C++ treats all exceptions as unchecked, giving more flexibility but less compile-time safety.
+
+---
+
+### Unchecked Exception
+
+**Definition:** Exceptions that are not checked at compile time.
+
+**Explanation:** Unchecked exceptions occur at runtime and don't need to be declared or caught. They typically represent programming errors like null pointers or array bounds violations.
+
+**C++ Example:**
+```cpp
+void process(int* ptr) {
+    int value = *ptr; // May crash if ptr is null
+}
+```
+
+**Java Example:**
+```java
+public void process(String text) {
+    int len = text.length(); // NullPointerException if text is null
+}
+```
+
+**Differences:** In C++, all exceptions are unchecked. In Java, RuntimeException and its subclasses are unchecked.
+
+---
+
+### RuntimeException
+
+**Definition:** Base class for unchecked exceptions in Java.
+
+**Explanation:** RuntimeException represents exceptions that occur during program execution and typically indicate programming bugs. These don't need to be declared or caught.
+
+**C++ Example:**
+```cpp
+// C++ uses runtime_error for similar purposes
+#include <stdexcept>
+
+throw runtime_error("Unexpected condition");
+```
+
+**Java Example:**
+```java
+public void divide(int a, int b) {
+    if (b == 0) {
+        throw new ArithmeticException("Cannot divide by zero");
+    }
+}
+```
+
+**Differences:** Java has RuntimeException as a specific unchecked exception class. C++ has std::runtime_error but all exceptions are unchecked.
+
+---
+
+### Error
+
+**Definition:** Serious problems that applications should not try to catch.
+
+**Explanation:** Errors represent serious issues typically outside the application's control, like OutOfMemoryError or StackOverflowError. They indicate conditions that recovery is usually not possible.
+
+**C++ Example:**
+```cpp
+// C++ doesn't distinguish Error from Exception
+// Use standard exception classes
+throw bad_alloc(); // Memory allocation failure
+```
+
+**Java Example:**
+```java
+// Example of Error (not recommended to throw manually)
+// Error occurs automatically in severe situations
+public void causeStackOverflow() {
+    causeStackOverflow(); // StackOverflowError
+}
+```
+
+**Differences:** Java has a distinct Error class hierarchy separate from Exception. C++ doesn't make this distinction.
+
+---
+
+### Chained Exceptions
+
+**Definition:** Linking one exception to another to preserve the cause of an error.
+
+**Explanation:** Chained exceptions allow you to wrap one exception inside another, maintaining the original error context while providing additional information. This helps in debugging complex error scenarios.
+
+**C++ Example:**
+```cpp
+#include <exception>
+#include <iostream>
+using namespace std;
+
+class MyException : public exception {
+    string msg;
+public:
+    MyException(string m) : msg(m) {}
+    const char* what() const noexcept { return msg.c_str(); }
+};
+
+void process() {
+    try {
+        throw runtime_error("Original error");
+    } catch (exception& e) {
+        throw MyException(string("Wrapped: ") + e.what());
+    }
+}
+```
+
+**Java Example:**
+```java
+public void process() throws Exception {
+    try {
+        throw new IOException("File error");
+    } catch (IOException e) {
+        throw new Exception("Processing failed", e); // Chained
+    }
+}
+```
+
+**Differences:** Java has built-in support for chained exceptions via constructors and getCause(). C++ requires manual implementation.
+
+---
+
+### Throwable
+
+**Definition:** The superclass of all errors and exceptions in Java.
+
+**Explanation:** Throwable is the root class for all objects that can be thrown using the throw statement. All exceptions and errors inherit from Throwable.
+
+**C++ Example:**
+```cpp
+// C++ uses std::exception as base class
+#include <exception>
+
+class MyException : public std::exception {
+    const char* what() const noexcept {
+        return "Custom exception";
+    }
+};
+```
+
+**Java Example:**
+```java
+// All exceptions inherit from Throwable
+public class CustomException extends Throwable {
+    public CustomException(String message) {
+        super(message);
+    }
+}
+```
+
+**Differences:** Java uses Throwable as the root. C++ uses std::exception as the base but allows throwing any type.
+
+---
+
+## Interfaces and Abstract Classes
+
+### Interface
+
+**Definition:** A contract that defines methods a class must implement, containing only abstract methods and constants.
+
+**Explanation:** Interfaces specify what a class must do, not how. They enable multiple inheritance of type and support polymorphism. Classes implement interfaces to guarantee certain behaviors.
+
+**C++ Example:**
+```cpp
+class Drawable {
+public:
+    virtual void draw() = 0; // Pure virtual function
+    virtual ~Drawable() {}
+};
+
+class Circle : public Drawable {
+public:
+    void draw() override {
+        cout << "Drawing circle" << endl;
+    }
+};
+```
+
+**Java Example:**
+```java
+interface Drawable {
+    void draw(); // Abstract method
+}
+
+class Circle implements Drawable {
+    public void draw() {
+        System.out.println("Drawing circle");
+    }
+}
+```
+
+**Differences:** C++ uses abstract classes with pure virtual functions. Java has dedicated 'interface' keyword. Java 8+ allows default methods in interfaces.
+
+---
+
+### Abstract Method
+
+**Definition:** A method declared without an implementation that must be overridden in subclasses.
+
+**Explanation:** Abstract methods define the signature but leave the implementation to derived classes. They enforce a contract that subclasses must fulfill.
+
+**C++ Example:**
+```cpp
+class Animal {
+public:
+    virtual void makeSound() = 0; // Abstract method
+};
+
+class Dog : public Animal {
+public:
+    void makeSound() override {
+        cout << "Woof!" << endl;
+    }
+};
+```
+
+**Java Example:**
+```java
+abstract class Animal {
+    abstract void makeSound(); // Abstract method
+}
+
+class Dog extends Animal {
+    void makeSound() {
+        System.out.println("Woof!");
+    }
+}
+```
+
+**Differences:** C++ uses `= 0` syntax for pure virtual functions. Java uses 'abstract' keyword explicitly.
+
+---
+
+### Interface Contents
+
+**Definition:** The members allowed within an interface definition.
+
+**Explanation:** Traditionally, interfaces contain abstract methods and constants. Modern Java allows default methods, static methods, and private methods in interfaces.
+
+**C++ Example:**
+```cpp
+// C++ abstract class (interface-like)
+class Device {
+public:
+    virtual void turnOn() = 0;
+    virtual void turnOff() = 0;
+    static const int MAX_POWER = 100;
+};
+```
+
+**Java Example:**
+```java
+interface Device {
+    void turnOn();  // Abstract method
+    void turnOff(); // Abstract method
+    int MAX_POWER = 100; // Constant (public static final)
+    
+    default void reset() { // Default method (Java 8+)
+        turnOff();
+        turnOn();
+    }
+}
+```
+
+**Differences:** Java interfaces can have default implementations (Java 8+). C++ abstract classes can have any member types including fields and constructors.
+
+---
+
+### Implementation (implements keyword)
+
+**Definition:** The keyword used to declare that a class provides the behavior specified by an interface.
+
+**Explanation:** When a class implements an interface, it must provide concrete implementations for all abstract methods declared in that interface.
+
+**C++ Example:**
+```cpp
+// C++ uses inheritance with colon
+class Printer : public Printable {
+public:
+    void print() override {
+        cout << "Printing..." << endl;
+    }
+};
+```
+
+**Java Example:**
+```java
+class Printer implements Printable {
+    public void print() {
+        System.out.println("Printing...");
+    }
+}
+```
+
+**Differences:** Java uses 'implements' keyword for interfaces and 'extends' for classes. C++ uses inheritance (`:`) for both.
+
+---
+
+### Comparable Interface
+
+**Definition:** An interface that defines a natural ordering for objects of a class.
+
+**Explanation:** Comparable allows objects to be compared and sorted. It contains the compareTo() method which returns negative, zero, or positive values indicating ordering.
+
+**C++ Example:**
+```cpp
+class Student {
+public:
+    int id;
+    Student(int i) : id(i) {}
+    
+    bool operator<(const Student& other) const {
+        return id < other.id;
+    }
+};
+```
+
+**Java Example:**
+```java
+class Student implements Comparable<Student> {
+    int id;
+    
+    public int compareTo(Student other) {
+        return Integer.compare(this.id, other.id);
+    }
+}
+```
+
+**Differences:** C++ uses operator overloading (`<`, `>`, etc.). Java uses the Comparable interface with compareTo() method.
+
+---
+
+### Cloneable Interface
+
+**Definition:** A marker interface indicating that a class allows object cloning.
+
+**Explanation:** Cloneable signals that an object can be safely cloned using the clone() method. Without implementing this interface, clone() throws CloneNotSupportedException.
+
+**C++ Example:**
+```cpp
+class Person {
+public:
+    string name;
+    
+    Person(string n) : name(n) {}
+    
+    Person(const Person& other) { // Copy constructor
+        name = other.name;
+    }
+};
+```
+
+**Java Example:**
+```java
+class Person implements Cloneable {
+    String name;
+    
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+}
+```
+
+**Differences:** C++ uses copy constructors and assignment operators. Java uses Cloneable interface and clone() method.
+
+---
+
+### Marker Interface
+
+**Definition:** An interface with no methods that serves as a flag to provide metadata about a class.
+
+**Explanation:** Marker interfaces don't define behavior but indicate that a class has certain properties or capabilities. The compiler or runtime uses this information.
+
+**C++ Example:**
+```cpp
+// C++ doesn't have marker interfaces
+// Use empty base classes or type traits
+class Serializable {}; // Empty class as marker
+
+class Data : public Serializable {
+    int value;
+};
+```
+
+**Java Example:**
+```java
+// Serializable is a built-in marker interface
+import java.io.Serializable;
+
+class Data implements Serializable {
+    int value;
+}
+```
+
+**Differences:** Java has explicit marker interfaces (Serializable, Cloneable). C++ achieves similar effects through templates, traits, or empty base classes.
+
+---
+
+### Functional Interface
+
+**Definition:** An interface with exactly one abstract method, used for lambda expressions.
+
+**Explanation:** Functional interfaces enable functional programming features. They can have multiple default or static methods but only one abstract method. Used extensively with lambda expressions and method references.
+
+**C++ Example:**
+```cpp
+#include <functional>
+
+// Using std::function
+function<int(int, int)> add = [](int a, int b) {
+    return a + b;
+};
+
+int result = add(5, 3); // 8
+```
+
+**Java Example:**
+```java
+@FunctionalInterface
+interface Calculator {
+    int calculate(int a, int b);
+}
+
+Calculator add = (a, b) -> a + b;
+int result = add.calculate(5, 3); // 8
+```
+
+**Differences:** C++ uses std::function and lambdas directly. Java uses @FunctionalInterface annotation and has built-in functional interfaces (Predicate, Function, Consumer).
+
+---
+
+### Subinterface
+
+**Definition:** An interface that extends another interface, inheriting its methods.
+
+**Explanation:** Subinterfaces create a hierarchy of interfaces. A subinterface inherits all abstract methods from its parent interface and can add new ones.
+
+**C++ Example:**
+```cpp
+class Readable {
+public:
+    virtual void read() = 0;
+};
+
+class Editable : public Readable {
+public:
+    virtual void edit() = 0;
+};
+```
+
+**Java Example:**
+```java
+interface Readable {
+    void read();
+}
+
+interface Editable extends Readable {
+    void edit();
+}
+```
+
+**Differences:** Both support interface inheritance. Java uses 'extends' for interface-to-interface relationships. C++ uses standard inheritance.
+
+---
+
+### extends keyword
+
+**Definition:** A keyword used to create inheritance relationships between classes or interfaces.
+
+**Explanation:** 'extends' establishes an "is-a" relationship where the child inherits members from the parent. In Java, it's used for both class and interface inheritance.
+
+**C++ Example:**
+```cpp
+class Vehicle {
+    int speed;
+};
+
+class Car : public Vehicle { // Inheritance using colon
+    int doors;
+};
+```
+
+**Java Example:**
+```java
+class Vehicle {
+    int speed;
+}
+
+class Car extends Vehicle {
+    int doors;
+}
+```
+
+**Differences:** Java uses 'extends' keyword. C++ uses colon (`:`) with access specifiers (public, private, protected).
+
+---
+
+## Relationships and Design
+
+### Encapsulation
+
+**Definition:** Bundling data and methods that operate on that data within a single unit, hiding internal details.
+
+**Explanation:** Encapsulation restricts direct access to object components, exposing only necessary parts through public methods (getters/setters). This protects data integrity and allows implementation changes without affecting external code.
+
+**C++ Example:**
+```cpp
+class BankAccount {
+private:
+    double balance;
+public:
+    void deposit(double amount) {
+        if (amount > 0) balance += amount;
+    }
+    double getBalance() { return balance; }
+};
+```
+
+**Java Example:**
+```java
+class BankAccount {
+    private double balance;
+    
+    public void deposit(double amount) {
+        if (amount > 0) balance += amount;
+    }
+    public double getBalance() { return balance; }
+}
+```
+
+**Differences:** Both languages support encapsulation similarly through access modifiers (private, public, protected).
+
+---
+
+### Inheritance
+
+**Definition:** A mechanism where a new class derives properties and behaviors from an existing class.
+
+**Explanation:** Inheritance creates parent-child relationships between classes, promoting code reuse. The child class inherits members from the parent and can add new features or override existing ones.
+
+**C++ Example:**
+```cpp
+class Animal {
+public:
+    void eat() { cout << "Eating" << endl; }
+};
+
+class Dog : public Animal {
+public:
+    void bark() { cout << "Barking" << endl; }
+};
+```
+
+**Java Example:**
+```java
+class Animal {
+    void eat() { System.out.println("Eating"); }
+}
+
+class Dog extends Animal {
+    void bark() { System.out.println("Barking"); }
+}
+```
+
+**Differences:** C++ supports multiple inheritance. Java allows single inheritance for classes but multiple inheritance through interfaces.
+
+---
+
+### Polymorphism
+
+**Definition:** The ability of objects to take multiple forms, allowing methods to behave differently based on the object type.
+
+**Explanation:** Polymorphism enables a single interface to represent different underlying forms. It includes method overloading (compile-time) and method overriding (runtime polymorphism).
+
+**C++ Example:**
+```cpp
+class Shape {
+public:
+    virtual void draw() { cout << "Drawing shape" << endl; }
+};
+
+class Circle : public Shape {
+public:
+    void draw() override { cout << "Drawing circle" << endl; }
+};
+
+Shape* shape = new Circle();
+shape->draw(); // Outputs: Drawing circle
+```
+
+**Java Example:**
+```java
+class Shape {
+    void draw() { System.out.println("Drawing shape"); }
+}
+
+class Circle extends Shape {
+    void draw() { System.out.println("Drawing circle"); }
+}
+
+Shape shape = new Circle();
+shape.draw(); // Outputs: Drawing circle
+```
+
+**Differences:** Both support polymorphism. C++ requires 'virtual' keyword for runtime polymorphism. Java methods are virtual by default.
+
+---
+
+### Abstraction
+
+**Definition:** Hiding complex implementation details and showing only essential features of an object.
+
+**Explanation:** Abstraction focuses on what an object does rather than how it does it. It's achieved through abstract classes and interfaces, providing a simplified view of complex systems.
+
+**C++ Example:**
+```cpp
+class Database {
+public:
+    virtual void connect() = 0;
+    virtual void query(string sql) = 0;
+};
+
+class MySQL : public Database {
+public:
+    void connect() { /* MySQL specific */ }
+    void query(string sql) { /* Execute query */ }
+};
+```
+
+**Java Example:**
+```java
+abstract class Database {
+    abstract void connect();
+    abstract void query(String sql);
+}
+
+class MySQL extends Database {
+    void connect() { /* MySQL specific */ }
+    void query(String sql) { /* Execute query */ }
+}
+```
+
+**Differences:** Both support abstraction through abstract classes and interfaces. Implementation is very similar.
+
+---
+
+### Association
+
+**Definition:** A relationship where objects are independent but can interact with each other.
+
+**Explanation:** Association represents a "uses-a" relationship between classes. Objects can exist independently, and the relationship can be one-to-one, one-to-many, or many-to-many.
+
+**C++ Example:**
+```cpp
+class Teacher {
+    string name;
+};
+
+class Student {
+    Teacher* teacher; // Association
+public:
+    void setTeacher(Teacher* t) { teacher = t; }
+};
+```
+
+**Java Example:**
+```java
+class Teacher {
+    String name;
+}
+
+class Student {
+    Teacher teacher; // Association
+    
+    void setTeacher(Teacher t) { teacher = t; }
+}
+```
+
+**Differences:** No significant difference. Both use references/pointers to establish associations.
+
+---
+
+### Aggregation
+
+**Definition:** A special form of association representing a "has-a" relationship where parts can exist independently of the whole.
+
+**Explanation:** Aggregation implies ownership but not strong lifecycle dependency. The contained object can exist without the container. It's a weaker relationship than composition.
+
+**C++ Example:**
+```cpp
+class Department {
+    string name;
+};
+
+class University {
+    vector<Department*> departments; // Aggregation
+public:
+    void addDepartment(Department* d) {
+        departments.push_back(d);
+    }
+};
+```
+
+**Java Example:**
+```java
+class Department {
+    String name;
+}
+
+class University {
+    List<Department> departments = new ArrayList<>();
+    
+    void addDepartment(Department d) {
+        departments.add(d);
+    }
+}
+```
+
+**Differences:** Implementation is similar. The conceptual difference between aggregation and association is more about design intent than syntax.
+
+---
+
+### Composition
+
+**Definition:** A strong "has-a" relationship where the contained object cannot exist independently of the container.
+
+**Explanation:** Composition represents whole-part relationships with strong lifecycle dependency. When the container is destroyed, its parts are also destroyed. It implies exclusive ownership.
+
+**C++ Example:**
+```cpp
+class Engine {
+    int horsepower;
+};
+
+class Car {
+    Engine engine; // Composition (by value)
+public:
+    Car() : engine() {} // Engine created with Car
+    // Engine destroyed when Car is destroyed
+};
+```
+
+**Java Example:**
+```java
+class Engine {
+    int horsepower;
+}
+
+class Car {
+    private Engine engine = new Engine(); // Composition
+    
+    // Engine lifecycle tied to Car
+}
+```
+
+**Differences:** C++ can use value semantics (member objects) for true composition. Java uses references but implies ownership through design.
+
+---
+
+### "is-a" Relationship
+
+**Definition:** An inheritance relationship where a subclass is a type of its superclass.
+
+**Explanation:** The "is-a" relationship is established through inheritance. It means the derived class is a specialized version of the base class and can be used wherever the base class is expected.
+
+**C++ Example:**
+```cpp
+class Vehicle {};
+
+class Car : public Vehicle {}; // Car IS-A Vehicle
+
+Vehicle* v = new Car(); // Valid
+```
+
+**Java Example:**
+```java
+class Vehicle {}
+
+class Car extends Vehicle {} // Car IS-A Vehicle
+
+Vehicle v = new Car(); // Valid
+```
+
+**Differences:** Both languages implement "is-a" through inheritance with similar semantics.
+
+---
+
+### "has-a" Relationship
+
+**Definition:** A composition or aggregation relationship where one class contains another as a member.
+
+**Explanation:** The "has-a" relationship represents ownership or association. A class has a member of another class type, either through composition (strong) or aggregation (weak).
+
+**C++ Example:**
+```cpp
+class Engine {};
+
+class Car {
+    Engine engine; // Car HAS-A Engine
+};
+```
+
+**Java Example:**
+```java
+class Engine {}
+
+class Car {
+    Engine engine; // Car HAS-A Engine
+}
+```
+
+**Differences:** Implementation is nearly identical. Both use member variables to establish "has-a" relationships.
+
+---
+
+### "is-kind-of" Relationship
+
+**Definition:** A classification relationship similar to inheritance but emphasizing categorization.
+
+**Explanation:** This relationship is essentially another way to describe inheritance, emphasizing that the subclass is a specific kind or category of the superclass.
+
+**C++ Example:**
+```cpp
+class Fruit {};
+
+class Apple : public Fruit {}; // Apple IS-KIND-OF Fruit
+```
+
+**Java Example:**
+```java
+class Fruit {}
+
+class Apple extends Fruit {} // Apple IS-KIND-OF Fruit
+```
+
+**Differences:** No technical difference; it's a semantic interpretation of inheritance in both languages.
+
+---
+
+### Hierarchical Classification
+
+**Definition:** Organizing classes in a tree-like structure based on generalization and specialization.
+
+**Explanation:** Hierarchical classification creates a taxonomy of classes from general (abstract) to specific (concrete). Higher levels contain common features, while lower levels add specialization.
+
+**C++ Example:**
+```cpp
+class Animal {};
+class Mammal : public Animal {};
+class Dog : public Mammal {};
+class Cat : public Mammal {};
+// Hierarchy: Animal -> Mammal -> Dog/Cat
+```
+
+**Java Example:**
+```java
+class Animal {}
+class Mammal extends Animal {}
+class Dog extends Mammal {}
+class Cat extends Mammal {}
+// Hierarchy: Animal -> Mammal -> Dog/Cat
+```
+
+**Differences:** Both support class hierarchies through inheritance with similar structures.
+
+---
+
+### Code Reusability
+
+**Definition:** The ability to use existing code in new contexts without rewriting it.
+
+**Explanation:** Code reusability reduces duplication and development time. It's achieved through inheritance, composition, interfaces, and generic programming, allowing tested code to be leveraged in multiple places.
+
+**C++ Example:**
+```cpp
+class Logger {
+public:
+    void log(string msg) {
+        cout << "[LOG] " << msg << endl;
+    }
+};
+
+class Application {
+    Logger logger; // Reusing Logger
+public:
+    void run() {
+        logger.log("Application started");
+    }
+};
+```
+
+**Java Example:**
+```java
+class Logger {
+    void log(String msg) {
+        System.out.println("[LOG] " + msg);
+    }
+}
+
+class Application {
+    Logger logger = new Logger(); // Reusing Logger
+    
+    void run() {
+        logger.log("Application started");
+    }
+}
+```
+
+**Differences:** Both achieve code reusability through similar OOP mechanisms.
+
+---
+
+### Data Hiding
+
+**Definition:** Restricting access to object data by making it private and providing controlled access through methods.
+
+**Explanation:** Data hiding protects internal state from unauthorized access and modification. It's a key aspect of encapsulation, ensuring data integrity by controlling how data is accessed and modified.
+
+**C++ Example:**
+```cpp
+class Account {
+private:
+    double balance; // Hidden data
+public:
+    void deposit(double amt) {
+        if (amt > 0) balance += amt;
+    }
+};
+```
+
+**Java Example:**
+```java
+class Account {
+    private double balance; // Hidden data
+    
+    public void deposit(double amt) {
+        if (amt > 0) balance += amt;
+    }
+}
+```
+
+**Differences:** Both use private access modifiers for data hiding with identical semantics.
+
+---
+
+### Information Hiding
+
+**Definition:** Concealing implementation details and internal workings of a module from external code.
+
+**Explanation:** Information hiding is broader than data hiding, encompassing implementation details, algorithms, and internal structures. It allows internal changes without affecting external code that uses the module.
+
+**C++ Example:**
+```cpp
+class Encryptor {
+private:
+    string algorithm; // Hidden implementation detail
+    void prepareKey() {} // Hidden method
+public:
+    string encrypt(string data) {
+        prepareKey();
+        // Encryption logic hidden
+        return data;
+    }
+};
+```
+
+**Java Example:**
+```java
+class Encryptor {
+    private String algorithm; // Hidden implementation
+    
+    private void prepareKey() {} // Hidden method
+    
+    public String encrypt(String data) {
+        prepareKey();
+        // Encryption logic hidden
+        return data;
+    }
+}
+```
+
+**Differences:** Both implement information hiding through private members and methods identically.
+
+---
+
+### Class Abstraction
+
+**Definition:** Separating the interface (what a class does) from implementation (how it does it).
+
+**Explanation:** Class abstraction defines public contracts while hiding implementation complexity. Users interact with the class through its public interface without needing to understand internal mechanics.
+
+**C++ Example:**
+```cpp
+class Stack {
+private:
+    int arr[100];
+    int top;
+public:
+    void push(int x) { arr[++top] = x; }
+    int pop() { return arr[top--]; }
+    // Implementation hidden from users
+};
+```
+
+**Java Example:**
+```java
+class Stack {
+    private int[] arr = new int[100];
+    private int top;
+    
+    public void push(int x) { arr[++top] = x; }
+    public int pop() { return arr[top--]; }
+    // Implementation hidden from users
+}
+```
+
+**Differences:** Both achieve class abstraction through encapsulation with similar approaches.
+
+---
+
+## Summary
+
+This comprehensive guide covers essential OOP concepts including exception handling mechanisms, interface design patterns, and fundamental object-oriented design principles. The examples demonstrate how these concepts are implemented in both C++ and Java, highlighting similarities and key differences between the languages.
+
+**Key Takeaways:**
+- Exception handling provides robust error management with language-specific features
+- Interfaces and abstract classes enable flexible design through contracts and polymorphism
+- OOP principles (encapsulation, inheritance, polymorphism, abstraction) form the foundation of maintainable software
+- Relationships (association, aggregation, composition) model real-world interactions between objects
+- Both C++ and Java support core OOP concepts with syntax and semantic variations
