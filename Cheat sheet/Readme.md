@@ -3998,4 +3998,1563 @@ class Child extends Parent {
 **C++ vs Java Difference:** C++ static_cast is compile-time only, no runtime checks. Java casting includes runtime type checking. C++ has multiple cast operators; Java has one cast syntax with automatic checking. Java is safer; C++ offers more control.
 
 ---
+# C++ and Java Advance Concept
 
+## 1. Run-Time Type Identification (RTTI)
+
+**Definition:** A mechanism that allows the type of an object to be determined during program execution.
+
+**Explanation:** RTTI provides runtime information about objects, enabling dynamic type checking and safe downcasting. It's useful when working with polymorphic class hierarchies where the exact type isn't known at compile time.
+
+**C++ Code Example:**
+```cpp
+#include <iostream>
+#include <typeinfo>
+using namespace std;
+
+class Animal { virtual void speak() {} };
+class Dog : public Animal {};
+
+int main() {
+    Animal* a = new Dog();
+    cout << typeid(*a).name() << endl; // Outputs: Dog
+    return 0;
+}
+```
+
+**Java Code Example:**
+```java
+class Animal {}
+class Dog extends Animal {}
+
+public class Main {
+    public static void main(String[] args) {
+        Animal a = new Dog();
+        System.out.println(a.getClass().getName()); // Outputs: Dog
+    }
+}
+```
+
+**Differences:** C++ requires virtual functions in the base class for RTTI to work with pointers/references. Java has built-in RTTI for all objects through the `getClass()` method and `instanceof` operator.
+
+---
+
+## 2. typeid Operator
+
+**Definition:** A C++ operator that returns type information about an expression.
+
+**Explanation:** The `typeid` operator returns a reference to a `type_info` object representing the type of the expression. It works at runtime for polymorphic types and at compile time for non-polymorphic types.
+
+**C++ Code Example:**
+```cpp
+#include <iostream>
+#include <typeinfo>
+using namespace std;
+
+int main() {
+    int x = 5;
+    double y = 3.14;
+    cout << typeid(x).name() << endl; // Outputs: i (int)
+    cout << typeid(y).name() << endl; // Outputs: d (double)
+    return 0;
+}
+```
+
+**Java Code Example:**
+```java
+// Java uses getClass() method instead
+public class Main {
+    public static void main(String[] args) {
+        Integer x = 5;
+        Double y = 3.14;
+        System.out.println(x.getClass().getName()); // Outputs: java.lang.Integer
+        System.out.println(y.getClass().getName()); // Outputs: java.lang.Double
+    }
+}
+```
+
+**Differences:** C++ has the `typeid` operator, while Java uses the `getClass()` method. C++ returns a `type_info` object, while Java returns a `Class` object.
+
+---
+
+## 3. dynamic_cast
+
+**Definition:** A C++ casting operator that performs safe downcasting with runtime type checking.
+
+**Explanation:** `dynamic_cast` is used to safely convert pointers or references along an inheritance hierarchy. It returns `nullptr` (for pointers) or throws `bad_cast` (for references) if the cast is invalid.
+
+**C++ Code Example:**
+```cpp
+#include <iostream>
+using namespace std;
+
+class Animal { virtual void speak() {} };
+class Dog : public Animal { void bark() { cout << "Woof!" << endl; } };
+
+int main() {
+    Animal* a = new Dog();
+    Dog* d = dynamic_cast<Dog*>(a);
+    if (d) d->bark(); // Safe cast, outputs: Woof!
+    return 0;
+}
+```
+
+**Java Code Example:**
+```java
+// Java uses instanceof and explicit cast
+class Animal {}
+class Dog extends Animal { 
+    void bark() { System.out.println("Woof!"); }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Animal a = new Dog();
+        if (a instanceof Dog) {
+            Dog d = (Dog) a; // Safe cast
+            d.bark(); // Outputs: Woof!
+        }
+    }
+}
+```
+
+**Differences:** C++ has `dynamic_cast` operator, while Java uses `instanceof` check followed by explicit casting. C++ returns `nullptr` on failure for pointers; Java throws `ClassCastException` on invalid casts.
+
+---
+
+## 4. const_cast
+
+**Definition:** A C++ casting operator that adds or removes const or volatile qualifiers.
+
+**Explanation:** `const_cast` is used to modify the const-ness of a variable. It's the only C++ cast that can remove constness, but modifying a truly const object leads to undefined behavior.
+
+**C++ Code Example:**
+```cpp
+#include <iostream>
+using namespace std;
+
+void modify(const int* p) {
+    int* modifiable = const_cast<int*>(p);
+    *modifiable = 20;
+}
+
+int main() {
+    int x = 10;
+    modify(&x);
+    cout << x << endl; // Outputs: 20
+    return 0;
+}
+```
+
+**Java Code Example:**
+```java
+// Java doesn't have const_cast equivalent
+// Java uses 'final' for constants, which cannot be cast away
+public class Main {
+    public static void main(String[] args) {
+        final int x = 10;
+        // x = 20; // Compilation error - cannot modify final variable
+        System.out.println(x);
+    }
+}
+```
+
+**Differences:** C++ has `const_cast` to modify constness. Java has no equivalent; `final` variables cannot have their immutability removed.
+
+---
+
+## 5. static_cast
+
+**Definition:** A C++ casting operator that performs compile-time type conversions.
+
+**Explanation:** `static_cast` performs explicit type conversions that are checked at compile time. It's used for well-defined conversions like numeric conversions, upcasting, and downcasting (without runtime checks).
+
+**C++ Code Example:**
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    double d = 3.14;
+    int i = static_cast<int>(d); // Convert double to int
+    cout << i << endl; // Outputs: 3
+    return 0;
+}
+```
+
+**Java Code Example:**
+```java
+// Java uses explicit cast syntax
+public class Main {
+    public static void main(String[] args) {
+        double d = 3.14;
+        int i = (int) d; // Convert double to int
+        System.out.println(i); // Outputs: 3
+    }
+}
+```
+
+**Differences:** C++ uses `static_cast<Type>(value)` syntax, while Java uses `(Type) value` syntax. Both perform compile-time conversions without runtime overhead.
+
+---
+
+## 6. reinterpret_cast
+
+**Definition:** A C++ casting operator that performs low-level reinterpretation of bit patterns.
+
+**Explanation:** `reinterpret_cast` converts any pointer type to any other pointer type, or integers to pointers and vice versa. It's dangerous and implementation-dependent, used mainly for low-level programming.
+
+**C++ Code Example:**
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    int x = 65;
+    char* c = reinterpret_cast<char*>(&x);
+    cout << "First byte: " << (int)c[0] << endl;
+    return 0;
+}
+```
+
+**Java Code Example:**
+```java
+// Java doesn't have reinterpret_cast equivalent
+// Java doesn't allow arbitrary pointer manipulation
+// Closest is using ByteBuffer for bit manipulation
+import java.nio.ByteBuffer;
+
+public class Main {
+    public static void main(String[] args) {
+        int x = 65;
+        ByteBuffer buffer = ByteBuffer.allocate(4);
+        buffer.putInt(x);
+        byte b = buffer.get(0);
+        System.out.println("First byte: " + (int)b);
+    }
+}
+```
+
+**Differences:** C++ allows `reinterpret_cast` for low-level bit manipulation. Java doesn't allow arbitrary pointer casting; uses `ByteBuffer` or similar classes for byte-level operations.
+
+---
+
+## 7. Upcasting (Implicit)
+
+**Definition:** Converting a derived class reference/pointer to a base class reference/pointer.
+
+**Explanation:** Upcasting is the process of treating a derived class object as a base class object. It's always safe and happens implicitly because a derived object "is-a" base object.
+
+**C++ Code Example:**
+```cpp
+#include <iostream>
+using namespace std;
+
+class Animal { public: virtual void speak() { cout << "Animal sound" << endl; } };
+class Dog : public Animal { public: void speak() { cout << "Woof!" << endl; } };
+
+int main() {
+    Dog d;
+    Animal* a = &d; // Implicit upcast
+    a->speak(); // Outputs: Woof! (polymorphism)
+    return 0;
+}
+```
+
+**Java Code Example:**
+```java
+class Animal { void speak() { System.out.println("Animal sound"); } }
+class Dog extends Animal { void speak() { System.out.println("Woof!"); } }
+
+public class Main {
+    public static void main(String[] args) {
+        Dog d = new Dog();
+        Animal a = d; // Implicit upcast
+        a.speak(); // Outputs: Woof! (polymorphism)
+    }
+}
+```
+
+**Differences:** Both languages perform upcasting implicitly and safely. The mechanism is essentially the same in both languages.
+
+---
+
+## 8. Downcasting (Explicit)
+
+**Definition:** Converting a base class reference/pointer to a derived class reference/pointer.
+
+**Explanation:** Downcasting attempts to treat a base class reference as a more specific derived class. It requires explicit casting and can fail at runtime if the actual object is not of the target type.
+
+**C++ Code Example:**
+```cpp
+#include <iostream>
+using namespace std;
+
+class Animal { virtual void speak() {} };
+class Dog : public Animal { public: void bark() { cout << "Woof!" << endl; } };
+
+int main() {
+    Animal* a = new Dog();
+    Dog* d = dynamic_cast<Dog*>(a); // Explicit downcast
+    if (d) d->bark();
+    return 0;
+}
+```
+
+**Java Code Example:**
+```java
+class Animal {}
+class Dog extends Animal { void bark() { System.out.println("Woof!"); } }
+
+public class Main {
+    public static void main(String[] args) {
+        Animal a = new Dog();
+        if (a instanceof Dog) {
+            Dog d = (Dog) a; // Explicit downcast
+            d.bark();
+        }
+    }
+}
+```
+
+**Differences:** C++ uses `dynamic_cast` for safe downcasting. Java uses `instanceof` check with explicit cast. Both require runtime verification.
+
+---
+
+## 9. instanceof Operator
+
+**Definition:** A Java operator that tests whether an object is an instance of a specific class or interface.
+
+**Explanation:** The `instanceof` operator returns `true` if the object is an instance of the specified type or any of its subclasses. It's used for safe type checking before downcasting.
+
+**C++ Code Example:**
+```cpp
+// C++ doesn't have instanceof; uses dynamic_cast instead
+#include <iostream>
+using namespace std;
+
+class Animal { virtual ~Animal() {} };
+class Dog : public Animal {};
+
+int main() {
+    Animal* a = new Dog();
+    Dog* d = dynamic_cast<Dog*>(a);
+    if (d != nullptr) {
+        cout << "a is a Dog" << endl;
+    }
+    return 0;
+}
+```
+
+**Java Code Example:**
+```java
+class Animal {}
+class Dog extends Animal {}
+
+public class Main {
+    public static void main(String[] args) {
+        Animal a = new Dog();
+        if (a instanceof Dog) {
+            System.out.println("a is a Dog");
+        }
+    }
+}
+```
+
+**Differences:** Java has the `instanceof` operator. C++ uses `dynamic_cast` and checks for `nullptr` (pointers) or catches `bad_cast` (references).
+
+---
+
+## 10. type_info Object
+
+**Definition:** A C++ class that holds implementation-specific information about a type.
+
+**Explanation:** The `type_info` class is returned by the `typeid` operator. It provides methods like `name()` to get type name and operator `==` to compare types.
+
+**C++ Code Example:**
+```cpp
+#include <iostream>
+#include <typeinfo>
+using namespace std;
+
+int main() {
+    int x = 5;
+    const type_info& ti = typeid(x);
+    cout << ti.name() << endl; // Type name (implementation-specific)
+    if (typeid(x) == typeid(int)) {
+        cout << "x is an int" << endl;
+    }
+    return 0;
+}
+```
+
+**Java Code Example:**
+```java
+// Java uses Class object instead
+public class Main {
+    public static void main(String[] args) {
+        Integer x = 5;
+        Class<?> cls = x.getClass();
+        System.out.println(cls.getName()); // java.lang.Integer
+        if (cls == Integer.class) {
+            System.out.println("x is an Integer");
+        }
+    }
+}
+```
+
+**Differences:** C++ uses `type_info` class. Java uses `Class` object with more extensive reflection capabilities. Java's `Class` provides more runtime information.
+
+---
+
+## 11. Templates and Generics
+
+**Definition:** Mechanisms for writing code that works with any data type without sacrificing type safety.
+
+**Explanation:** Templates (C++) and Generics (Java) allow creation of classes and functions that can operate on different types. They enable code reuse and type-safe generic programming.
+
+**C++ Code Example:**
+```cpp
+#include <iostream>
+using namespace std;
+
+template <typename T>
+T maximum(T a, T b) {
+    return (a > b) ? a : b;
+}
+
+int main() {
+    cout << maximum(5, 10) << endl;      // Outputs: 10
+    cout << maximum(3.14, 2.71) << endl; // Outputs: 3.14
+    return 0;
+}
+```
+
+**Java Code Example:**
+```java
+public class Main {
+    public static <T extends Comparable<T>> T maximum(T a, T b) {
+        return (a.compareTo(b) > 0) ? a : b;
+    }
+    
+    public static void main(String[] args) {
+        System.out.println(maximum(5, 10));      // Outputs: 10
+        System.out.println(maximum(3.14, 2.71)); // Outputs: 3.14
+    }
+}
+```
+
+**Differences:** C++ templates are compiled for each type used (code generation at compile time). Java generics use type erasure (single compiled version with runtime type checking). C++ templates are more powerful but increase code size.
+
+---
+
+## 12. Generic Function (Template)
+
+**Definition:** A function that can operate on different data types specified as parameters.
+
+**Explanation:** Generic functions use type parameters to work with any data type, providing type safety while avoiding code duplication.
+
+**C++ Code Example:**
+```cpp
+#include <iostream>
+using namespace std;
+
+template <typename T>
+void swap(T& a, T& b) {
+    T temp = a;
+    a = b;
+    b = temp;
+}
+
+int main() {
+    int x = 1, y = 2;
+    swap(x, y);
+    cout << x << " " << y << endl; // Outputs: 2 1
+    return 0;
+}
+```
+
+**Java Code Example:**
+```java
+public class Main {
+    public static <T> void swap(T[] arr, int i, int j) {
+        T temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+    
+    public static void main(String[] args) {
+        Integer[] arr = {1, 2};
+        swap(arr, 0, 1);
+        System.out.println(arr[0] + " " + arr[1]); // Outputs: 2 1
+    }
+}
+```
+
+**Differences:** C++ can use template functions with any type directly. Java generic methods work with reference types (objects) and require workarounds for primitives or array parameters.
+
+---
+
+## 13. Generic Class (Template Class)
+
+**Definition:** A class that can work with any data type specified as a type parameter.
+
+**Explanation:** Generic classes encapsulate operations that can work with different types while maintaining type safety. They're instantiated with specific types.
+
+**C++ Code Example:**
+```cpp
+#include <iostream>
+using namespace std;
+
+template <typename T>
+class Box {
+    T value;
+public:
+    Box(T v) : value(v) {}
+    T getValue() { return value; }
+};
+
+int main() {
+    Box<int> intBox(42);
+    Box<string> strBox("Hello");
+    cout << intBox.getValue() << endl;
+    cout << strBox.getValue() << endl;
+    return 0;
+}
+```
+
+**Java Code Example:**
+```java
+class Box<T> {
+    private T value;
+    
+    public Box(T v) {
+        value = v;
+    }
+    
+    public T getValue() {
+        return value;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Box<Integer> intBox = new Box<>(42);
+        Box<String> strBox = new Box<>("Hello");
+        System.out.println(intBox.getValue());
+        System.out.println(strBox.getValue());
+    }
+}
+```
+
+**Differences:** C++ template classes generate separate code for each type. Java generic classes use type erasure (runtime type information is lost). C++ allows non-type template parameters (e.g., integers).
+
+---
+
+## 14. Namespace
+
+**Definition:** A declarative region that provides scope to identifiers to prevent name conflicts.
+
+**Explanation:** Namespaces organize code into logical groups and prevent naming collisions between different parts of code or libraries.
+
+**C++ Code Example:**
+```cpp
+#include <iostream>
+
+namespace Math {
+    int add(int a, int b) {
+        return a + b;
+    }
+}
+
+int main() {
+    std::cout << Math::add(5, 3) << std::endl; // Outputs: 8
+    return 0;
+}
+```
+
+**Java Code Example:**
+```java
+// Java uses packages instead of namespaces
+package com.example.math; // This would be in a separate file
+
+class MathUtils {
+    public static int add(int a, int b) {
+        return a + b;
+    }
+}
+
+// In main file:
+// import com.example.math.MathUtils;
+// MathUtils.add(5, 3);
+```
+
+**Differences:** C++ uses `namespace` keyword. Java uses `package` system with directory structure. C++ namespaces can be nested and reopened; Java packages correspond to directory hierarchy.
+
+---
+
+## 15. using Statement
+
+**Definition:** A C++ statement that introduces names from a namespace into the current scope.
+
+**Explanation:** The `using` statement allows access to namespace members without fully qualifying them, reducing verbosity. It can import entire namespaces or specific members.
+
+**C++ Code Example:**
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    cout << "Hello" << endl; // No need for std::cout
+    return 0;
+}
+```
+
+**Java Code Example:**
+```java
+// Java uses import statements
+import java.util.ArrayList;
+import java.util.*; // Import all from package
+
+public class Main {
+    public static void main(String[] args) {
+        ArrayList<Integer> list = new ArrayList<>(); // No need for full path
+    }
+}
+```
+
+**Differences:** C++ `using namespace` can be used anywhere in code. Java `import` statements must be at the top of file. C++ can import entire namespaces into local scopes; Java imports are file-level only.
+
+---
+
+## 16. Formal Generic Type
+
+**Definition:** The type parameter declared in a generic class or method definition.
+
+**Explanation:** Formal generic types are placeholders (like `T`, `E`, `K`, `V`) used in generic definitions. They're replaced with actual types when the generic is instantiated.
+
+**C++ Code Example:**
+```cpp
+#include <iostream>
+using namespace std;
+
+// T is the formal generic type
+template <typename T>
+class Container {
+    T element;
+public:
+    Container(T e) : element(e) {}
+    T get() { return element; }
+};
+
+int main() {
+    Container<int> c(42); // int is the actual type
+    cout << c.get() << endl;
+    return 0;
+}
+```
+
+**Java Code Example:**
+```java
+// T is the formal generic type
+class Container<T> {
+    private T element;
+    
+    public Container(T e) {
+        element = e;
+    }
+    
+    public T get() {
+        return element;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Container<Integer> c = new Container<>(42); // Integer is the actual type
+        System.out.println(c.get());
+    }
+}
+```
+
+**Differences:** Both languages use similar syntax with angle brackets. C++ uses `typename` or `class` keyword before the parameter; Java uses just the identifier. Terminology is the same in both.
+
+---
+
+## 17. Wildcard Generic Type
+
+**Definition:** A special generic type parameter in Java that represents an unknown type.
+
+**Explanation:** Wildcards (`?`) in Java allow flexibility in generic type parameters. They can be unbounded (`?`), upper-bounded (`? extends Type`), or lower-bounded (`? super Type`).
+
+**C++ Code Example:**
+```cpp
+// C++ doesn't have wildcard types like Java
+// Uses template specialization or function overloading
+#include <iostream>
+#include <vector>
+using namespace std;
+
+template <typename T>
+void printVector(const vector<T>& v) {
+    for (const auto& elem : v) {
+        cout << elem << " ";
+    }
+    cout << endl;
+}
+
+int main() {
+    vector<int> v = {1, 2, 3};
+    printVector(v); // Works with any type
+    return 0;
+}
+```
+
+**Java Code Example:**
+```java
+import java.util.*;
+
+public class Main {
+    // Wildcard with upper bound
+    public static void printList(List<? extends Number> list) {
+        for (Number n : list) {
+            System.out.print(n + " ");
+        }
+        System.out.println();
+    }
+    
+    public static void main(String[] args) {
+        List<Integer> intList = Arrays.asList(1, 2, 3);
+        List<Double> doubleList = Arrays.asList(1.1, 2.2, 3.3);
+        printList(intList);
+        printList(doubleList);
+    }
+}
+```
+
+**Differences:** Java has wildcard types (`?`, `? extends`, `? super`) for flexible generic parameters. C++ doesn't have wildcards; uses template parameters that can accept any type or constrained with concepts (C++20).
+
+---
+
+## 18. Template Instantiation
+
+**Definition:** The process of generating concrete code from a template by substituting type parameters with actual types.
+
+**Explanation:** When a template is used with a specific type, the compiler generates (instantiates) the corresponding code. Each unique type creates a separate instantiation.
+
+**C++ Code Example:**
+```cpp
+#include <iostream>
+using namespace std;
+
+template <typename T>
+class Array {
+    T* data;
+    int size;
+public:
+    Array(int s) : size(s) { data = new T[s]; }
+    ~Array() { delete[] data; }
+};
+
+int main() {
+    Array<int> intArr(10);    // Instantiation for int
+    Array<double> doubleArr(5); // Instantiation for double
+    return 0;
+}
+```
+
+**Java Code Example:**
+```java
+// Java uses type erasure, not true instantiation
+class Array<T> {
+    private Object[] data;
+    private int size;
+    
+    public Array(int s) {
+        size = s;
+        data = new Object[s];
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Array<Integer> intArr = new Array<>(10);
+        Array<Double> doubleArr = new Array<>(5);
+        // Only one bytecode version exists at runtime
+    }
+}
+```
+
+**Differences:** C++ creates separate compiled code for each type (template instantiation). Java creates one version and uses type erasure (type information removed at runtime, only one compiled version exists).
+
+---
+
+## 19. Standard Template Library (STL)
+
+**Definition:** A C++ library providing generic container classes, algorithms, and iterators.
+
+**Explanation:** STL is a powerful collection of template-based data structures and algorithms that provides efficient, reusable components for common programming tasks.
+
+**C++ Code Example:**
+```cpp
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int main() {
+    vector<int> v = {5, 2, 8, 1, 9};
+    sort(v.begin(), v.end());
+    for (int x : v) {
+        cout << x << " "; // Outputs: 1 2 5 8 9
+    }
+    return 0;
+}
+```
+
+**Java Code Example:**
+```java
+// Java has Collections Framework (similar concept)
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        List<Integer> list = new ArrayList<>(Arrays.asList(5, 2, 8, 1, 9));
+        Collections.sort(list);
+        for (int x : list) {
+            System.out.print(x + " "); // Outputs: 1 2 5 8 9
+        }
+    }
+}
+```
+
+**Differences:** C++ has STL (part of C++ Standard Library). Java has Collections Framework. STL uses templates; Java uses generics. STL has more emphasis on iterators; Java uses interfaces like `Iterable`.
+
+---
+
+## 20. STL Containers
+
+**Definition:** Template classes in STL that store collections of objects.
+
+**Explanation:** STL containers are data structures like vectors, lists, sets, and maps that manage collections of elements with different characteristics and performance trade-offs.
+
+**C++ Code Example:**
+```cpp
+#include <iostream>
+#include <vector>
+#include <list>
+#include <set>
+using namespace std;
+
+int main() {
+    vector<int> v = {1, 2, 3};      // Dynamic array
+    list<int> l = {4, 5, 6};        // Doubly-linked list
+    set<int> s = {7, 8, 9};         // Ordered set
+    
+    cout << v[0] << " " << l.front() << " " << *s.begin() << endl;
+    return 0;
+}
+```
+
+**Java Code Example:**
+```java
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        List<Integer> list = new ArrayList<>(Arrays.asList(1, 2, 3)); // Dynamic array
+        LinkedList<Integer> linkedList = new LinkedList<>(Arrays.asList(4, 5, 6));
+        Set<Integer> set = new TreeSet<>(Arrays.asList(7, 8, 9)); // Ordered set
+        
+        System.out.println(list.get(0) + " " + linkedList.getFirst() + " " + set.iterator().next());
+    }
+}
+```
+
+**Differences:** C++ STL containers are template-based. Java Collections are interface-based with implementations. C++ has more variety (e.g., `deque`, `multiset`). Both provide similar functionality with different syntax.
+
+---
+
+## 21. Algorithms
+
+**Definition:** Template functions in STL that perform operations on containers.
+
+**Explanation:** STL algorithms are generic functions for searching, sorting, modifying, and manipulating data in containers. They work with iterators to be container-independent.
+
+**C++ Code Example:**
+```cpp
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int main() {
+    vector<int> v = {5, 2, 8, 1, 9};
+    
+    sort(v.begin(), v.end());
+    auto it = find(v.begin(), v.end(), 8);
+    
+    if (it != v.end()) {
+        cout << "Found: " << *it << endl;
+    }
+    return 0;
+}
+```
+
+**Java Code Example:**
+```java
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        List<Integer> list = new ArrayList<>(Arrays.asList(5, 2, 8, 1, 9));
+        
+        Collections.sort(list);
+        boolean found = Collections.binarySearch(list, 8) >= 0;
+        
+        if (found) {
+            System.out.println("Found: 8");
+        }
+    }
+}
+```
+
+**Differences:** C++ STL algorithms are in `<algorithm>` header and use iterators. Java algorithms are in `Collections` class and work with collection objects. C++ has more extensive algorithm library.
+
+---
+
+## 22. Iterators
+
+**Definition:** Objects that allow traversal through container elements.
+
+**Explanation:** Iterators provide a uniform way to access container elements sequentially without exposing the underlying structure. They act like pointers to elements.
+
+**C++ Code Example:**
+```cpp
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    vector<int> v = {1, 2, 3, 4, 5};
+    
+    for (vector<int>::iterator it = v.begin(); it != v.end(); ++it) {
+        cout << *it << " ";
+    }
+    cout << endl;
+    return 0;
+}
+```
+
+**Java Code Example:**
+```java
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        List<Integer> list = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5));
+        
+        Iterator<Integer> it = list.iterator();
+        while (it.hasNext()) {
+            System.out.print(it.next() + " ");
+        }
+        System.out.println();
+    }
+}
+```
+
+**Differences:** C++ iterators behave like pointers with `*` dereference and `++` increment. Java iterators use `hasNext()` and `next()` methods. C++ has multiple iterator categories; Java has simpler iterator interface.
+
+---
+
+## 23. vector
+
+**Definition:** A dynamic array container that can grow or shrink in size.
+
+**Explanation:** Vector provides random access, dynamic sizing, and efficient insertion/deletion at the end. It's the most commonly used sequence container.
+
+**C++ Code Example:**
+```cpp
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    vector<int> v;
+    v.push_back(10);
+    v.push_back(20);
+    v.push_back(30);
+    
+    cout << "Size: " << v.size() << endl;
+    cout << "Element at index 1: " << v[1] << endl;
+    return 0;
+}
+```
+
+**Java Code Example:**
+```java
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        ArrayList<Integer> list = new ArrayList<>();
+        list.add(10);
+        list.add(20);
+        list.add(30);
+        
+        System.out.println("Size: " + list.size());
+        System.out.println("Element at index 1: " + list.get(1));
+    }
+}
+```
+
+**Differences:** C++ `vector` uses `push_back()` and `[]` operator. Java `ArrayList` uses `add()` and `get()` methods. Both provide dynamic arrays with similar performance characteristics.
+
+---
+
+## 24. list
+
+**Definition:** A doubly-linked list container.
+
+**Explanation:** List provides efficient insertion and deletion at any position but no random access. Elements are stored in nodes with links to previous and next elements.
+
+**C++ Code Example:**
+```cpp
+#include <iostream>
+#include <list>
+using namespace std;
+
+int main() {
+    list<int> l;
+    l.push_back(10);
+    l.push_front(5);
+    l.push_back(20);
+    
+    for (int x : l) {
+        cout << x << " "; // Outputs: 5 10 20
+    }
+    return 0;
+}
+```
+
+**Java Code Example:**
+```java
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        LinkedList<Integer> list = new LinkedList<>();
+        list.add(10);
+        list.addFirst(5);
+        list.add(20);
+        
+        for (int x : list) {
+            System.out.print(x + " "); // Outputs: 5 10 20
+        }
+    }
+}
+```
+
+**Differences:** C++ `list` is a doubly-linked list with `push_front()` and `push_back()`. Java `LinkedList` is similar with `addFirst()` and `add()`. Both provide O(1) insertion/deletion but O(n) access.
+
+---
+
+## 25. queue
+
+**Definition:** A FIFO (First-In-First-Out) container adapter.
+
+**Explanation:** Queue provides operations for adding elements at the back and removing from the front, following the first-in-first-out principle.
+
+**C++ Code Example:**
+```cpp
+#include <iostream>
+#include <queue>
+using namespace std;
+
+int main() {
+    queue<int> q;
+    q.push(10);
+    q.push(20);
+    q.push(30);
+    
+    cout << "Front: " << q.front() << endl; // Outputs: 10
+    q.pop();
+    cout << "New front: " << q.front() << endl; // Outputs: 20
+    return 0;
+}
+```
+
+**Java Code Example:**
+```java
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Queue<Integer> q = new LinkedList<>();
+        q.offer(10);
+        q.offer(20);
+        q.offer(30);
+        
+        System.out.println("Front: " + q.peek()); // Outputs: 10
+        q.poll();
+        System.out.println("New front: " + q.peek()); // Outputs: 20
+    }
+}
+```
+
+**Differences:** C++ `queue` uses `push()`, `pop()`, `front()`. Java `Queue` interface uses `offer()`, `poll()`, `peek()`. C++ is a container adapter; Java is an interface with various implementations.
+
+---
+
+## 26. stack
+
+**Definition:** A LIFO (Last-In-First-Out) container adapter.
+
+**Explanation:** Stack provides operations for adding and removing elements from the top only, following the last-in-first-out principle.
+
+**C++ Code Example:**
+```cpp
+#include <iostream>
+#include <stack>
+using namespace std;
+
+int main() {
+    stack<int> s;
+    s.push(10);
+    s.push(20);
+    s.push(30);
+    
+    cout << "Top: " << s.top() << endl; // Outputs: 30
+    s.pop();
+    cout << "New top: " << s.top() << endl; // Outputs: 20
+    return 0;
+}
+```
+
+**Java Code Example:**
+```java
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Stack<Integer> s = new Stack<>();
+        s.push(10);
+        s.push(20);
+        s.push(30);
+        
+        System.out.println("Top: " + s.peek()); // Outputs: 30
+        s.pop();
+        System.out.println("New top: " + s.peek()); // Outputs: 20
+    }
+}
+```
+
+**Differences:** Both languages have similar `Stack` classes with `push()`, `pop()`, and `top()`/`peek()` methods. C++ stack is a container adapter; Java `Stack` is a legacy class (Deque recommended for new code).
+
+---
+
+## 27. map
+
+**Definition:** An associative container that stores key-value pairs with unique keys.
+
+**Explanation:** Map maintains elements sorted by key and provides fast lookup, insertion, and deletion based on keys. Each key maps to exactly one value.
+
+**C++ Code Example:**
+```cpp
+#include <iostream>
+#include <map>
+using namespace std;
+
+int main() {
+    map<string, int> ages;
+    ages["Alice"] = 25;
+    ages["Bob"] = 30;
+    
+    cout << "Alice's age: " << ages["Alice"] << endl;
+    cout << "Size: " << ages.size() << endl;
+    return 0;
+}
+```
+
+**Java Code Example:**
+```java
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Map<String, Integer> ages = new TreeMap<>();
+        ages.put("Alice", 25);
+        ages.put("Bob", 30);
+        
+        System.out.println("Alice's age: " + ages.get("Alice"));
+        System.out.println("Size: " + ages.size());
+    }
+}
+```
+
+**Differences:** C++ `map` uses `[]` operator and maintains sorted order (typically red-black tree). Java `TreeMap` uses `put()`/`get()` and is also sorted. Java also has `HashMap` for unsorted, faster access.
+
+---
+
+## 28. Random-access Iterator
+
+**Definition:** An iterator that provides random access to elements with constant time complexity.
+
+**Explanation:** Random-access iterators support all pointer operations including arithmetic (addition, subtraction, comparison). They allow jumping to any element directly.
+
+**C++ Code Example:**
+```cpp
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    vector<int> v = {10, 20, 30, 40, 50};
+    
+    auto it = v.begin();
+    it += 2; // Jump to third element
+    cout << *it << endl; // Outputs: 30
+    cout << *(it + 1) << endl; // Outputs: 40
+    return 0;
+}
+```
+
+**Java Code Example:**
+```java
+// Java doesn't have random-access iterators
+// Use ListIterator or direct index access
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        List<Integer> list = new ArrayList<>(Arrays.asList(10, 20, 30, 40, 50));
+        
+        // Direct access instead
+        System.out.println(list.get(2)); // Outputs: 30
+        System.out.println(list.get(3)); // Outputs: 40
+    }
+}
+```
+
+**Differences:** C++ has random-access iterators for containers like `vector` and `deque`. Java doesn't have iterator categories; uses `ListIterator` for bidirectional access or direct indexing for random access.
+
+---
+
+## 29. Bidirectional Iterator
+
+**Definition:** An iterator that can move both forward and backward through elements.
+
+**Explanation:** Bidirectional iterators support `++` (forward) and `--` (backward) operations but not arithmetic operations. Used by containers like `list`, `set`, and `map`.
+
+**C++ Code Example:**
+```cpp
+#include <iostream>
+#include <list>
+using namespace std;
+
+int main() {
+    list<int> l = {10, 20, 30, 40};
+    
+    auto it = l.end();
+    --it; // Move backward
+    cout << *it << endl; // Outputs: 40
+    --it;
+    cout << *it << endl; // Outputs: 30
+    return 0;
+}
+```
+
+**Java Code Example:**
+```java
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        List<Integer> list = new LinkedList<>(Arrays.asList(10, 20, 30, 40));
+        
+        ListIterator<Integer> it = list.listIterator(list.size());
+        System.out.println(it.previous()); // Outputs: 40
+        System.out.println(it.previous()); // Outputs: 30
+    }
+}
+```
+
+**Differences:** C++ uses `++` and `--` operators on iterators. Java uses `ListIterator` with `next()` and `previous()` methods. C++ has explicit iterator categories; Java doesn't.
+
+---
+
+## 30. Forward Iterator
+
+**Definition:** An iterator that can only move forward through elements.
+
+**Explanation:** Forward iterators support `++` operation and multi-pass iteration (can iterate multiple times over the same range). Cannot move backward.
+
+**C++ Code Example:**
+```cpp
+#include <iostream>
+#include <forward_list>
+using namespace std;
+
+int main() {
+    forward_list<int> fl = {10, 20, 30};
+    
+    for (auto it = fl.begin(); it != fl.end(); ++it) {
+        cout << *it << " "; // Outputs: 10 20 30
+    }
+    return 0;
+}
+```
+
+**Java Code Example:**
+```java
+// Java's standard Iterator is forward-only
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        List<Integer> list = new ArrayList<>(Arrays.asList(10, 20, 30));
+        
+        Iterator<Integer> it = list.iterator();
+        while (it.hasNext()) {
+            System.out.print(it.next() + " "); // Outputs: 10 20 30
+        }
+    }
+}
+```
+
+**Differences:** C++ has explicit forward iterator category for containers like `forward_list`. Java's default `Iterator` is forward-only but isn't categorized as such. Functionality is similar.
+
+---
+
+## 31. Input Iterator
+
+**Definition:** An iterator that can read elements sequentially in a single pass.
+
+**Explanation:** Input iterators are the most basic read-only iterators. They support single-pass iteration (can only traverse once) and are typically used for reading from input streams.
+
+**C++ Code Example:**
+```cpp
+#include <iostream>
+#include <iterator>
+#include <sstream>
+using namespace std;
+
+int main() {
+    istringstream iss("10 20 30");
+    
+    istream_iterator<int> start(iss);
+    istream_iterator<int> end;
+    
+    while (start != end) {
+        cout << *start << " "; // Outputs: 10 20 30
+        ++start;
+    }
+    return 0;
+}
+```
+
+**Java Code Example:**
+```java
+// Java uses Scanner or BufferedReader for input
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner("10 20 30");
+        
+        while (scanner.hasNextInt()) {
+            System.out.print(scanner.nextInt() + " "); // Outputs: 10 20 30
+        }
+        scanner.close();
+    }
+}
+```
+
+**Differences:** C++ has explicit input iterator category (`istream_iterator`). Java doesn't categorize iterators but uses classes like `Scanner` for input. C++ iterators are more generic; Java uses specialized input classes.
+
+---
+
+## 32. Output Iterator
+
+**Definition:** An iterator that can write elements sequentially in a single pass.
+
+**Explanation:** Output iterators are write-only iterators used for sequential output operations. They support single-pass iteration and are typically used with output streams or algorithms.
+
+**C++ Code Example:**
+```cpp
+#include <iostream>
+#include <iterator>
+#include <algorithm>
+#include <vector>
+using namespace std;
+
+int main() {
+    vector<int> v = {10, 20, 30};
+    
+    ostream_iterator<int> out(cout, " ");
+    copy(v.begin(), v.end(), out); // Outputs: 10 20 30
+    return 0;
+}
+```
+
+**Java Code Example:**
+```java
+// Java doesn't have output iterators
+// Use PrintWriter or similar for output
+import java.util.*;
+import java.io.*;
+
+public class Main {
+    public static void main(String[] args) {
+        List<Integer> list = Arrays.asList(10, 20, 30);
+        PrintWriter out = new PrintWriter(System.out);
+        
+        for (int x : list) {
+            out.print(x + " "); // Outputs: 10 20 30
+        }
+        out.flush();
+    }
+}
+```
+
+**Differences:** C++ has explicit output iterator category (`ostream_iterator`). Java doesn't have output iterators; uses output stream classes directly. C++ integrates iterators with algorithms; Java uses different approach.
+
+---
+
+## 33. size_type
+
+**Definition:** An unsigned integer type representing the size of a container.
+
+**Explanation:** `size_type` is a typedef defined by containers to represent sizes and counts. It's guaranteed to be large enough to represent the maximum size of the container.
+
+**C++ Code Example:**
+```cpp
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    vector<int> v = {1, 2, 3, 4, 5};
+    
+    vector<int>::size_type sz = v.size();
+    cout << "Size: " << sz << endl;
+    
+    for (vector<int>::size_type i = 0; i < sz; ++i) {
+        cout << v[i] << " ";
+    }
+    return 0;
+}
+```
+
+**Java Code Example:**
+```java
+// Java uses int for size
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        List<Integer> list = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5));
+        
+        int size = list.size();
+        System.out.println("Size: " + size);
+        
+        for (int i = 0; i < size; i++) {
+            System.out.print(list.get(i) + " ");
+        }
+    }
+}
+```
+
+**Differences:** C++ containers define `size_type` (usually `std::size_t`, unsigned). Java uses `int` for sizes (signed, limited to 2^31-1). C++ is more flexible for very large containers.
+
+---
+
+## 34. iterator Type
+
+**Definition:** A typedef representing the iterator type for a container.
+
+**Explanation:** Each container defines its own `iterator` type that can be used to traverse elements. This type varies based on the container's structure.
+
+**C++ Code Example:**
+```cpp
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    vector<int> v = {10, 20, 30};
+    
+    // Using iterator type
+    vector<int>::iterator it;
+    for (it = v.begin(); it != v.end(); ++it) {
+        cout << *it << " ";
+    }
+    return 0;
+}
+```
+
+**Java Code Example:**
+```java
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        List<Integer> list = new ArrayList<>(Arrays.asList(10, 20, 30));
+        
+        // Using Iterator type
+        Iterator<Integer> it = list.iterator();
+        while (it.hasNext()) {
+            System.out.print(it.next() + " ");
+        }
+    }
+}
+```
+
+**Differences:** C++ containers have `iterator` and `const_iterator` typedefs specific to each container. Java uses generic `Iterator<T>` interface for all collections. C++ iterators act like pointers; Java iterators use methods.
+
+---
+
+## 35. value_type
+
+**Definition:** A typedef representing the type of elements stored in a container.
+
+**Explanation:** `value_type` is defined by containers to specify the type of elements they hold. It's useful for writing generic code that works with different container types.
+
+**C++ Code Example:**
+```cpp
+#include <iostream>
+#include <vector>
+using namespace std;
+
+template <typename Container>
+void printFirst(const Container& c) {
+    typename Container::value_type first = *c.begin();
+    cout << "First element: " << first << endl;
+}
+
+int main() {
+    vector<int> v = {100, 200, 300};
+    printFirst(v); // Outputs: First element: 100
+    return 0;
+}
+```
+
+**Java Code Example:**
+```java
+// Java uses generic type parameter directly
+import java.util.*;
+
+public class Main {
+    public static <T> void printFirst(List<T> list) {
+        T first = list.get(0);
+        System.out.println("First element: " + first);
+    }
+    
+    public static void main(String[] args) {
+        List<Integer> list = new ArrayList<>(Arrays.asList(100, 200, 300));
+        printFirst(list); // Outputs: First element: 100
+    }
+}
+```
+
+**Differences:** C++ containers define `value_type` typedef for element type. Java uses the generic type parameter directly (no separate typedef). Both achieve type safety but with different mechanisms.
