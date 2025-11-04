@@ -3998,9 +3998,9 @@ class Child extends Parent {
 **C++ vs Java Difference:** C++ static_cast is compile-time only, no runtime checks. Java casting includes runtime type checking. C++ has multiple cast operators; Java has one cast syntax with automatic checking. Java is safer; C++ offers more control.
 
 ---
-# C++ and Java Advance Concept
+# C++ and Java Advanced Concepts
 
-## 1. Run-Time Type Identification (RTTI)
+### 1. Run-Time Type Identification (RTTI)
 
 **Definition:** A mechanism that allows the type of an object to be determined during program execution.
 
@@ -4039,7 +4039,7 @@ public class Main {
 
 ---
 
-## 2. typeid Operator
+### 2. typeid Operator
 
 **Definition:** A C++ operator that returns type information about an expression.
 
@@ -4077,7 +4077,7 @@ public class Main {
 
 ---
 
-## 3. dynamic_cast
+### 3. dynamic_cast
 
 **Definition:** A C++ casting operator that performs safe downcasting with runtime type checking.
 
@@ -4122,7 +4122,7 @@ public class Main {
 
 ---
 
-## 4. const_cast
+### 4. const_cast
 
 **Definition:** A C++ casting operator that adds or removes const or volatile qualifiers.
 
@@ -4163,7 +4163,7 @@ public class Main {
 
 ---
 
-## 5. static_cast
+### 5. static_cast
 
 **Definition:** A C++ casting operator that performs compile-time type conversions.
 
@@ -4198,7 +4198,7 @@ public class Main {
 
 ---
 
-## 6. reinterpret_cast
+### 6. reinterpret_cast
 
 **Definition:** A C++ casting operator that performs low-level reinterpretation of bit patterns.
 
@@ -4239,7 +4239,7 @@ public class Main {
 
 ---
 
-## 7. Upcasting (Implicit)
+### 7. Upcasting (Implicit)
 
 **Definition:** Converting a derived class reference/pointer to a base class reference/pointer.
 
@@ -4279,7 +4279,7 @@ public class Main {
 
 ---
 
-## 8. Downcasting (Explicit)
+### 8. Downcasting (Explicit)
 
 **Definition:** Converting a base class reference/pointer to a derived class reference/pointer.
 
@@ -4321,7 +4321,7 @@ public class Main {
 
 ---
 
-## 9. instanceof Operator
+### 9. instanceof Operator
 
 **Definition:** A Java operator that tests whether an object is an instance of a specific class or interface.
 
@@ -4365,7 +4365,7 @@ public class Main {
 
 ---
 
-## 10. type_info Object
+### 10. type_info Object
 
 **Definition:** A C++ class that holds implementation-specific information about a type.
 
@@ -4407,7 +4407,7 @@ public class Main {
 
 ---
 
-## 11. Templates and Generics
+### 11. Templates and Generics
 
 **Definition:** Mechanisms for writing code that works with any data type without sacrificing type safety.
 
@@ -4448,7 +4448,7 @@ public class Main {
 
 ---
 
-## 12. Generic Function (Template)
+### 12. Generic Function (Template)
 
 **Definition:** A function that can operate on different data types specified as parameters.
 
@@ -4495,7 +4495,7 @@ public class Main {
 
 ---
 
-## 13. Generic Class (Template Class)
+### 13. Generic Class (Template Class)
 
 **Definition:** A class that can work with any data type specified as a type parameter.
 
@@ -4551,7 +4551,7 @@ public class Main {
 
 ---
 
-## 14. Namespace
+### 14. Namespace
 
 **Definition:** A declarative region that provides scope to identifiers to prevent name conflicts.
 
@@ -4593,7 +4593,7 @@ class MathUtils {
 
 ---
 
-## 15. using Statement
+### 15. using Statement
 
 **Definition:** A C++ statement that introduces names from a namespace into the current scope.
 
@@ -4627,7 +4627,7 @@ public class Main {
 
 ---
 
-## 16. Formal Generic Type
+### 16. Formal Generic Type
 
 **Definition:** The type parameter declared in a generic class or method definition.
 
@@ -4681,7 +4681,7 @@ public class Main {
 
 ---
 
-## 17. Wildcard Generic Type
+### 17. Wildcard Generic Type
 
 **Definition:** A special generic type parameter in Java that represents an unknown type.
 
@@ -4736,7 +4736,7 @@ public class Main {
 
 ---
 
-## 18. Template Instantiation
+### 18. Template Instantiation
 
 **Definition:** The process of generating concrete code from a template by substituting type parameters with actual types.
 
@@ -4789,7 +4789,7 @@ public class Main {
 
 ---
 
-## 19. Standard Template Library (STL)
+### 19. Standard Template Library (STL)
 
 **Definition:** A C++ library providing generic container classes, algorithms, and iterators.
 
@@ -4832,7 +4832,7 @@ public class Main {
 
 ---
 
-## 20. STL Containers
+### 20. STL Containers
 
 **Definition:** Template classes in STL that store collections of objects.
 
@@ -4875,7 +4875,7 @@ public class Main {
 
 ---
 
-## 21. Algorithms
+### 21. Algorithms
 
 **Definition:** Template functions in STL that perform operations on containers.
 
@@ -4923,7 +4923,7 @@ public class Main {
 
 ---
 
-## 22. Iterators
+### 22. Iterators
 
 **Definition:** Objects that allow traversal through container elements.
 
@@ -4967,7 +4967,7 @@ public class Main {
 
 ---
 
-## 23. vector
+### 23. vector
 
 **Definition:** A dynamic array container that can grow or shrink in size.
 
@@ -5012,7 +5012,7 @@ public class Main {
 
 ---
 
-## 24. list
+### 24. list
 
 **Definition:** A doubly-linked list container.
 
@@ -5059,7 +5059,7 @@ public class Main {
 
 ---
 
-## 25. queue
+### 25. queue
 
 **Definition:** A FIFO (First-In-First-Out) container adapter.
 
@@ -5106,7 +5106,7 @@ public class Main {
 
 ---
 
-## 26. stack
+### 26. stack
 
 **Definition:** A LIFO (Last-In-First-Out) container adapter.
 
@@ -5153,7 +5153,7 @@ public class Main {
 
 ---
 
-## 27. map
+### 27. map
 
 **Definition:** An associative container that stores key-value pairs with unique keys.
 
@@ -5196,7 +5196,7 @@ public class Main {
 
 ---
 
-## 28. Random-access Iterator
+### 28. Random-access Iterator
 
 **Definition:** An iterator that provides random access to elements with constant time complexity.
 
@@ -5240,7 +5240,7 @@ public class Main {
 
 ---
 
-## 29. Bidirectional Iterator
+### 29. Bidirectional Iterator
 
 **Definition:** An iterator that can move both forward and backward through elements.
 
@@ -5283,7 +5283,7 @@ public class Main {
 
 ---
 
-## 30. Forward Iterator
+### 30. Forward Iterator
 
 **Definition:** An iterator that can only move forward through elements.
 
@@ -5326,7 +5326,7 @@ public class Main {
 
 ---
 
-## 31. Input Iterator
+### 31. Input Iterator
 
 **Definition:** An iterator that can read elements sequentially in a single pass.
 
@@ -5374,7 +5374,7 @@ public class Main {
 
 ---
 
-## 32. Output Iterator
+### 32. Output Iterator
 
 **Definition:** An iterator that can write elements sequentially in a single pass.
 
@@ -5421,7 +5421,7 @@ public class Main {
 
 ---
 
-## 33. size_type
+### 33. size_type
 
 **Definition:** An unsigned integer type representing the size of a container.
 
@@ -5469,7 +5469,7 @@ public class Main {
 
 ---
 
-## 34. iterator Type
+### 34. iterator Type
 
 **Definition:** A typedef representing the iterator type for a container.
 
@@ -5514,7 +5514,7 @@ public class Main {
 
 ---
 
-## 35. value_type
+### 35. value_type
 
 **Definition:** A typedef representing the type of elements stored in a container.
 
