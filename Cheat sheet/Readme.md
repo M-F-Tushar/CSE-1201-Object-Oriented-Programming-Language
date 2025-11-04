@@ -6752,3 +6752,1146 @@ This comprehensive guide covers essential OOP concepts including exception handl
 - OOP principles (encapsulation, inheritance, polymorphism, abstraction) form the foundation of maintainable software
 - Relationships (association, aggregation, composition) model real-world interactions between objects
 - Both C++ and Java support core OOP concepts with syntax and semantic variations
+
+# Object-Oriented Programming Concepts Reference
+
+## Object Methods and Utilities
+
+### equals Method
+
+**Definition:** A method used to compare two objects for equality based on their content rather than memory reference.
+
+**Explanation:** The equals method checks whether two objects are logically equivalent. By default, it compares memory addresses, but it's typically overridden to compare the actual data within objects. This allows meaningful comparisons of object state.
+
+**C++ Code Example:**
+```cpp
+class Person {
+    string name;
+    int age;
+public:
+    bool operator==(const Person& other) const {
+        return name == other.name && age == other.age;
+    }
+};
+
+// Usage
+Person p1{"John", 25};
+Person p2{"John", 25};
+if (p1 == p2) { /* equal */ }
+```
+
+**Java Code Example:**
+```java
+class Person {
+    String name;
+    int age;
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Person other = (Person) obj;
+        return age == other.age && name.equals(other.name);
+    }
+}
+
+// Usage
+Person p1 = new Person("John", 25);
+Person p2 = new Person("John", 25);
+if (p1.equals(p2)) { /* equal */ }
+```
+
+**Differences:** In C++, operator overloading (==) is used for equality comparison. In Java, the equals() method is inherited from Object class and should be overridden. Java also requires hashCode() to be overridden when equals() is overridden.
+
+---
+
+### toString Method
+
+**Definition:** A method that returns a string representation of an object.
+
+**Explanation:** The toString method converts an object into a human-readable string format. This is useful for debugging, logging, and displaying object information. It provides a textual description of the object's state.
+
+**C++ Code Example:**
+```cpp
+class Person {
+    string name;
+    int age;
+public:
+    string toString() const {
+        return "Person{name='" + name + "', age=" + to_string(age) + "}";
+    }
+};
+
+// Usage
+Person p{"Alice", 30};
+cout << p.toString() << endl;
+```
+
+**Java Code Example:**
+```java
+class Person {
+    String name;
+    int age;
+    
+    @Override
+    public String toString() {
+        return "Person{name='" + name + "', age=" + age + "}";
+    }
+}
+
+// Usage
+Person p = new Person("Alice", 30);
+System.out.println(p.toString());
+// or simply: System.out.println(p);
+```
+
+**Differences:** In C++, toString() is a custom method you define. In Java, toString() is inherited from Object class and automatically called when printing objects. Java's System.out.println() implicitly calls toString().
+
+---
+
+### clone() Method
+
+**Definition:** A method that creates and returns a copy of an object.
+
+**Explanation:** The clone method produces a duplicate of an object. It can perform shallow copying (copying references) or deep copying (copying referenced objects too). This allows creating independent copies of objects without affecting the original.
+
+**C++ Code Example:**
+```cpp
+class Person {
+    string name;
+    int age;
+public:
+    Person* clone() const {
+        return new Person(*this); // copy constructor
+    }
+};
+
+// Usage
+Person* p1 = new Person{"Bob", 28};
+Person* p2 = p1->clone();
+```
+
+**Java Code Example:**
+```java
+class Person implements Cloneable {
+    String name;
+    int age;
+    
+    @Override
+    public Person clone() throws CloneNotSupportedException {
+        return (Person) super.clone();
+    }
+}
+
+// Usage
+Person p1 = new Person("Bob", 28);
+Person p2 = p1.clone();
+```
+
+**Differences:** C++ uses copy constructors naturally. Java requires implementing Cloneable interface and handling CloneNotSupportedException. Java's default clone() performs shallow copy; deep copy requires manual implementation.
+
+---
+
+### compareTo Method
+
+**Definition:** A method that compares two objects to determine their ordering.
+
+**Explanation:** The compareTo method returns a negative integer, zero, or positive integer if the current object is less than, equal to, or greater than the specified object. This enables sorting and ordering of objects in collections.
+
+**C++ Code Example:**
+```cpp
+class Person {
+    string name;
+    int age;
+public:
+    int compareTo(const Person& other) const {
+        if (age < other.age) return -1;
+        if (age > other.age) return 1;
+        return 0;
+    }
+};
+
+// Usage
+Person p1{"Alice", 25};
+Person p2{"Bob", 30};
+int result = p1.compareTo(p2); // returns -1
+```
+
+**Java Code Example:**
+```java
+class Person implements Comparable<Person> {
+    String name;
+    int age;
+    
+    @Override
+    public int compareTo(Person other) {
+        return Integer.compare(this.age, other.age);
+    }
+}
+
+// Usage
+Person p1 = new Person("Alice", 25);
+Person p2 = new Person("Bob", 30);
+int result = p1.compareTo(p2); // returns -1
+```
+
+**Differences:** C++ doesn't have a built-in Comparable interface; compareTo is a custom method. Java has the Comparable<T> interface that must be implemented. Java's collections use compareTo for natural ordering automatically.
+
+---
+
+### Wrapper Class
+
+**Definition:** A class that encapsulates a primitive data type as an object.
+
+**Explanation:** Wrapper classes convert primitive types into objects, allowing them to be used where objects are required (like in collections). They provide utility methods for conversion and manipulation of primitive values.
+
+**C++ Code Example:**
+```cpp
+// C++ doesn't have wrapper classes in the same way
+// Standard types are directly usable in templates
+template<typename T>
+class Wrapper {
+    T value;
+public:
+    Wrapper(T v) : value(v) {}
+    T getValue() const { return value; }
+};
+
+// Usage
+Wrapper<int> num(42);
+```
+
+**Java Code Example:**
+```java
+// Java has built-in wrapper classes
+Integer num = new Integer(42); // deprecated
+Integer num2 = Integer.valueOf(42); // preferred
+
+// Usage
+int primitive = num2.intValue();
+String str = num2.toString();
+```
+
+**Differences:** C++ doesn't need wrapper classes as primitives can be used directly in templates. Java requires wrapper classes (Integer, Double, etc.) because collections can only store objects, not primitives. Java wrappers are immutable.
+
+---
+
+### Integer
+
+**Definition:** A wrapper class that encapsulates an int primitive value as an object.
+
+**Explanation:** The Integer class wraps the primitive int type, providing methods for conversion, parsing, and arithmetic operations. It allows int values to be used in contexts requiring objects and provides utility functions like parsing strings to integers.
+
+**C++ Code Example:**
+```cpp
+// C++ uses int directly, but here's a wrapper approach
+class Integer {
+    int value;
+public:
+    Integer(int v) : value(v) {}
+    int intValue() const { return value; }
+    static int parseInt(const string& s) {
+        return stoi(s);
+    }
+};
+
+// Usage
+Integer num(100);
+int val = Integer::parseInt("42");
+```
+
+**Java Code Example:**
+```java
+// Java's built-in Integer class
+Integer num = Integer.valueOf(100);
+int val = num.intValue();
+
+// Parsing and utility methods
+int parsed = Integer.parseInt("42");
+int max = Integer.MAX_VALUE;
+String binary = Integer.toBinaryString(10);
+```
+
+**Differences:** C++ uses int primitives directly without wrappers. Java's Integer class is immutable and provides extensive utility methods like parseInt(), valueOf(), and constants like MAX_VALUE. Java requires Integer for generic collections.
+
+---
+
+### Double
+
+**Definition:** A wrapper class that encapsulates a double primitive value as an object.
+
+**Explanation:** The Double class wraps the primitive double type, providing methods for floating-point operations, conversions, and special value handling (NaN, infinity). It enables double values to be used as objects in collections and provides parsing capabilities.
+
+**C++ Code Example:**
+```cpp
+// C++ uses double directly
+class Double {
+    double value;
+public:
+    Double(double v) : value(v) {}
+    double doubleValue() const { return value; }
+    static double parseDouble(const string& s) {
+        return stod(s);
+    }
+};
+
+// Usage
+Double num(3.14);
+double val = Double::parseDouble("2.718");
+```
+
+**Java Code Example:**
+```java
+// Java's built-in Double class
+Double num = Double.valueOf(3.14);
+double val = num.doubleValue();
+
+// Parsing and special values
+double parsed = Double.parseDouble("2.718");
+boolean isNaN = Double.isNaN(val);
+double inf = Double.POSITIVE_INFINITY;
+```
+
+**Differences:** C++ uses double primitives without wrappers. Java's Double class provides methods for special floating-point values (NaN, infinity) and is required for using doubles in generic collections. Both languages handle floating-point similarly at the primitive level.
+
+---
+
+### Autoboxing
+
+**Definition:** The automatic conversion of primitive types to their corresponding wrapper class objects.
+
+**Explanation:** Autoboxing is a compiler feature that automatically converts primitives to objects when needed, such as when adding primitives to collections. This eliminates the need for explicit wrapper object creation and makes code more readable.
+
+**C++ Code Example:**
+```cpp
+// C++ doesn't have autoboxing in the Java sense
+// Templates work directly with primitives
+template<typename T>
+void add(vector<T>& vec, T value) {
+    vec.push_back(value);
+}
+
+// Usage - primitives work directly
+vector<int> numbers;
+numbers.push_back(42); // no boxing needed
+```
+
+**Java Code Example:**
+```java
+// Java automatically boxes primitives
+List<Integer> numbers = new ArrayList<>();
+numbers.add(42); // int is autoboxed to Integer
+
+// Works seamlessly
+int x = 10;
+Integer y = x; // autoboxing: int to Integer
+```
+
+**Differences:** C++ doesn't have autoboxing because templates work directly with any type including primitives. Java introduced autoboxing in Java 5 to simplify working with wrapper classes, automatically converting primitives to objects when needed.
+
+---
+
+### Autounboxing
+
+**Definition:** The automatic conversion of wrapper class objects back to their corresponding primitive types.
+
+**Explanation:** Autounboxing is the reverse of autoboxing, automatically extracting the primitive value from a wrapper object when needed. This occurs in arithmetic operations, comparisons, or assignments to primitive variables, making code cleaner.
+
+**C++ Code Example:**
+```cpp
+// C++ doesn't need unboxing
+// Templates preserve the original type
+vector<int> numbers = {1, 2, 3};
+int sum = 0;
+for (int n : numbers) {
+    sum += n; // direct use of int
+}
+```
+
+**Java Code Example:**
+```java
+// Java automatically unboxes wrapper objects
+Integer num = 100;
+int x = num; // autounboxing: Integer to int
+
+// In operations
+Integer a = 10;
+Integer b = 20;
+int sum = a + b; // both autounboxed for addition
+```
+
+**Differences:** C++ doesn't require unboxing since primitives aren't boxed. Java autounboxing can cause NullPointerException if the wrapper object is null. This is a Java-specific feature that pairs with autoboxing.
+
+---
+
+## Advanced Features
+
+### Inner Class
+
+**Definition:** A class defined within another class, having access to the outer class's members.
+
+**Explanation:** Inner classes are nested classes that have a relationship with an instance of the outer class. They can access all members of the outer class including private ones. Inner classes are useful for logically grouping classes that are only used in one place and for implementing helper functionality.
+
+**C++ Code Example:**
+```cpp
+class Outer {
+    int outerData = 10;
+    
+    class Inner {
+        Outer* outer;
+    public:
+        Inner(Outer* o) : outer(o) {}
+        void display() {
+            cout << outer->outerData << endl;
+        }
+    };
+    
+public:
+    Inner* createInner() {
+        return new Inner(this);
+    }
+};
+
+// Usage
+Outer outer;
+auto inner = outer.createInner();
+inner->display();
+```
+
+**Java Code Example:**
+```java
+class Outer {
+    private int outerData = 10;
+    
+    class Inner {
+        void display() {
+            System.out.println(outerData); // direct access
+        }
+    }
+    
+    public Inner createInner() {
+        return new Inner();
+    }
+}
+
+// Usage
+Outer outer = new Outer();
+Outer.Inner inner = outer.createInner();
+inner.display();
+```
+
+**Differences:** Java inner classes have implicit reference to outer class instance and automatic access to outer members. C++ nested classes require explicit pointer to outer class and don't have automatic access privileges. Java's syntax is cleaner for inner class instantiation.
+
+---
+
+### Anonymous Inner Class
+
+**Definition:** A nameless inner class defined and instantiated in a single expression.
+
+**Explanation:** Anonymous inner classes are used to create one-time-use classes without formally declaring them. They're commonly used to implement interfaces or extend classes inline, particularly for event handlers or callbacks. They provide a concise way to create objects with custom behavior.
+
+**C++ Code Example:**
+```cpp
+// C++ doesn't have anonymous classes
+// Use lambda or named local class
+class Button {
+public:
+    void onClick(function<void()> handler) {
+        handler();
+    }
+};
+
+// Usage with lambda (similar concept)
+Button btn;
+btn.onClick([]() {
+    cout << "Button clicked" << endl;
+});
+```
+
+**Java Code Example:**
+```java
+interface ClickHandler {
+    void onClick();
+}
+
+class Button {
+    void setClickHandler(ClickHandler handler) {
+        handler.onClick();
+    }
+}
+
+// Usage with anonymous inner class
+Button btn = new Button();
+btn.setClickHandler(new ClickHandler() {
+    @Override
+    public void onClick() {
+        System.out.println("Button clicked");
+    }
+});
+```
+
+**Differences:** C++ doesn't have anonymous inner classes; lambdas serve a similar purpose. Java anonymous inner classes can implement interfaces or extend classes inline. Java 8+ lambdas have largely replaced anonymous inner classes for functional interfaces.
+
+---
+
+### Lambda Expression
+
+**Definition:** A concise way to represent an anonymous function that can be passed as an argument.
+
+**Explanation:** Lambda expressions provide a clear and compact way to represent single-method interfaces or function objects. They eliminate the need for anonymous inner classes when implementing functional interfaces, making code more readable and functional in style.
+
+**C++ Code Example:**
+```cpp
+#include <algorithm>
+#include <vector>
+
+// Lambda expression
+vector<int> numbers = {3, 1, 4, 1, 5};
+sort(numbers.begin(), numbers.end(), 
+     [](int a, int b) { return a < b; });
+
+// With capture
+int threshold = 3;
+auto filtered = count_if(numbers.begin(), numbers.end(),
+    [threshold](int n) { return n > threshold; });
+```
+
+**Java Code Example:**
+```java
+import java.util.*;
+
+// Lambda expression
+List<Integer> numbers = Arrays.asList(3, 1, 4, 1, 5);
+numbers.sort((a, b) -> a - b);
+
+// With streams
+int threshold = 3;
+long count = numbers.stream()
+    .filter(n -> n > threshold)
+    .count();
+```
+
+**Differences:** C++ lambdas have explicit capture clauses ([], [=], [&]) for accessing outer variables. Java lambdas capture variables implicitly but they must be effectively final. C++ lambdas are more flexible with mutable captures and return type specification.
+
+---
+
+### UML Class Diagram
+
+**Definition:** A visual representation of classes, their attributes, methods, and relationships in a system.
+
+**Explanation:** UML Class Diagrams show the static structure of a system by illustrating classes with their attributes and methods, along with relationships like inheritance, association, and dependency. They help in designing and documenting object-oriented systems before implementation.
+
+**C++ Code Example:**
+```cpp
+// Representing this UML:
+// Person: -name: string, -age: int, +getName(): string
+class Person {
+private:
+    string name;
+    int age;
+public:
+    string getName() const { return name; }
+};
+
+// Inheritance relationship
+class Student : public Person {
+private:
+    string studentId;
+};
+```
+
+**Java Code Example:**
+```java
+// Representing this UML:
+// Person: -name: String, -age: int, +getName(): String
+class Person {
+    private String name;
+    private int age;
+    
+    public String getName() { return name; }
+}
+
+// Inheritance relationship
+class Student extends Person {
+    private String studentId;
+}
+```
+
+**Differences:** Both languages represent UML diagrams similarly. C++ uses public/private/protected inheritance which adds complexity to UML representation. Java's single inheritance and interface implementation are more straightforward to diagram. Notation is language-agnostic.
+
+---
+
+### State (attributes)
+
+**Definition:** The data or properties that define the current condition of an object.
+
+**Explanation:** State represents the values stored in an object's fields or attributes at any given time. It captures what an object knows about itself. The state can change over time through method calls, and different objects of the same class can have different states.
+
+**C++ Code Example:**
+```cpp
+class BankAccount {
+private:
+    double balance;  // state
+    string owner;    // state
+    bool isActive;   // state
+    
+public:
+    void deposit(double amount) {
+        balance += amount; // changing state
+    }
+};
+
+// Two objects, different states
+BankAccount acc1; // balance=0
+BankAccount acc2; // balance=0
+```
+
+**Java Code Example:**
+```java
+class BankAccount {
+    private double balance;  // state
+    private String owner;    // state
+    private boolean isActive; // state
+    
+    public void deposit(double amount) {
+        balance += amount; // changing state
+    }
+}
+
+// Two objects, different states
+BankAccount acc1 = new BankAccount(); // balance=0
+BankAccount acc2 = new BankAccount(); // balance=0
+```
+
+**Differences:** No significant difference between C++ and Java for representing state. Both use member variables/fields. Java fields are automatically initialized to default values (0, null, false), while C++ members may contain garbage values if not initialized.
+
+---
+
+### Behavior (methods)
+
+**Definition:** The actions or operations that an object can perform, defined by its methods.
+
+**Explanation:** Behavior defines what an object can do through its methods. Methods operate on the object's state and define the object's functionality. Behavior is shared among all instances of a class, though the results may differ based on each object's state.
+
+**C++ Code Example:**
+```cpp
+class Dog {
+    string name;
+    
+public:
+    // Behaviors (methods)
+    void bark() {
+        cout << name << " says: Woof!" << endl;
+    }
+    
+    void eat(string food) {
+        cout << name << " is eating " << food << endl;
+    }
+};
+
+// Usage
+Dog dog;
+dog.bark();  // behavior
+dog.eat("bone"); // behavior
+```
+
+**Java Code Example:**
+```java
+class Dog {
+    private String name;
+    
+    // Behaviors (methods)
+    public void bark() {
+        System.out.println(name + " says: Woof!");
+    }
+    
+    public void eat(String food) {
+        System.out.println(name + " is eating " + food);
+    }
+}
+
+// Usage
+Dog dog = new Dog();
+dog.bark();  // behavior
+dog.eat("bone"); // behavior
+```
+
+**Differences:** No significant difference in representing behavior. Both languages use methods. C++ has const methods to indicate behavior that doesn't modify state. Java doesn't have this distinction but uses final for variables and methods.
+
+---
+
+### Identity (unique name)
+
+**Definition:** The unique characteristic that distinguishes one object from another, typically its memory address or reference.
+
+**Explanation:** Identity means each object is unique and can be distinguished from other objects even if they have identical state. In programming, identity is usually represented by the object's memory address. Two objects can have the same values but different identities.
+
+**C++ Code Example:**
+```cpp
+class Person {
+    string name;
+};
+
+// Two objects with same state but different identity
+Person* p1 = new Person{"Alice"};
+Person* p2 = new Person{"Alice"};
+
+// Different identities (memory addresses)
+cout << p1 << endl; // e.g., 0x7fff5fbff8a0
+cout << p2 << endl; // e.g., 0x7fff5fbff8b0
+bool sameIdentity = (p1 == p2); // false
+```
+
+**Java Code Example:**
+```java
+class Person {
+    String name;
+}
+
+// Two objects with same state but different identity
+Person p1 = new Person("Alice");
+Person p2 = new Person("Alice");
+
+// Different identities (references)
+System.out.println(System.identityHashCode(p1));
+System.out.println(System.identityHashCode(p2));
+boolean sameIdentity = (p1 == p2); // false
+```
+
+**Differences:** C++ uses memory addresses directly for identity comparison with pointer equality. Java uses references and provides System.identityHashCode() to get identity. The == operator compares identity in both languages (memory address in C++, reference in Java).
+
+---
+
+### Object Identity
+
+**Definition:** The property that makes each object instance unique and distinguishable from others.
+
+**Explanation:** Object identity is what makes an object distinct, regardless of its state. Even if two objects have identical attributes, they remain separate entities with unique identities. This concept is fundamental for comparing objects by reference versus by value.
+
+**C++ Code Example:**
+```cpp
+class Car {
+    string model;
+};
+
+Car c1{"Tesla"};
+Car c2{"Tesla"};
+
+// Identity comparison (by address)
+bool sameObject = (&c1 == &c2); // false
+
+// For pointers
+Car* p1 = &c1;
+Car* p2 = &c1;
+bool sameIdentity = (p1 == p2); // true
+```
+
+**Java Code Example:**
+```java
+class Car {
+    String model;
+}
+
+Car c1 = new Car("Tesla");
+Car c2 = new Car("Tesla");
+
+// Identity comparison (by reference)
+boolean sameObject = (c1 == c2); // false
+
+Car r1 = c1;
+Car r2 = c1;
+boolean sameIdentity = (r1 == r2); // true
+```
+
+**Differences:** C++ uses address-of operator (&) to get object identity for stack objects, and pointer comparison for heap objects. Java uses reference comparison with ==. Java's equals() method compares state, while == compares identity. C++ overloads == for value comparison.
+
+---
+
+### Black Box
+
+**Definition:** A concept where an object's internal implementation is hidden, exposing only its interface.
+
+**Explanation:** The black box principle treats objects as entities whose internal workings are concealed from users. Users interact with objects through public methods without needing to understand the internal implementation. This abstraction allows implementation changes without affecting code that uses the object.
+
+**C++ Code Example:**
+```cpp
+class Calculator {
+private:
+    // Hidden internal implementation
+    double memory;
+    double complexAlgorithm(double x) {
+        return x * x + 2 * x + 1;
+    }
+    
+public:
+    // Public interface (black box boundary)
+    double calculate(double input) {
+        return complexAlgorithm(input);
+    }
+};
+
+// User doesn't know how it works internally
+Calculator calc;
+double result = calc.calculate(5);
+```
+
+**Java Code Example:**
+```java
+class Calculator {
+    // Hidden internal implementation
+    private double memory;
+    
+    private double complexAlgorithm(double x) {
+        return x * x + 2 * x + 1;
+    }
+    
+    // Public interface (black box boundary)
+    public double calculate(double input) {
+        return complexAlgorithm(input);
+    }
+}
+
+// User doesn't know how it works internally
+Calculator calc = new Calculator();
+double result = calc.calculate(5);
+```
+
+**Differences:** Both languages implement black box principle through access modifiers. C++ has friend classes/functions that can break encapsulation. Java's encapsulation is stricter with no friend concept. Both achieve information hiding effectively through private members.
+
+---
+
+### Contract (class contract)
+
+**Definition:** The agreement between a class and its users defining what the class guarantees and what it expects.
+
+**Explanation:** A class contract specifies the expected behavior, preconditions, postconditions, and invariants of a class. It's an implicit or explicit agreement about how methods should be called and what they will return. Contracts ensure reliable interactions between objects and classes.
+
+**C++ Code Example:**
+```cpp
+class Stack {
+private:
+    vector<int> items;
+    
+public:
+    // Contract: push adds element to top
+    void push(int value) {
+        items.push_back(value);
+    }
+    
+    // Contract: pop removes top, requires non-empty stack
+    int pop() {
+        if (items.empty()) 
+            throw runtime_error("Stack empty");
+        int value = items.back();
+        items.pop_back();
+        return value;
+    }
+};
+```
+
+**Java Code Example:**
+```java
+class Stack {
+    private List<Integer> items = new ArrayList<>();
+    
+    // Contract: push adds element to top
+    public void push(int value) {
+        items.add(value);
+    }
+    
+    // Contract: pop removes top, requires non-empty stack
+    public int pop() {
+        if (items.isEmpty()) 
+            throw new IllegalStateException("Stack empty");
+        return items.remove(items.size() - 1);
+    }
+}
+```
+
+**Differences:** C++ can use assertions and exceptions to enforce contracts. Java has formal contract support through interfaces and exceptions. Both can document contracts with comments. Java's interface mechanism provides stronger contract enforcement than C++ abstract classes.
+
+---
+
+### No-arg Constructor
+
+**Definition:** A constructor that takes no parameters, used to create objects with default values.
+
+**Explanation:** A no-arg constructor initializes an object without requiring any arguments. It's called the default constructor if it's the only constructor or if explicitly defined. If no constructors are defined, the compiler provides a default no-arg constructor automatically.
+
+**C++ Code Example:**
+```cpp
+class Person {
+    string name;
+    int age;
+    
+public:
+    // No-arg constructor
+    Person() : name("Unknown"), age(0) {
+        cout << "Default person created" << endl;
+    }
+    
+    // Parameterized constructor
+    Person(string n, int a) : name(n), age(a) {}
+};
+
+// Usage
+Person p1;              // calls no-arg constructor
+Person p2("Alice", 25); // calls parameterized
+```
+
+**Java Code Example:**
+```java
+class Person {
+    String name;
+    int age;
+    
+    // No-arg constructor
+    public Person() {
+        this.name = "Unknown";
+        this.age = 0;
+        System.out.println("Default person created");
+    }
+    
+    // Parameterized constructor
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+}
+
+// Usage
+Person p1 = new Person();        // no-arg
+Person p2 = new Person("Alice", 25); // parameterized
+```
+
+**Differences:** C++ uses initializer lists for member initialization in constructors. Java initializes fields inline or in constructor body. Both languages auto-generate a default no-arg constructor only if no other constructors exist. C++ allows default parameter values, Java doesn't.
+
+---
+
+### Protective Shield
+
+**Definition:** The encapsulation mechanism that protects object data from unauthorized or harmful access.
+
+**Explanation:** The protective shield concept refers to access control through private, protected, and public modifiers. It shields internal data from direct manipulation, forcing interaction through controlled public methods. This prevents invalid state changes and maintains object integrity.
+
+**C++ Code Example:**
+```cpp
+class BankAccount {
+private:
+    double balance; // protected by private access
+    
+public:
+    void deposit(double amount) {
+        if (amount > 0) // validation shield
+            balance += amount;
+    }
+    
+    bool withdraw(double amount) {
+        if (amount > 0 && amount <= balance) {
+            balance -= amount;
+            return true;
+        }
+        return false; // protective logic
+    }
+};
+```
+
+**Java Code Example:**
+```java
+class BankAccount {
+    private double balance; // protected by private access
+    
+    public void deposit(double amount) {
+        if (amount > 0) // validation shield
+            balance += amount;
+    }
+    
+    public boolean withdraw(double amount) {
+        if (amount > 0 && amount <= balance) {
+            balance -= amount;
+            return true;
+        }
+        return false; // protective logic
+    }
+}
+```
+
+**Differences:** Both languages implement protective shields through access modifiers similarly. C++ has friend declarations that can bypass protection. Java's protection is more absolute. Both use validation in methods to maintain data integrity as part of the protective mechanism.
+
+---
+
+### Controlled Interface
+
+**Definition:** The public methods of a class that provide regulated access to its functionality.
+
+**Explanation:** A controlled interface is the set of public methods that external code can use to interact with an object. It acts as a gateway, ensuring all interactions go through validated, controlled pathways. This allows the class to maintain invariants and prevent misuse while providing necessary functionality.
+
+**C++ Code Example:**
+```cpp
+class TemperatureController {
+private:
+    double temperature;
+    const double MIN_TEMP = -50.0;
+    const double MAX_TEMP = 100.0;
+    
+public:
+    // Controlled interface
+    bool setTemperature(double temp) {
+        if (temp >= MIN_TEMP && temp <= MAX_TEMP) {
+            temperature = temp;
+            return true;
+        }
+        return false; // control logic
+    }
+    
+    double getTemperature() const {
+        return temperature;
+    }
+};
+```
+
+**Java Code Example:**
+```java
+class TemperatureController {
+    private double temperature;
+    private static final double MIN_TEMP = -50.0;
+    private static final double MAX_TEMP = 100.0;
+    
+    // Controlled interface
+    public boolean setTemperature(double temp) {
+        if (temp >= MIN_TEMP && temp <= MAX_TEMP) {
+            temperature = temp;
+            return true;
+        }
+        return false; // control logic
+    }
+    
+    public double getTemperature() {
+        return temperature;
+    }
+}
+```
+
+**Differences:** Both languages implement controlled interfaces through public methods with validation. C++ can use const methods to indicate read-only operations. Java uses final for constants. The concept and implementation are nearly identical in both languages.
+
+---
+
+### Formal Generic Type Parameter
+
+**Definition:** A placeholder type used in generic class or method declarations, to be replaced with actual types later.
+
+**Explanation:** Formal generic type parameters (like T, E, K, V) are declared in angle brackets when defining generic classes or methods. They act as type variables that will be substituted with concrete types when the generic is instantiated. This enables writing type-safe, reusable code that works with different types.
+
+**C++ Code Example:**
+```cpp
+// T is the formal generic type parameter
+template<typename T>
+class Box {
+private:
+    T content;
+    
+public:
+    Box(T value) : content(value) {}
+    T getContent() const { return content; }
+};
+
+// Multiple type parameters
+template<typename K, typename V>
+class Pair {
+    K key;
+    V value;
+};
+```
+
+**Java Code Example:**
+```java
+// T is the formal generic type parameter
+class Box<T> {
+    private T content;
+    
+    public Box(T value) {
+        this.content = value;
+    }
+    
+    public T getContent() {
+        return content;
+    }
+}
+
+// Multiple type parameters
+class Pair<K, V> {
+    private K key;
+    private V value;
+}
+```
+
+**Differences:** C++ uses template<typename T> or template<class T> syntax. Java uses class Name<T> syntax. C++ templates are compiled per instantiation (code generation), while Java uses type erasure (single compiled version). C++ allows non-type template parameters, Java doesn't.
+
+---
+
+### Generic Type Argument
+
+**Definition:** The actual concrete type provided when instantiating a generic class or calling a generic method.
+
+**Explanation:** Generic type arguments are the specific types (like Integer, String, Double) that replace formal type parameters when creating an instance of a generic class or calling a generic method. They allow the same generic code to work with different types while maintaining type safety. The argument is specified at instantiation time.
+
+**C++ Code Example:**
+```cpp
+template<typename T>
+class Container {
+    T item;
+public:
+    Container(T i) : item(i) {}
+    T getItem() const { return item; }
+};
+
+// Integer is the generic type argument
+Container<int> intContainer(42);
+
+// String is the generic type argument
+Container<string> strContainer("Hello");
+
+// Custom class as type argument
+Container<Person> personContainer(Person{"Alice", 30});
+```
+
+**Java Code Example:**
+```java
+class Container<T> {
+    private T item;
+    
+    public Container(T item) {
+        this.item = item;
+    }
+    
+    public T getItem() {
+        return item;
+    }
+}
+
+// Integer is the generic type argument
+Container<Integer> intContainer = new Container<>(42);
+
+// String is the generic type argument
+Container<String> strContainer = new Container<>("Hello");
+
+// Custom class as type argument
+Container<Person> personContainer = new Container<>(new Person("Alice", 30));
+```
+
+**Differences:** C++ type arguments can be any type including primitives (int, double). Java type arguments must be reference types (Integer, Double, not primitives). Java 7+ has diamond operator (<>) for type inference. C++ performs complete instantiation per type, Java uses type erasure with runtime type information removed.
+
+---
+
+## Summary
+
+This reference guide covers essential object-oriented programming concepts used in both C++ and Java. Key differences between the languages include:
+
+- **Memory Management:** C++ requires manual memory management (new/delete), Java has automatic garbage collection
+- **Generics vs Templates:** C++ templates generate code per type, Java generics use type erasure
+- **Access Control:** Both have similar access modifiers, but C++ has friend declarations
+- **Wrapper Classes:** Java requires wrappers for primitives in collections, C++ doesn't
+- **Method Overriding:** Java uses @Override annotation, C++ uses virtual/override keywords
+- **Boxing:** Java has autoboxing/unboxing, C++ uses primitives directly in templates
+
+Both languages support fundamental OOP principles of encapsulation, inheritance, and polymorphism with slight syntactic and implementation differences.
