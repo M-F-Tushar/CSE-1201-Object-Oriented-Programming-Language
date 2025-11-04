@@ -1,5 +1,20 @@
 # Complete OOP Concepts Reference Guide
 
+## Table of Contents
+
+1. [Fundamental Structure and Lifetime](#fundamental-structure-and-lifetime)
+2. [Access Control and Inheritance](#access-control-and-inheritance)
+3. [Polymorphism and Virtual Functions](#polymorphism-and-virtual-functions)
+4. [Friends and Operators](#friends-and-operators)
+5. [Memory and Pointers](#memory-and-pointers)
+6. [Special Functions and Modifiers](#special-functions-and-modifiers)
+7. [C++ and Java Advanced Concepts](#c-and-java-advanced-concepts)
+8. [Exception Handling](#exception-handling)
+9. [Interfaces and Abstract Classes](#interfaces-and-abstract-classes)
+10. [Relationships and Design](#relationships-and-design)
+11. [Object Methods and Utilities](#object-methods-and-utilities)
+12. [Advanced Features](#advanced-features)
+
 ---
 
 ## Fundamental Structure and Lifetime
@@ -3998,7 +4013,7 @@ class Child extends Parent {
 **C++ vs Java Difference:** C++ static_cast is compile-time only, no runtime checks. Java casting includes runtime type checking. C++ has multiple cast operators; Java has one cast syntax with automatic checking. Java is safer; C++ offers more control.
 
 ---
-# C++ and Java Advanced Concepts
+## C++ and Java Advanced Concepts
 
 ### 1. Run-Time Type Identification (RTTI)
 
@@ -5559,9 +5574,7 @@ public class Main {
 
 **Differences:** C++ containers define `value_type` typedef for element type. Java uses the generic type parameter directly (no separate typedef). Both achieve type safety but with different mechanisms.
 
-# Object-Oriented Programming Concepts Guide
-
-## Exception Handling
+## Object-Oriented Programming Concepts Guide
 
 ### Exception Handling
 
@@ -5876,7 +5889,7 @@ public class CustomException extends Throwable {
 
 ---
 
-## Interfaces and Abstract Classes
+### Interfaces and Abstract Classes
 
 ### Interface
 
@@ -6219,7 +6232,7 @@ class Car extends Vehicle {
 
 ---
 
-## Relationships and Design
+### Relationships and Design
 
 ### Encapsulation
 
@@ -6753,9 +6766,9 @@ This comprehensive guide covers essential OOP concepts including exception handl
 - Relationships (association, aggregation, composition) model real-world interactions between objects
 - Both C++ and Java support core OOP concepts with syntax and semantic variations
 
-# Object-Oriented Programming Concepts Reference
+## Object-Oriented Programming Concepts Reference
 
-## Object Methods and Utilities
+### Object Methods and Utilities
 
 ### equals Method
 
@@ -7124,7 +7137,7 @@ int sum = a + b; // both autounboxed for addition
 
 ---
 
-## Advanced Features
+### Advanced Features
 
 ### Inner Class
 
