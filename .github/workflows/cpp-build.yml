@@ -32,16 +32,50 @@ jobs:
         sudo apt-get install -y g++ build-essential
 
     - name: Verify g++ Installation
-      run: g++ --version
+      run: |
+        echo "📦 Compiler Information:"
+        g++ --version
+        echo ""
 
     - name: Find and Compile C++ Files
       run: |
         echo "🔍 Finding C++ source files..."
-        find . -name "*.cpp" -type f | while read file; do
-          echo "📝 Compiling: $file"
-          g++ -std=c++17 -c "$file" -o "${file%.cpp}.o" || echo "⚠️ Warning: $file failed to compile"
-        done
-        echo "✅ Compilation check complete!"
+        FAILED_FILES=0
+        SUCCESS_FILES=0
+        TOTAL_FILES=0
+        
+        while IFS= read -r file; do
+          TOTAL_FILES=$((TOTAL_FILES + 1))
+          echo ""
+          echo "📝 Compiling ($TOTAL_FILES): $file"
+          if g++ -std=c++17 -Wall -Wextra -c "$file" -o "${file%.cpp}.o" 2>&1; then
+            echo "✅ Success: $file"
+            SUCCESS_FILES=$((SUCCESS_FILES + 1))
+          else
+            echo "❌ Failed: $file"
+            FAILED_FILES=$((FAILED_FILES + 1))
+          fi
+        done < <(find . -name "*.cpp" -type f)
+        
+        echo ""
+        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        echo "📊 Compilation Summary:"
+        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        echo "Total files:   $TOTAL_FILES"
+        echo "✅ Successful: $SUCCESS_FILES"
+        echo "❌ Failed:     $FAILED_FILES"
+        echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        
+        if [ $FAILED_FILES -gt 0 ]; then
+          echo ""
+          echo "⚠️  Warning: Some files failed to compile"
+          echo "This is expected for educational examples that may contain intentional errors."
+          exit 0
+        else
+          echo ""
+          echo "🎉 All files compiled successfully!"
+        fi
 
     - name: Clean Up Object Files
+      if: always()
       run: find . -name "*.o" -delete

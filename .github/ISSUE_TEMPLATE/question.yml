@@ -1,0 +1,94 @@
+name: Question
+description: Ask a question about the course material
+title: "[Question]: "
+labels: ["question"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Have a question about OOP concepts or code? Ask away!
+
+  - type: dropdown
+    id: question-type
+    attributes:
+      label: Question Type
+      description: What is your question about?
+      options:
+        - Concept Clarification
+        - Code Understanding
+        - Setup/Installation Help
+        - Best Practices
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: language
+    attributes:
+      label: Programming Language
+      description: Which language does your question relate to?
+      options:
+        - C++
+        - Java
+        - Both
+        - General OOP Concepts
+    validations:
+      required: true
+
+  - type: input
+    id: topic
+    attributes:
+      label: Related Topic/Lecture
+      description: Which topic or lecture is this question about?
+      placeholder: "e.g., Lecture 07: Inheritance"
+    validations:
+      required: false
+
+  - type: textarea
+    id: question
+    attributes:
+      label: Your Question
+      description: What would you like to know?
+      placeholder: Ask your question here in detail
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Provide any relevant context or what you've tried so far
+      placeholder: |
+        - What have you already tried?
+        - What do you already understand?
+        - Where are you stuck?
+    validations:
+      required: false
+
+  - type: textarea
+    id: code
+    attributes:
+      label: Related Code (if applicable)
+      description: Share any relevant code snippets
+      placeholder: |
+        ```cpp
+        // Your code here
+        ```
+      render: cpp
+    validations:
+      required: false
+
+  - type: textarea
+    id: resources
+    attributes:
+      label: Resources Consulted
+      description: What resources have you already checked?
+      placeholder: |
+        - [ ] README documentation
+        - [ ] Lecture notes
+        - [ ] GETTING_STARTED guide
+        - [ ] Online tutorials
+    validations:
+      required: false

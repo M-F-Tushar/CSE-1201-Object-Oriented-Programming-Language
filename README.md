@@ -4,6 +4,8 @@
 [![GitHub Stars](https://img.shields.io/github/stars/M-F-Tushar/CSE-1201-Object-Oriented-Programming-Language?style=social)](https://github.com/M-F-Tushar/CSE-1201-Object-Oriented-Programming-Language/stargazers)
 [![GitHub Forks](https://img.shields.io/github/forks/M-F-Tushar/CSE-1201-Object-Oriented-Programming-Language?style=social)](https://github.com/M-F-Tushar/CSE-1201-Object-Oriented-Programming-Language/network/members)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+[![C++ Build](https://github.com/M-F-Tushar/CSE-1201-Object-Oriented-Programming-Language/actions/workflows/cpp-build.yml/badge.svg)](https://github.com/M-F-Tushar/CSE-1201-Object-Oriented-Programming-Language/actions/workflows/cpp-build.yml)
+[![Java Build](https://github.com/M-F-Tushar/CSE-1201-Object-Oriented-Programming-Language/actions/workflows/java-build.yml/badge.svg)](https://github.com/M-F-Tushar/CSE-1201-Object-Oriented-Programming-Language/actions/workflows/java-build.yml)
 
 > 📚 A comprehensive collection of Object-Oriented Programming course materials, examples, and assignments using C++ and Java
 
@@ -19,11 +21,16 @@ This repository contains all the programs, practicals, and assignments for **CSE
 - [Main Textbook](#-main-textbook)
 - [How to Use This Repository](#-how-to-use-this-repository)
 - [Contributing](#-contributing)
+- [Community](#-community)
 - [License](#-license)
 
 > 📚 **New to this repository?** Check out the [Getting Started Guide](GETTING_STARTED.md) for setup instructions!
 >
 > 🗺️ **Looking for specific topics?** See the [Complete Content Index](CONTENT_INDEX.md) for a detailed catalog of all materials!
+>
+> ⚡ **Need quick answers?** Visit the [Quick Reference Guide](QUICK_REFERENCE.md) for commands and common concepts!
+>
+> 💬 **Need help?** Visit our [Support Guide](SUPPORT.md) for assistance!
 
 ## 📘 About the Course
 
@@ -216,6 +223,40 @@ Contributions are welcome! This repository is for academic and self-learning pur
 - 🐛 **Report issues** for bugs or errors
 
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
+
+## 👥 Community
+
+We believe in building a supportive learning community! Here's how you can engage:
+
+### 📖 Documentation & Resources
+
+- **[Getting Started Guide](GETTING_STARTED.md)** - Setup and installation instructions
+- **[Quick Reference Guide](QUICK_REFERENCE.md)** - Fast reference for commands and concepts
+- **[Content Index](CONTENT_INDEX.md)** - Complete catalog of all materials
+- **[Support Guide](SUPPORT.md)** - Community support and help resources
+- **[Known Issues](KNOWN_ISSUES.md)** - Known issues and their status
+- **[Code Style Guide](CODE_STYLE.md)** - Coding standards and best practices
+
+### 🛡️ Policies & Guidelines
+
+- **[Code of Conduct](CODE_OF_CONDUCT.md)** - Community standards and expectations
+- **[Security Policy](SECURITY.md)** - Reporting security vulnerabilities
+- **[Contributing Guidelines](CONTRIBUTING.md)** - How to contribute effectively
+- **[Contributors](CONTRIBUTORS.md)** - Recognition of all contributors
+
+### 🐛 Issue Templates
+
+We've created templates to make it easier to report issues:
+
+- **[Bug Report](.github/ISSUE_TEMPLATE/bug_report.yml)** - Report compilation errors, bugs, or issues
+- **[Feature Request](.github/ISSUE_TEMPLATE/feature_request.yml)** - Suggest new features or improvements
+- **[Question](.github/ISSUE_TEMPLATE/question.yml)** - Ask questions about the course material
+
+### 💬 Get Help
+
+- **Issues**: [Open an issue](https://github.com/M-F-Tushar/CSE-1201-Object-Oriented-Programming-Language/issues/new/choose)
+- **Discussions**: [Join discussions](https://github.com/M-F-Tushar/CSE-1201-Object-Oriented-Programming-Language/discussions) (if enabled)
+- **Support**: Read the [Support Guide](SUPPORT.md)
 
 ## 📜 License
 

@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Course Discussion Forum
+    url: https://github.com/M-F-Tushar/CSE-1201-Object-Oriented-Programming-Language/discussions
+    about: Ask questions and discuss topics with the community
+  - name: Contributing Guidelines
+    url: https://github.com/M-F-Tushar/CSE-1201-Object-Oriented-Programming-Language/blob/main/CONTRIBUTING.md
+    about: Learn how to contribute to this repository
+  - name: Getting Started Guide
+    url: https://github.com/M-F-Tushar/CSE-1201-Object-Oriented-Programming-Language/blob/main/GETTING_STARTED.md
+    about: Setup instructions and beginner's guide
