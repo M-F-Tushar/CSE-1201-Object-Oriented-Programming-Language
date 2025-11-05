@@ -28,6 +28,8 @@ This repository contains all the programs, practicals, and assignments for **CSE
 >
 > 🗺️ **Looking for specific topics?** See the [Complete Content Index](CONTENT_INDEX.md) for a detailed catalog of all materials!
 >
+> ⚡ **Need quick answers?** Visit the [Quick Reference Guide](QUICK_REFERENCE.md) for commands and common concepts!
+>
 > 💬 **Need help?** Visit our [Support Guide](SUPPORT.md) for assistance!
 
 ## 📘 About the Course
@@ -229,15 +231,18 @@ We believe in building a supportive learning community! Here's how you can engag
 ### 📖 Documentation & Resources
 
 - **[Getting Started Guide](GETTING_STARTED.md)** - Setup and installation instructions
+- **[Quick Reference Guide](QUICK_REFERENCE.md)** - Fast reference for commands and concepts
 - **[Content Index](CONTENT_INDEX.md)** - Complete catalog of all materials
 - **[Support Guide](SUPPORT.md)** - Community support and help resources
 - **[Known Issues](KNOWN_ISSUES.md)** - Known issues and their status
+- **[Code Style Guide](CODE_STYLE.md)** - Coding standards and best practices
 
 ### 🛡️ Policies & Guidelines
 
 - **[Code of Conduct](CODE_OF_CONDUCT.md)** - Community standards and expectations
 - **[Security Policy](SECURITY.md)** - Reporting security vulnerabilities
 - **[Contributing Guidelines](CONTRIBUTING.md)** - How to contribute effectively
+- **[Contributors](CONTRIBUTORS.md)** - Recognition of all contributors
 
 ### 🐛 Issue Templates
 
