@@ -12,7 +12,7 @@ If you call destructor explicitly and then let object go out of scope, destructo
 Placement new allows constructing an object at a preallocated memory address; then explicit destructor is safe.
 
 Example:
-
+*/
 #include <iostream>
 #include <new> // for placement new
 using namespace std;
@@ -40,4 +40,4 @@ Destructor called
 
 
 Note: The final destructor corresponds to the object that exists at end of scope. If you explicitly destroyed t and then did not re-construct, the automatic destructor at scope exit would run on an already-destroyed object → UB. So be careful.
-*/
+
