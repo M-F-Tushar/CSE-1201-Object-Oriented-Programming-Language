@@ -1,0 +1,111 @@
+name: Bug Report
+description: Report a bug in the code or documentation
+title: "[Bug]: "
+labels: ["bug"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug! Please fill out the form below.
+
+  - type: dropdown
+    id: bug-type
+    attributes:
+      label: Bug Type
+      description: What type of bug are you reporting?
+      options:
+        - Code Compilation Error
+        - Code Runtime Error
+        - Documentation Error
+        - Typo/Grammar Issue
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: language
+    attributes:
+      label: Programming Language
+      description: Which language does this bug affect?
+      options:
+        - C++
+        - Java
+        - Both
+        - Not Applicable
+    validations:
+      required: true
+
+  - type: input
+    id: location
+    attributes:
+      label: File/Folder Location
+      description: Where is the bug located?
+      placeholder: "e.g., OOP in C++/Lecture_02/1.cpp"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: A clear description of what the bug is
+      placeholder: Describe the bug in detail
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What did you expect to happen?
+      placeholder: Describe expected behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior
+      description: What actually happened?
+      placeholder: Describe actual behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: How can we reproduce this bug?
+      placeholder: |
+        1. Navigate to '...'
+        2. Compile with '...'
+        3. Run '...'
+        4. See error
+    validations:
+      required: false
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Your development environment
+      placeholder: |
+        - OS: [e.g., Ubuntu 22.04, Windows 11, macOS 14]
+        - Compiler: [e.g., g++ 11.3, MSVC 2022, clang 14]
+        - Java Version: [e.g., JDK 17, JDK 21]
+      value: |
+        - OS: 
+        - Compiler/JDK: 
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Add any other context, screenshots, or error messages
+      placeholder: Any additional information
+    validations:
+      required: false
