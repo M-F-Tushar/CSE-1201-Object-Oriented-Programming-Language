@@ -11,8 +11,86 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Visual diagrams for OOP concepts
 - Video tutorials for complex topics
 - GitHub Pages site for better browsing
-- Pull request and issue templates
 - More real-world application examples
+- Automated code formatting checks (clang-format for C++, checkstyle for Java)
+
+## [2.1.0] - 2024-11-05
+
+### Added - Repository Quality Improvements
+
+#### Folder Structure
+- ✅ Fixed naming inconsistency: Renamed "Leacture" folders to "Lecture" (Lectures 01-06)
+- ✅ Fixed spacing in Lecture_08 folder name for consistency
+
+#### Community Templates
+- **Issue Templates** - Professional issue reporting system
+  - Bug Report template with structured fields
+  - Feature Request template for suggestions
+  - Question template for course-related questions
+  - Issue template configuration with helpful links
+  
+- **Pull Request Template** - Standardized PR submission format
+  - Type of change checkboxes
+  - Testing checklist
+  - Environment details section
+  - Contribution guidelines reference
+
+#### Policy Documents
+- **SECURITY.md** - Comprehensive security policy
+  - Vulnerability reporting guidelines
+  - Security best practices for C++ and Java
+  - Response timeline commitments
+  - Educational context considerations
+  
+- **SUPPORT.md** - Community support guide
+  - Getting help resources
+  - Common questions and answers
+  - Learning resources (internal and external)
+  - Bug reporting process
+  - Community guidelines
+
+#### CI/CD Improvements
+- **Enhanced C++ Build Workflow**
+  - Improved error reporting with detailed statistics
+  - Compilation summary with success/failure counts
+  - Warning flags enabled (-Wall -Wextra)
+  - Better visual feedback with emojis
+  
+- **Enhanced Java Build Workflow**
+  - Improved error reporting with detailed statistics
+  - Compilation summary with success/failure counts
+  - Lint warnings enabled (-Xlint:all)
+  - Better visual feedback with emojis
+
+#### Documentation Updates
+- **README.md** - Enhanced main documentation
+  - Added CI/CD status badges for C++ and Java builds
+  - Added comprehensive Community section
+  - Links to all new policy documents
+  - Improved navigation with Support Guide reference
+  
+- **KNOWN_ISSUES.md** - Updated status
+  - Marked folder naming issues as FIXED
+  - Added completion dates
+  - Updated with all corrected folder names
+
+### Changed
+- CI/CD workflows now provide detailed compilation statistics
+- Issue tracking system now uses modern YAML templates
+- Community engagement improved with better documentation
+
+### Fixed
+- Folder naming inconsistency (Leacture → Lecture) across C++ lectures 01-06
+- Missing space in Lecture_08 folder name
+- Lack of structured issue reporting
+- Insufficient community guidelines
+- No security vulnerability reporting process
+
+### Improved
+- GitHub Actions workflows with better error reporting
+- Community engagement through templates and guides
+- Documentation organization and accessibility
+- Repository discoverability with status badges
 
 ## [2.0.0] - 2024-11-02
 
