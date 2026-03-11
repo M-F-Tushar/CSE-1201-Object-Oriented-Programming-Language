@@ -1653,7 +1653,7 @@ print(acc.get_balance())  # 1000
 # print(acc.__balance)  # AttributeError
 ```
 
-**Key Differences:** Both languages implement private members identically. C++ has class-level access (all instances of a class can access each other's private members). Java has the same behavior. C++ default access for class is private; Java's is package-private.
+**Key Differences:** Both languages implement private members identically. C++ has class-level access (all instances of a class can access each other's private members). Java has the same behavior. C++ default access for class is private; Java's is package-private. In Python, there is no true private access; a single underscore prefix (`_name`) is a convention for 'internal use', while double underscore (`__name`) triggers name mangling to `_ClassName__name` to avoid accidental override in subclasses.
 
 ---
 
@@ -1716,7 +1716,7 @@ print(p.name)   # Direct access
 p.greet()
 ```
 
-**Key Differences:** Public members work identically in both languages. C++ struct has default public access; Java doesn't have struct. Both languages use public for class interface design. Access syntax is the same in both.
+**Key Differences:** Public members work identically in both languages. C++ struct has default public access; Java doesn't have struct. Both languages use public for class interface design. Access syntax is the same in both. In Python, all members are public by default; use underscore conventions (`_` or `__`) to signal restricted access.
 
 ---
 
@@ -1785,7 +1785,7 @@ class Dog(Animal):
         print(f"{self._name} barks")
 ```
 
-**Key Differences:** C++ protected members are accessible by friends and within the same package in derived classes. Java protected members are also package-accessible. C++ has more complex protected inheritance rules. Both allow derived class access.
+**Key Differences:** C++ protected members are accessible by friends and within the same package in derived classes. Java protected members are also package-accessible. C++ has more complex protected inheritance rules. Both allow derived class access. In Python, a single underscore prefix (`_name`) is the convention for protected/internal members; it is not enforced by the language.
 
 ---
 
@@ -1845,7 +1845,7 @@ class Circle(Shape):  # Derived from Shape
         self.radius = radius
 ```
 
-**Key Differences:** C++ uses `:` for inheritance syntax; Java uses `extends`. C++ supports multiple inheritance from multiple base classes; Java allows only single inheritance (but multiple interfaces). C++ has virtual inheritance; Java doesn't need it.
+**Key Differences:** C++ uses `:` for inheritance syntax; Java uses `extends`. C++ supports multiple inheritance from multiple base classes; Java allows only single inheritance (but multiple interfaces). C++ has virtual inheritance; Java doesn't need it. Python uses `class Derived(Base):` syntax for inheritance; `super()` accesses the base class; supports multiple inheritance with MRO (Method Resolution Order) using C3 linearization.
 
 ---
 
@@ -1918,7 +1918,7 @@ class Dog(Animal):  # Derived class
         print(f"{self.name} barks!")
 ```
 
-**Key Differences:** C++ uses `:` followed by access specifier (public/protected/private); Java uses `extends`. C++ can inherit from multiple classes; Java only one class. Java uses `super()` to call parent constructor; C++ uses initializer list.
+**Key Differences:** C++ uses `:` followed by access specifier (public/protected/private); Java uses `extends`. C++ can inherit from multiple classes; Java only one class. Java uses `super()` to call parent constructor; C++ uses initializer list. Python subclasses are defined as `class Child(Parent):`; `super()` calls parent methods; Python supports multiple inheritance natively.
 
 ---
 
@@ -1994,7 +1994,7 @@ c.start()         # Inherited public method
 print(c.brand)    # Inherited public attribute
 ```
 
-**Key Differences:** C++ has explicit public inheritance (`: public BaseClass`). Java's `extends` is always public inheritance by default. C++ offers private and protected inheritance options; Java doesn't. Both maintain the is-a relationship with public inheritance.
+**Key Differences:** C++ has explicit public inheritance (`: public BaseClass`). Java's `extends` is always public inheritance by default. C++ offers private and protected inheritance options; Java doesn't. Both maintain the is-a relationship with public inheritance. Python inheritance is always analogous to public inheritance; there is no access specifier in the inheritance syntax — `class Child(Parent):` is the only form.
 
 ---
 
@@ -2070,7 +2070,7 @@ c = Car()
 c.drive()
 ```
 
-**Key Differences:** C++ supports private inheritance with `: private BaseClass`. Java doesn't have private inheritance; composition is used instead. C++ private inheritance is rarely used; composition is preferred in both languages for has-a relationships.
+**Key Differences:** C++ supports private inheritance with `: private BaseClass`. Java doesn't have private inheritance; composition is used instead. C++ private inheritance is rarely used; composition is preferred in both languages for has-a relationships. Python has no private inheritance; the recommended alternative is composition (has-a relationship), just as in Java.
 
 ---
 
@@ -2142,7 +2142,7 @@ d = Derived()
 d.access_protected()
 ```
 
-**Key Differences:** C++ has protected inheritance (`: protected BaseClass`). Java only supports public inheritance. Protected inheritance in C++ is very rare and generally avoided. Java's simpler inheritance model is easier to understand and use.
+**Key Differences:** C++ has protected inheritance (`: protected BaseClass`). Java only supports public inheritance. Protected inheritance in C++ is very rare and generally avoided. Java's simpler inheritance model is easier to understand and use. Python has no protected inheritance; single underscore convention (`_`) signals intended restricted access, but all members are accessible from subclasses.
 
 ---
 
@@ -2225,7 +2225,7 @@ d.swim()   # From Swimmable
 d.quack()
 ```
 
-**Key Differences:** C++ supports multiple inheritance from multiple classes. Java only allows single class inheritance but multiple interface implementation. C++ has diamond problem requiring virtual inheritance; Java avoids this complexity. Java's approach is simpler and safer.
+**Key Differences:** C++ supports multiple inheritance from multiple classes. Java only allows single class inheritance but multiple interface implementation. C++ has diamond problem requiring virtual inheritance; Java avoids this complexity. Java's approach is simpler and safer. Python supports multiple inheritance natively (`class C(A, B):`); the MRO (Method Resolution Order) using C3 linearization resolves method lookup order and handles diamond inheritance without needing virtual base classes.
 
 ---
 
@@ -2296,7 +2296,7 @@ d.method()  # Calls A.method once (MRO: D -> B -> C -> A)
 print(D.__mro__)
 ```
 
-**Key Differences:** C++ requires virtual base classes to solve diamond problem in multiple inheritance. Java doesn't have this issue due to single inheritance model. C++ virtual inheritance adds complexity; Java's simpler model avoids the problem entirely.
+**Key Differences:** C++ requires virtual base classes to solve diamond problem in multiple inheritance. Java doesn't have this issue due to single inheritance model. C++ virtual inheritance adds complexity; Java's simpler model avoids the problem entirely. Python resolves the diamond problem automatically using MRO (C3 linearization); there is no `virtual` base class keyword — `super()` in all classes ensures each base `__init__` is called only once.
 
 ---
 
@@ -2361,7 +2361,7 @@ dog.eat()   # Inherited
 dog.bark()  # Own method
 ```
 
-**Key Differences:** C++ allows both single and multiple inheritance. Java enforces single inheritance for classes (but multiple for interfaces). Both languages commonly use single inheritance. Single inheritance is simpler and more maintainable in both languages.
+**Key Differences:** C++ allows both single and multiple inheritance. Java enforces single inheritance for classes (but multiple for interfaces). Both languages commonly use single inheritance. Single inheritance is simpler and more maintainable in both languages. Python supports single inheritance with `class Child(Parent):`; it also supports multiple inheritance, unlike Java's class single-inheritance restriction.
 
 ---
 
@@ -2430,7 +2430,7 @@ doc = Document("Hello World")
 doc.print_info()
 ```
 
-**Key Differences:** Java has dedicated `interface` keyword; C++ uses abstract classes. Java interfaces can have default methods (Java 8+); C++ can have regular methods in abstract classes. Java uses `implements`; C++ uses inheritance syntax.
+**Key Differences:** Java has dedicated `interface` keyword; C++ uses abstract classes. Java interfaces can have default methods (Java 8+); C++ can have regular methods in abstract classes. Java uses `implements`; C++ uses inheritance syntax. Python has no `interface` keyword; abstract base classes (`abc.ABC` with `@abstractmethod`) serve the same role; duck typing also allows interface-like polymorphism without formal inheritance.
 
 ---
 
@@ -2496,7 +2496,7 @@ print(obj._protected_var)   # OK (convention only)
 # print(obj.__private_var)  # AttributeError
 ```
 
-**Key Differences:** Java has four levels (private, protected, public, default/package-private). C++ has three (private, protected, public) plus friend. Java's default is package-private; C++ class default is private. Java has finer package-level control.
+**Key Differences:** Java has four levels (private, protected, public, default/package-private). C++ has three (private, protected, public) plus friend. Java's default is package-private; C++ class default is private. Java has finer package-level control. Python has no formal access modifiers; it uses naming conventions: no prefix (public), `_` prefix (protected/internal by convention), `__` prefix (name-mangled). Access is not enforced by the interpreter.
 
 ---
 
@@ -2583,7 +2583,7 @@ s.grade = 95
 print(s.grade)  # 95
 ```
 
-**Key Differences:** Both languages implement encapsulation identically using private fields and public methods. Naming conventions differ slightly (Java uses JavaBeans style strictly). Both benefit equally from encapsulation for maintainability and data integrity.
+**Key Differences:** Both languages implement encapsulation identically using private fields and public methods. Naming conventions differ slightly (Java uses JavaBeans style strictly). Both benefit equally from encapsulation for maintainability and data integrity. Python achieves encapsulation through naming conventions (`_` and `__` prefixes) and properties (`@property`); there are no formal access modifiers enforced at runtime.
 
 ---
 
@@ -2655,7 +2655,7 @@ obj.public_method()     # Fine
 obj._internal_method()  # Allowed but discouraged
 ```
 
-**Key Differences:** Java has package-private (default) access level. C++ doesn't have packages; uses namespaces which don't provide access control. C++ uses friend for selective access. Java's package system provides better modularity.
+**Key Differences:** Java has package-private (default) access level. C++ doesn't have packages; uses namespaces which don't provide access control. C++ uses friend for selective access. Java's package system provides better modularity. Python has no package-private access level; module-level underscore prefix (`_name`) is the convention for module-internal names (hidden from `from module import *`), but is not enforced.
 
 ---
 
@@ -2725,7 +2725,7 @@ print(p.name)  # Alice  (calls getter)
 print(p.age)   # 25
 ```
 
-**Key Differences:** Both implement getters identically. Java follows strict JavaBeans naming convention (get + CapitalizedFieldName). C++ const getters (`double getCelsius() const`) prevent modification. Both languages benefit from getters for encapsulation and flexibility.
+**Key Differences:** Both implement getters identically. Java follows strict JavaBeans naming convention (get + CapitalizedFieldName). C++ const getters (`double getCelsius() const`) prevent modification. Both languages benefit from getters for encapsulation and flexibility. Python uses the `@property` decorator to create getters, allowing attribute-style access (`obj.value`) while executing getter logic; no strict naming convention like Java's `getX()` is required.
 
 ---
 
@@ -2798,7 +2798,7 @@ p.age = 30   # Calls setter
 p.age = -5   # Invalid age
 ```
 
-**Key Differences:** Both implement setters identically. Java follows JavaBeans convention (set + CapitalizedFieldName). Both allow validation logic. Java has builder pattern for complex object creation; C++ has similar patterns. Both benefit from controlled mutation.
+**Key Differences:** Both implement setters identically. Java follows JavaBeans convention (set + CapitalizedFieldName). Both allow validation logic. Java has builder pattern for complex object creation; C++ has similar patterns. Both benefit from controlled mutation. Python uses `@property_name.setter` decorator for setters, allowing `obj.value = x` syntax while executing setter logic; no `setX()` naming convention is enforced.
 
 ---
 
@@ -2869,7 +2869,7 @@ class NoSubclass:
         raise TypeError("Cannot subclass NoSubclass")
 ```
 
-**Key Differences:** Java uses `final` for variables, methods, and classes. C++ uses `const` for variables and `final` for virtual methods only. C++ doesn't prevent class inheritance with `final` keyword on class. Java's `final` is more comprehensive.
+**Key Differences:** Java uses `final` for variables, methods, and classes. C++ uses `const` for variables and `final` for virtual methods only. C++ doesn't prevent class inheritance with `final` keyword on class. Java's `final` is more comprehensive. Python has no `final` keyword; use `@property` without a setter to create read-only attributes, or document intent with naming conventions; `Final` from `typing` module provides static type hint support.
 
 ---
 
@@ -2950,7 +2950,7 @@ print(calc.add(2, 3))     # 5
 print(calc.add(2, 3, 4))  # 9
 ```
 
-**Key Differences:** Both support function overloading identically based on parameter types and count. C++ can overload by const-ness of parameters; Java cannot. Return type doesn't affect overloading in either language. Both resolve at compile-time.
+**Key Differences:** Both support function overloading identically based on parameter types and count. C++ can overload by const-ness of parameters; Java cannot. Return type doesn't affect overloading in either language. Both resolve at compile-time. Python doesn't support traditional method overloading by signature; instead, use default parameter values, `*args`/`**kwargs`, or `functools.singledispatch` for type-based dispatch.
 
 ---
 
@@ -3031,7 +3031,7 @@ for s in shapes:
     print(s.area())  # Dynamic dispatch
 ```
 
-**Key Differences:** C++ requires explicit `virtual` keyword; Java methods are virtual by default (except final, static, private). C++ has vtable overhead only for virtual functions; Java has it for all methods. C++ needs virtual destructors; Java handles this automatically.
+**Key Differences:** C++ requires explicit `virtual` keyword; Java methods are virtual by default (except final, static, private). C++ has vtable overhead only for virtual functions; Java has it for all methods. C++ needs virtual destructors; Java handles this automatically. In Python, all instance methods are effectively virtual (overridable) by default; there is no `virtual` keyword. Use `abc.ABC` with `@abstractmethod` for abstract/pure-virtual behavior.
 
 ---
 
@@ -3114,7 +3114,7 @@ class Circle(Shape):
         return 2 * 3.14 * self.radius
 ```
 
-**Key Differences:** C++ uses `= 0` for pure virtual functions; Java uses `abstract` keyword. C++ abstract classes can have constructors and data members; Java abstract classes too. Java has interfaces for pure abstraction; C++ uses abstract classes.
+**Key Differences:** C++ uses `= 0` for pure virtual functions; Java uses `abstract` keyword. C++ abstract classes can have constructors and data members; Java abstract classes too. Java has interfaces for pure abstraction; C++ uses abstract classes. Python uses `@abstractmethod` from the `abc` module to declare pure virtual methods; a class with abstract methods cannot be instantiated, similar to C++ pure virtual functions.
 
 ---
 
@@ -3200,7 +3200,7 @@ dog = Dog("Rex")
 dog.speak()
 ```
 
-**Key Differences:** C++ uses pure virtual functions to create abstract classes; Java uses `abstract` keyword. Both can have concrete and abstract methods. Both cannot be instantiated. Java has both abstract classes and interfaces; C++ uses abstract classes for both purposes.
+**Key Differences:** C++ uses pure virtual functions to create abstract classes; Java uses `abstract` keyword. Both can have concrete and abstract methods. Both cannot be instantiated. Java has both abstract classes and interfaces; C++ uses abstract classes for both purposes. Python creates abstract classes by inheriting from `abc.ABC` and decorating methods with `@abstractmethod`; attempting to instantiate an abstract class raises `TypeError`.
 
 ---
 
@@ -3273,7 +3273,7 @@ for animal in animals:
     animal.speak()  # Polymorphic call
 ```
 
-**Key Differences:** C++ requires `virtual` in base class for runtime polymorphism; Java methods are virtual by default. C++ uses `override` keyword (optional but recommended); Java uses `@Override` annotation (optional). Both enable runtime polymorphism.
+**Key Differences:** C++ requires `virtual` in base class for runtime polymorphism; Java methods are virtual by default. C++ uses `override` keyword (optional but recommended); Java uses `@Override` annotation (optional). Both enable runtime polymorphism. Python supports method overriding natively; override a method by redefining it in the subclass with the same name. There is no `@Override` annotation, but `super().method()` calls the parent's version.
 
 ---
 
@@ -3352,7 +3352,7 @@ v2 = Vector(3, 4)
 print(v1 + v2)  # (4, 6)
 ```
 
-**Key Differences:** Both support compile-time polymorphism through method overloading. C++ additionally supports operator overloading; Java doesn't (except for String concatenation). Resolution mechanism is identical in both. Performance is similar.
+**Key Differences:** Both support compile-time polymorphism through method overloading. C++ additionally supports operator overloading; Java doesn't (except for String concatenation). Resolution mechanism is identical in both. Performance is similar. Python does not support compile-time (static) polymorphism through overloading; it relies on duck typing and default arguments. `functools.singledispatch` can simulate type-based dispatch.
 
 ---
 
@@ -3432,7 +3432,7 @@ render(Circle())   # Drawing circle
 render(Square())   # Drawing square
 ```
 
-**Key Differences:** C++ requires explicit `virtual` keyword; Java methods are virtual by default. C++ has vtable only for classes with virtual functions; Java has it for all classes. C++ runtime polymorphism has slight overhead; Java's is built-in.
+**Key Differences:** C++ requires explicit `virtual` keyword; Java methods are virtual by default. C++ has vtable only for classes with virtual functions; Java has it for all classes. C++ runtime polymorphism has slight overhead; Java's is built-in. Python achieves run-time polymorphism through duck typing and method overriding; all method calls are dynamically dispatched by default, making `virtual` keyword unnecessary.
 
 ---
 
@@ -3515,7 +3515,7 @@ call_method(b)  # Base method
 call_method(d)  # Derived method
 ```
 
-**Key Differences:** C++ dynamic binding requires virtual functions; Java has it by default for all non-final, non-static methods. C++ uses vtables for virtual functions; Java uses similar mechanism for all methods. Both resolve method calls at runtime.
+**Key Differences:** C++ dynamic binding requires virtual functions; Java has it by default for all non-final, non-static methods. C++ uses vtables for virtual functions; Java uses similar mechanism for all methods. Both resolve method calls at runtime. Python uses dynamic binding for all attribute and method lookups by default; method resolution uses the MRO at runtime, making all Python method calls dynamically bound.
 
 ---
 
@@ -3602,7 +3602,7 @@ for animal in animals:
     print(animal.sound())  # Polymorphic calls
 ```
 
-**Key Differences:** Both support polymorphic calls through inheritance and virtual functions. C++ requires virtual keyword; Java methods are virtual by default. Both use similar runtime resolution mechanisms. Both enable flexible, extensible code.
+**Key Differences:** Both support polymorphic calls through inheritance and virtual functions. C++ requires virtual keyword; Java methods are virtual by default. Both use similar runtime resolution mechanisms. Both enable flexible, extensible code. Python supports polymorphic calls through duck typing and method overriding; any object with the expected method can be used, regardless of its class hierarchy.
 
 ---
 
@@ -3670,7 +3670,7 @@ class Derived(Base):
 # def greet(self): ...
 ```
 
-**Key Differences:** Java uses @Override annotation (optional); C++ uses override keyword (optional in C++11+). Both provide compile-time checking. C++ override is a contextual keyword; Java's is an annotation. Both improve code safety and readability.
+**Key Differences:** Java uses @Override annotation (optional); C++ uses override keyword (optional in C++11+). Both provide compile-time checking. C++ override is a contextual keyword; Java's is an annotation. Both improve code safety and readability. Python has no `@Override` annotation; overriding is implicit by redefining a method with the same name in a subclass. Python 3.12+ introduced `@override` from `typing` as an optional static type hint.
 
 ---
 
