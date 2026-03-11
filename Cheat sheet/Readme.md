@@ -280,7 +280,7 @@ s1.age = 20
 print(s1.name, s1.age)
 ```
 
-**Key Differences:** In C++, objects can be created on the stack (automatic storage) or heap (dynamic storage). In Java, all objects are created on the heap using `new`, and variables hold references to objects, not the objects themselves. In Python, objects are created by calling the class name as a function (e.g., `s1 = Student()`), and all objects are on the heap with automatic garbage collection via reference counting.
+**Key Differences:** In C++, objects can be created on the stack (automatic storage) or heap (dynamic storage). In Java, all objects are created on the heap using `new`, and variables hold references to objects, not the objects themselves. In Python, objects are created by calling the class name as a function (e.g., `s1 = Student()`), and all objects are on the heap with automatic memory management via reference counting supplemented by a cyclic garbage collector.
 
 ---
 
@@ -337,7 +337,7 @@ class Rectangle:
         return self.__width * self.__height
 ```
 
-**Key Differences:** C++ classes use semicolon at the end of class definition. Java classes don't require semicolons. C++ has default private access for class members, while Java has package-private (default) access. In Python, class definitions use `class ClassName:` syntax (no semicolons, no braces), and default member access is public; name mangling with `__` prefix provides name-based privacy.
+**Key Differences:** C++ classes use semicolon at the end of class definition. Java classes don't require semicolons. C++ has default private access for class members, while Java has package-private (default) access. In Python, class definitions use `class ClassName:` syntax (no semicolons, no braces), and default member access is public; `__` prefix performs name mangling to avoid accidental name collisions in subclasses (use `_` prefix by convention to signal internal members).
 
 ---
 
@@ -1343,7 +1343,7 @@ print(c1.get_count())  # 1
 print(c2.get_count())  # 0 (independent)
 ```
 
-**Key Differences:** Both languages support instance variables/methods similarly. C++ instance methods can be declared const. Java instance variables are automatically initialized to default values; C++ leaves them uninitialized unless explicitly set. Access syntax is identical in both. Python instance variables are created in `__init__` by assigning to `self.variable`; they are always public by default (name mangling with `__` prefix for pseudo-privacy). Instance methods always take `self` as first parameter.
+**Key Differences:** Both languages support instance variables/methods similarly. C++ instance methods can be declared const. Java instance variables are automatically initialized to default values; C++ leaves them uninitialized unless explicitly set. Access syntax is identical in both. Python instance variables are created in `__init__` by assigning to `self.variable`; they are public by default—use `_` prefix by convention for internal members and `__` prefix for name mangling to avoid collision in subclasses. Instance methods always take `self` as first parameter.
 
 ---
 
