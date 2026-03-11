@@ -280,7 +280,7 @@ s1.age = 20
 print(s1.name, s1.age)
 ```
 
-**Key Differences:** In C++, objects can be created on the stack (automatic storage) or heap (dynamic storage). In Java, all objects are created on the heap using `new`, and variables hold references to objects, not the objects themselves.
+**Key Differences:** In C++, objects can be created on the stack (automatic storage) or heap (dynamic storage). In Java, all objects are created on the heap using `new`, and variables hold references to objects, not the objects themselves. In Python, objects are created by calling the class name as a function (e.g., `s1 = Student()`), and all objects are on the heap with automatic garbage collection via reference counting.
 
 ---
 
@@ -337,7 +337,7 @@ class Rectangle:
         return self.__width * self.__height
 ```
 
-**Key Differences:** C++ classes use semicolon at the end of class definition. Java classes don't require semicolons. C++ has default private access for class members, while Java has package-private (default) access.
+**Key Differences:** C++ classes use semicolon at the end of class definition. Java classes don't require semicolons. C++ has default private access for class members, while Java has package-private (default) access. In Python, class definitions use `class ClassName:` syntax (no semicolons, no braces), and default member access is public; name mangling with `__` prefix provides name-based privacy.
 
 ---
 
@@ -390,7 +390,7 @@ class Circle:
         return 3.14 * self.__radius * self.__radius
 ```
 
-**Key Differences:** C++ member functions can be defined inside or outside the class using scope resolution operator (::). Java methods are always defined within the class body. C++ supports const member functions; Java doesn't have this feature.
+**Key Differences:** C++ member functions can be defined inside or outside the class using scope resolution operator (::). Java methods are always defined within the class body. C++ supports const member functions; Java doesn't have this feature. In Python, methods are defined using `def` inside the class body and always receive `self` as the first parameter explicitly; there is no `const` equivalent.
 
 ---
 
@@ -447,7 +447,7 @@ b1 = Book()                  # Default values
 b2 = Book("Python 101", 300) # Parameterized
 ```
 
-**Key Differences:** C++ objects can be created without `new`, automatically calling constructor. Java requires explicit `new` keyword. C++ supports member initializer lists for efficiency; Java uses assignment in constructor body.
+**Key Differences:** C++ objects can be created without `new`, automatically calling constructor. Java requires explicit `new` keyword. C++ supports member initializer lists for efficiency; Java uses assignment in constructor body. Python uses `__init__` as the constructor, which can have default parameters to serve as both default and parameterized constructors in one.
 
 ---
 
@@ -455,7 +455,7 @@ b2 = Book("Python 101", 300) # Parameterized
 
 **Definition:** A special member function that is automatically called when an object is destroyed.
 
-**Explanation:** Destructors clean up resources (like memory, file handles) before an object is destroyed. In C++, the destructor name is the class name preceded by a tilde (~). Java uses finalizers (deprecated) or try-with-resources instead.
+**Explanation:** Destructors clean up resources (like memory, file handles) before an object is destroyed. In C++, the destructor name is the class name preceded by a tilde (~). Java uses finalizers (deprecated) or try-with-resources instead. Python has `__del__`, but its invocation is non-deterministic; Python's context manager protocol (`__enter__`/`__exit__`) is the idiomatic way to manage resources.
 
 **C++ Code Example:**
 ```cpp
@@ -505,7 +505,7 @@ fh = FileHandler("data.txt")
 # Destructor called when object is garbage collected
 ```
 
-**Key Differences:** C++ has explicit destructors called automatically when objects go out of scope. Java relies on garbage collection and doesn't have destructors. Java's `finalize()` method (deprecated) is unpredictable, so explicit cleanup methods are preferred.
+**Key Differences:** C++ has explicit destructors called automatically when objects go out of scope. Java relies on garbage collection and doesn't have destructors. Java's `finalize()` method (deprecated) is unpredictable, so explicit cleanup methods are preferred. Python has `__del__` as a destructor, but like Java its invocation timing is unpredictable (depends on garbage collector); use context managers (`with` statement) for reliable cleanup.
 
 ---
 
@@ -568,7 +568,7 @@ p2 = copy.copy(p1)  # Uses __copy__
 print(p2.x, p2.y)  # 1 2
 ```
 
-**Key Differences:** C++ automatically provides a default copy constructor and calls it implicitly. Java doesn't have automatic copy constructors; you must implement them manually. Java passes objects by reference, so copying happens less frequently.
+**Key Differences:** C++ automatically provides a default copy constructor and calls it implicitly. Java doesn't have automatic copy constructors; you must implement them manually. Java passes objects by reference, so copying happens less frequently. Python uses the `copy` module (`copy.copy()` for shallow, `copy.deepcopy()` for deep copy) or implements `__copy__`/`__deepcopy__`; there is no automatic copy constructor.
 
 ---
 
@@ -638,13 +638,13 @@ d2 = Distance("200")  # Converts string to int
 d2.display()
 ```
 
-**Key Differences:** C++ allows implicit conversion via converting constructors (can be prevented with `explicit`). Java doesn't support implicit object conversion; all constructor calls must be explicit with the `new` keyword.
+**Key Differences:** C++ allows implicit conversion via converting constructors (can be prevented with `explicit`). Java doesn't support implicit object conversion; all constructor calls must be explicit with the `new` keyword. Python doesn't have converting constructors; type conversion is handled by `__init__` checking input types (e.g., `isinstance`) or by `@classmethod` factory methods.
 
 ---
 
 ### 8. explicit Keyword
 
-**Definition:** A C++ keyword that prevents implicit type conversions through constructors.
+**Definition:** A C++ keyword that prevents implicit type conversions through constructors. Python and Java do not have an equivalent keyword, as they use different approaches to avoid unintended conversions.
 
 **Explanation:** The `explicit` keyword prevents the compiler from using a constructor for implicit conversions. This helps avoid unintended conversions and makes code more readable and safer.
 
@@ -702,7 +702,7 @@ s = Score(95)           # Direct construction
 s2 = Score.from_percentage(95.5)  # Explicit conversion
 ```
 
-**Key Differences:** C++ has the `explicit` keyword to prevent implicit conversions. Java doesn't need this keyword because it doesn't support implicit constructor conversions; all object creation must use the `new` keyword explicitly.
+**Key Differences:** C++ has the `explicit` keyword to prevent implicit conversions. Java doesn't need this keyword because it doesn't support implicit constructor conversions; all object creation must use the `new` keyword explicitly. Python has no `explicit` keyword; use `@classmethod` named constructors or type checking in `__init__` to enforce explicit construction.
 
 ---
 
@@ -759,7 +759,7 @@ acc.deposit(500).deposit(200)  # Method chaining
 print(acc.balance)  # 1700
 ```
 
-**Key Differences:** In C++, `this` is a pointer (use `->` to access members). In Java, `this` is a reference (use `.` to access members). C++ `this` is a pointer constant; Java `this` is a final reference.
+**Key Differences:** In C++, `this` is a pointer (use `->` to access members). In Java, `this` is a reference (use `.` to access members). C++ `this` is a pointer constant; Java `this` is a final reference. In Python, `self` is the equivalent of `this`, but it must be explicitly declared as the first parameter of every instance method; it is a regular reference, not a pointer.
 
 ---
 
@@ -820,7 +820,7 @@ result = Calculator.multiply(3, 4)
 print(result)  # 12
 ```
 
-**Key Differences:** C++ has the `::` operator for defining members outside the class and accessing nested scopes. Java requires all methods to be defined within the class body and uses dot notation for static member access.
+**Key Differences:** C++ has the `::` operator for defining members outside the class and accessing nested scopes. Java requires all methods to be defined within the class body and uses dot notation for static member access. Python has no `::` operator; use `ClassName.method()` for class/static method access and module-level namespace using dot notation.
 
 ---
 
@@ -884,7 +884,7 @@ emp = Employee("John", 101, 50000.0)
 print(emp.name, emp.emp_id)
 ```
 
-**Key Differences:** Both languages support parameterized constructors similarly. C++ can use member initializer lists for efficiency. Java uses assignment in constructor body. C++ objects can be created on stack; Java requires heap allocation with `new`.
+**Key Differences:** Both languages support parameterized constructors similarly. C++ can use member initializer lists for efficiency. Java uses assignment in constructor body. C++ objects can be created on stack; Java requires heap allocation with `new`. Python's `__init__` method serves as the parameterized constructor; default parameter values allow a single `__init__` to act as both default and parameterized constructor.
 
 ---
 
@@ -944,7 +944,7 @@ p2 = Product("Laptop", 999.99)
 print(p.name)  # Unknown
 ```
 
-**Key Differences:** Both languages auto-generate default constructors if none are defined. C++ default constructor leaves primitive types uninitialized for local objects; Java initializes all fields to default values (0, null, false). C++ syntax doesn't require `new`.
+**Key Differences:** Both languages auto-generate default constructors if none are defined. C++ default constructor leaves primitive types uninitialized for local objects; Java initializes all fields to default values (0, null, false). C++ syntax doesn't require `new`. Python's `__init__` with default parameter values provides default-constructor behavior; if no `__init__` is defined, the base `object.__init__` is used.
 
 ---
 
@@ -1004,7 +1004,7 @@ class Car(Vehicle):
 c = Car("Toyota", 2023, "Camry")
 ```
 
-**Key Differences:** C++11 introduced delegating constructors using initializer lists. Java uses `this()` which must be the first statement. Java's syntax is more explicit; C++'s uses initialization list syntax. Both achieve code reuse effectively.
+**Key Differences:** C++11 introduced delegating constructors using initializer lists. Java uses `this()` which must be the first statement. Java's syntax is more explicit; C++'s uses initialization list syntax. Both achieve code reuse effectively. Python uses `super().__init__()` to call the parent constructor; within the same class, default parameter values or separate class methods are used instead of `this()`.
 
 ---
 
@@ -1064,7 +1064,7 @@ class Derived(Base):
         super().__del__()  # Base destructor called after
 ```
 
-**Key Differences:** C++ has explicit destructors called in reverse order of construction. Java relies on garbage collection without explicit destructors. C++ destructor order is deterministic and immediate; Java cleanup is non-deterministic.
+**Key Differences:** C++ has explicit destructors called in reverse order of construction. Java relies on garbage collection without explicit destructors. C++ destructor order is deterministic and immediate; Java cleanup is non-deterministic. Python constructors are called from base to derived (using `super().__init__()`); `__del__` destructors are called by the garbage collector in an undefined order.
 
 ---
 
@@ -1130,7 +1130,7 @@ r.use()         # Using
 del r           # Destroyed explicitly
 ```
 
-**Key Differences:** C++ objects have deterministic lifecycles with explicit destruction when leaving scope. Java objects persist until garbage collected, making lifecycle timing unpredictable. C++ requires manual memory management for heap objects; Java handles this automatically.
+**Key Differences:** C++ objects have deterministic lifecycles with explicit destruction when leaving scope. Java objects persist until garbage collected, making lifecycle timing unpredictable. C++ requires manual memory management for heap objects; Java handles this automatically. Python objects are created on the heap and managed by reference counting (CPython) plus cyclic garbage collection; destruction via `__del__` is non-deterministic, so `with` statements are preferred for resource cleanup.
 
 ---
 
@@ -1184,13 +1184,13 @@ print(c1.model)  # Tesla
 print(c2.model)  # BMW
 ```
 
-**Key Differences:** C++ allows stack and heap instantiation; Java only heap with `new`. C++ stack objects are automatically destroyed; Java relies on garbage collection. C++ requires explicit `delete` for heap objects; Java automates this.
+**Key Differences:** C++ allows stack and heap instantiation; Java only heap with `new`. C++ stack objects are automatically destroyed; Java relies on garbage collection. C++ requires explicit `delete` for heap objects; Java automates this. Python creates all objects on the heap by calling the class name; memory is managed automatically via reference counting and GC, with no explicit `delete` needed.
 
 ---
 
 ### 17. Main Class
 
-**Definition:** The class containing the main method, serving as the entry point of a program.
+**Definition:** The class containing the main method, serving as the entry point of a program. In Python, there is no required main class; the script entry point is typically guarded by `if __name__ == '__main__':`.
 
 **Explanation:** The main class contains the main method where program execution begins. In Java, the main class name should match the filename. C++ doesn't require a class for the main function.
 
@@ -1232,7 +1232,7 @@ if __name__ == "__main__":
     app.run()
 ```
 
-**Key Differences:** Java requires a main class containing the main method. C++ has a standalone main function without requiring a class. Java's main must be public static void; C++ main returns int. Java enforces filename matching class name.
+**Key Differences:** Java requires a main class containing the main method. C++ has a standalone main function without requiring a class. Java's main must be public static void; C++ main returns int. Java enforces filename matching class name. Python doesn't require a main class; scripts are executed top-to-bottom, and `if __name__ == '__main__':` is the idiomatic entry point guard.
 
 ---
 
@@ -1277,7 +1277,7 @@ if __name__ == "__main__":
     main()
 ```
 
-**Key Differences:** C++ main returns int (exit status); Java main returns void. C++ main can exist outside a class; Java main must be in a class. Java requires `public static void` signature; C++ just requires return type int.
+**Key Differences:** C++ main returns int (exit status); Java main returns void. C++ main can exist outside a class; Java main must be in a class. Java requires `public static void` signature; C++ just requires return type int. Python has no main method requirement; `if __name__ == '__main__':` is the standard idiom for entry point code, and the block is optional.
 
 ---
 
@@ -1343,7 +1343,7 @@ print(c1.get_count())  # 1
 print(c2.get_count())  # 0 (independent)
 ```
 
-**Key Differences:** Both languages support instance variables/methods similarly. C++ instance methods can be declared const. Java instance variables are automatically initialized to default values; C++ leaves them uninitialized unless explicitly set. Access syntax is identical in both.
+**Key Differences:** Both languages support instance variables/methods similarly. C++ instance methods can be declared const. Java instance variables are automatically initialized to default values; C++ leaves them uninitialized unless explicitly set. Access syntax is identical in both. Python instance variables are created in `__init__` by assigning to `self.variable`; they are always public by default (name mangling with `__` prefix for pseudo-privacy). Instance methods always take `self` as first parameter.
 
 ---
 
@@ -1403,7 +1403,7 @@ b2 = Bank()
 print(Bank.get_total_accounts())  # 2
 ```
 
-**Key Differences:** C++ requires static variables to be defined outside the class (except inline static). Java allows initialization in-place. Both use `ClassName::method()` (C++) or `ClassName.method()` (Java) for static method calls. C++ uses `::`, Java uses `.`.
+**Key Differences:** C++ requires static variables to be defined outside the class (except inline static). Java allows initialization in-place. Both use `ClassName::method()` (C++) or `ClassName.method()` (Java) for static method calls. C++ uses `::`, Java uses `.`. Python uses the `@staticmethod` decorator for static methods (no `self` or `cls`); class variables are defined at class level; `@classmethod` receives `cls` as the first parameter.
 
 ---
 
@@ -1451,7 +1451,7 @@ class Message:
 Message().display("Hello")  # No variable assigned
 ```
 
-**Key Differences:** C++ anonymous objects are destructed immediately after the statement. Java anonymous objects persist until garbage collected. C++ syntax allows `ClassName()` directly; Java requires `new ClassName()`. Both are useful for one-time operations.
+**Key Differences:** C++ anonymous objects are destructed immediately after the statement. Java anonymous objects persist until garbage collected. C++ syntax allows `ClassName()` directly; Java requires `new ClassName()`. Both are useful for one-time operations. Python creates temporary objects in expressions (e.g., `Student().greet()`); they are garbage collected when no longer referenced, similar to Java's behavior.
 
 ---
 
@@ -1515,7 +1515,7 @@ print(p.x, p.y)  # 3 4
 # p.x = 5  # AttributeError: can't set attribute
 ```
 
-**Key Differences:** C++ uses `const` for immutable fields; Java uses `final`. Java's String is immutable by design. C++ requires careful const-correctness. Java provides better immutability support with final classes. Both benefit from immutability for thread safety.
+**Key Differences:** C++ uses `const` for immutable fields; Java uses `final`. Java's String is immutable by design. C++ requires careful const-correctness. Java provides better immutability support with final classes. Both benefit from immutability for thread safety. Python achieves immutability using `__slots__` combined with properties, overriding `__setattr__`, or using `@dataclass(frozen=True)`; built-in types like `int`, `str`, and `tuple` are immutable by design.
 
 ---
 
@@ -1573,7 +1573,7 @@ gc.collect()  # Manually trigger garbage collection
 print(gc.get_count())  # View GC stats
 ```
 
-**Key Differences:** Java has automatic garbage collection; C++ doesn't (requires manual delete or smart pointers). Java GC timing is unpredictable; C++ destruction is deterministic. C++ offers more control over memory; Java provides safety and convenience.
+**Key Differences:** Java has automatic garbage collection; C++ doesn't (requires manual delete or smart pointers). Java GC timing is unpredictable; C++ destruction is deterministic. C++ offers more control over memory; Java provides safety and convenience. Python uses reference counting as its primary GC mechanism (CPython), with a cyclic garbage collector to handle reference cycles; like Java, it provides automatic memory management without explicit `delete`.
 
 ---
 
