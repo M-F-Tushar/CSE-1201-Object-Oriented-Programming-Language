@@ -3765,7 +3765,7 @@ b2 = Box(20)
 print(compare_boxes(b1, b2))  # False
 ```
 
-**Key Differences:** C++ has friend functions for selective access to private members. Java doesn't have friends; uses package-private access for similar functionality. C++ friends are more explicit; Java's approach is simpler but less granular.
+**Key Differences:** C++ has friend functions for selective access to private members. Java doesn't have friends; uses package-private access for similar functionality. C++ friends are more explicit; Java's approach is simpler but less granular. Python has no friend function concept; all methods can access class internals through `self`, and module-level functions can access objects through their public/convention-private attributes. Use underscore conventions for intent.
 
 ---
 
@@ -3842,7 +3842,7 @@ c2 = Complex(1, 4)
 print(c1 + c2)  # 3 + 7i
 ```
 
-**Key Differences:** C++ supports operator overloading for user-defined types; Java doesn't (design decision to avoid complexity). C++ allows intuitive syntax; Java requires explicit method calls. C++ is more flexible; Java is simpler.
+**Key Differences:** C++ supports operator overloading for user-defined types; Java doesn't (design decision to avoid complexity). C++ allows intuitive syntax; Java requires explicit method calls. C++ is more flexible; Java is simpler. Python has extensive operator overloading support through dunder (double-underscore) methods: `__add__` for `+`, `__sub__` for `-`, `__mul__` for `*`, `__eq__` for `==`, etc.
 
 ---
 
@@ -3920,7 +3920,7 @@ print(p)       # Point(3, 4) - uses __str__
 print(repr(p)) # Point(x=3, y=4) - uses __repr__
 ```
 
-**Key Differences:** C++ uses operator overloading for << with streams. Java uses toString() method which is called automatically by println(). C++ approach is more operator-centric; Java's is method-centric. Both achieve readable output.
+**Key Differences:** C++ uses operator overloading for << with streams. Java uses toString() method which is called automatically by println(). C++ approach is more operator-centric; Java's is method-centric. Both achieve readable output. Python has no stream insertion operator; use `__str__` and `__repr__` dunder methods to define string representations, and the built-in `print()` function for output.
 
 ---
 
@@ -4000,7 +4000,7 @@ p = Point(3, 4)
 print(p)
 ```
 
-**Key Differences:** C++ uses >> operator overloading for input. Java uses explicit input methods with Scanner or similar classes. C++ syntax is more concise; Java's approach is more explicit. Both achieve object input functionality.
+**Key Differences:** C++ uses >> operator overloading for input. Java uses explicit input methods with Scanner or similar classes. C++ syntax is more concise; Java's approach is more explicit. Both achieve object input functionality. Python has no stream extraction operator; use `input()` for user input and file methods like `read()` or `readline()` for file reading.
 
 ---
 
@@ -4078,7 +4078,7 @@ print(v1 + v2)  # (4, 6)
 print(v1 - v2)  # (2, 2)
 ```
 
-**Key Differences:** C++ supports binary operator overloading as member functions. Java doesn't support operator overloading; requires named methods. C++ syntax is more intuitive for mathematical operations; Java is more explicit.
+**Key Differences:** C++ supports binary operator overloading as member functions. Java doesn't support operator overloading; requires named methods. C++ syntax is more intuitive for mathematical operations; Java is more explicit. Python uses dunder methods for binary operator overloading: `__add__` for `+`, `__sub__` for `-`, `__mul__` for `*`, `__truediv__` for `/`; reflected versions like `__radd__` handle right-hand operand cases.
 
 ---
 
@@ -4156,7 +4156,7 @@ print(-c)    # 5
 print(abs(c)) # 5
 ```
 
-**Key Differences:** C++ supports unary operator overloading (++, --, -, !, ~, etc.). Java doesn't support operator overloading; requires explicit methods. C++ distinguishes prefix/postfix with dummy int parameter; Java uses different method names.
+**Key Differences:** C++ supports unary operator overloading (++, --, -, !, ~, etc.). Java doesn't support operator overloading; requires explicit methods. C++ distinguishes prefix/postfix with dummy int parameter; Java uses different method names. Python uses dunder methods for unary operators: `__neg__` for unary `-`, `__pos__` for unary `+`, `__invert__` for `~`, `__abs__` for `abs()`.
 
 ---
 
@@ -4237,7 +4237,7 @@ m2.data[0][0] = 99
 print(m1.data[0][0])  # 1 (unchanged)
 ```
 
-**Key Differences:** C++ = operator can be overloaded for deep copying. Java = always assigns references, not values. C++ requires careful implementation for classes with pointers; Java doesn't have manual memory management. For copying in Java, use clone() or copy constructors.
+**Key Differences:** C++ = operator can be overloaded for deep copying. Java = always assigns references, not values. C++ requires careful implementation for classes with pointers; Java doesn't have manual memory management. For copying in Java, use clone() or copy constructors. Python uses `__iadd__`, `__isub__`, etc. for augmented assignment (`+=`, `-=`); the basic `=` assignment is handled by the interpreter and cannot be overloaded. Deep copy uses `copy.deepcopy()`.
 
 ---
 
@@ -4315,7 +4315,7 @@ print(m[0])  # [1, 2, 3]
 print(m[0][1])  # 2
 ```
 
-**Key Differences:** C++ supports [] operator overloading for custom types. Java doesn't; requires get() and set() methods. C++ syntax is more concise; Java is more explicit. Both can implement bounds checking.
+**Key Differences:** C++ supports [] operator overloading for custom types. Java doesn't; requires get() and set() methods. C++ syntax is more concise; Java is more explicit. Both can implement bounds checking. Python uses `__getitem__`, `__setitem__`, and `__delitem__` dunder methods to overload the `[]` subscript operator.
 
 ---
 
@@ -4392,7 +4392,7 @@ print(t1 == t2)  # False
 print(t2 < t1)   # True
 ```
 
-**Key Differences:** C++ can overload relational operators directly. Java uses equals() for equality and compareTo() for ordering. C++ syntax is more operator-like; Java uses method calls. Both achieve comparison functionality effectively.
+**Key Differences:** C++ can overload relational operators directly. Java uses equals() for equality and compareTo() for ordering. C++ syntax is more operator-like; Java uses method calls. Both achieve comparison functionality effectively. Python overloads comparison operators using `__lt__`, `__le__`, `__gt__`, `__ge__`, `__eq__`, `__ne__`; logical operators (`and`, `or`, `not`) use `__bool__` and cannot be overloaded directly.
 
 ---
 
@@ -4472,7 +4472,7 @@ print(m + 10)   # $60
 print(10 + m)   # $60 (uses __radd__)
 ```
 
-**Key Differences:** C++ has friend operator functions for flexible operator overloading. Java doesn't support operator overloading or friends. C++ allows symmetric operations; Java requires explicit method calls. C++ is more flexible; Java is simpler.
+**Key Differences:** C++ has friend operator functions for flexible operator overloading. Java doesn't support operator overloading or friends. C++ allows symmetric operations; Java requires explicit method calls. C++ is more flexible; Java is simpler. Python has no friend functions; module-level functions or static methods can provide similar operator functionality, but Python's dunder method system covers most operator overloading needs.
 
 ---
 
@@ -4563,7 +4563,7 @@ c.decrement()
 print(c)  # 5
 ```
 
-**Key Differences:** C++ can overload prefix/postfix operators with dummy int parameter to distinguish them. Java doesn't support operator overloading; requires separate named methods. C++ syntax matches built-in types; Java uses method calls.
+**Key Differences:** C++ can overload prefix/postfix operators with dummy int parameter to distinguish them. Java doesn't support operator overloading; requires separate named methods. C++ syntax matches built-in types; Java uses method calls. Python supports `__iadd__`/`__isub__` for compound assignment; it does not have `++`/`--` increment/decrement operators. Use `+= 1` and `-= 1` instead.
 
 ---
 
@@ -4642,7 +4642,7 @@ n1.next = n2
 print(n1.data, n1.next.data)  # 10 20
 ```
 
-**Key Differences:** C++ new returns a pointer; Java new returns a reference. C++ requires manual delete; Java uses garbage collection. C++ new can fail and throw bad_alloc; Java throws OutOfMemoryError. Both allocate on heap.
+**Key Differences:** C++ new returns a pointer; Java new returns a reference. C++ requires manual delete; Java uses garbage collection. C++ new can fail and throw bad_alloc; Java throws OutOfMemoryError. Both allocate on heap. Python has no `new` keyword; objects are created by calling the class: `obj = ClassName()`. Memory allocation is handled by `__new__` (rarely overridden) and initialization by `__init__`.
 
 ---
 
@@ -4725,7 +4725,7 @@ with open("example.txt", "w") as f:
     pass  # File automatically closed
 ```
 
-**Key Differences:** C++ requires explicit delete to free heap memory. Java has automatic garbage collection, no delete needed. C++ delete is immediate and deterministic; Java GC is automatic but timing is unpredictable. C++ offers more control; Java is safer.
+**Key Differences:** C++ requires explicit delete to free heap memory. Java has automatic garbage collection, no delete needed. C++ delete is immediate and deterministic; Java GC is automatic but timing is unpredictable. C++ offers more control; Java is safer. Python has no `delete` operator; use `del obj` to remove a reference (object is garbage collected when reference count reaches zero). Python's GC handles memory automatically.
 
 ---
 
@@ -4800,7 +4800,7 @@ no_modify(my_list)
 print(my_list)  # [1, 2, 3, 4] unchanged
 ```
 
-**Key Differences:** C++ references are true aliases that cannot be null or reassigned. Java "references" are actually object pointers that can be null and reassigned. C++ references are safer for function parameters; Java references are more flexible.
+**Key Differences:** C++ references are true aliases that cannot be null or reassigned. Java "references" are actually object pointers that can be null and reassigned. C++ references are safer for function parameters; Java references are more flexible. In Python, all variables are references (similar to Java); there are no value semantics for objects. Assignment creates a new reference to the same object, not a copy.
 
 ---
 
@@ -4873,7 +4873,7 @@ increment(c)
 print(c.count)  # 2
 ```
 
-**Key Differences:** C++ has explicit reference parameters with &. Java passes object references by value (can modify object contents, not the reference itself). C++ can use const references to prevent modification; Java requires wrapper classes for primitive modification.
+**Key Differences:** C++ has explicit reference parameters with &. Java passes object references by value (can modify object contents, not the reference itself). C++ can use const references to prevent modification; Java requires wrapper classes for primitive modification. Python uses pass-by-object-reference (also called pass-by-assignment); mutable objects (lists, dicts) can be modified through the parameter, while reassigning the parameter doesn't affect the caller.
 
 ---
 
@@ -4956,7 +4956,7 @@ while current:
 # Output: 1 2 3
 ```
 
-**Key Differences:** C++ uses explicit pointers with -> operator. Java uses references with . operator (no pointer syntax). C++ requires manual delete; Java has garbage collection. C++ pointers can do pointer arithmetic; Java references cannot.
+**Key Differences:** C++ uses explicit pointers with -> operator. Java uses references with . operator (no pointer syntax). C++ requires manual delete; Java has garbage collection. C++ pointers can do pointer arithmetic; Java references cannot. Python has no explicit pointers; all object variables are implicitly references. Use `id()` to get the memory address. Python's memory model is similar to Java's reference model.
 
 ---
 
@@ -5044,7 +5044,7 @@ for animal in animals:
     animal.speak()  # Calls derived class method (polymorphism)
 ```
 
-**Key Differences:** C++ uses pointers to base class; Java uses references. Both achieve polymorphism similarly. C++ requires virtual functions; Java methods are virtual by default. C++ needs virtual destructor for proper cleanup; Java handles this automatically.
+**Key Differences:** C++ uses pointers to base class; Java uses references. Both achieve polymorphism similarly. C++ requires virtual functions; Java methods are virtual by default. C++ needs virtual destructor for proper cleanup; Java handles this automatically. Python achieves polymorphism through duck typing and inheritance without explicit pointer syntax; a variable holding any object can call overridden methods dynamically.
 
 ---
 
@@ -5121,7 +5121,7 @@ p.greet()       # Same as -> in C++
 print(p.name)   # Attribute access
 ```
 
-**Key Differences:** C++ uses -> for pointer member access and . for object member access. Java only uses . for all reference access (no distinction). C++ has two operators for clarity; Java's single operator is simpler.
+**Key Differences:** C++ uses -> for pointer member access and . for object member access. Java only uses . for all reference access (no distinction). C++ has two operators for clarity; Java's single operator is simpler. Python has no arrow operator; member access always uses dot notation (`.`) for all objects, since Python variables are always references, never raw pointers.
 
 ---
 
@@ -5192,7 +5192,7 @@ print(r.area())   # Dot operator for method call
 r.width = 10      # Dot operator for assignment
 ```
 
-**Key Differences:** C++ uses . for objects and references, -> for pointers. Java only uses . for all references and static access. C++ has :: for static members; Java uses . Both operators provide member access functionality.
+**Key Differences:** C++ uses . for objects and references, -> for pointers. Java only uses . for all references and static access. C++ has :: for static members; Java uses . Both operators provide member access functionality. Python uses dot notation for all member access (attributes and methods): `obj.attribute`, `obj.method()`; no `->` operator exists since there are no raw pointers.
 
 ---
 
@@ -5273,7 +5273,7 @@ print(square(5))  # 25
 print(cube(3))    # 27
 ```
 
-**Key Differences:** C++ has explicit `inline` keyword (compiler hint). Java JVM automatically inlines methods at runtime (JIT optimization). C++ inlining is compile-time; Java's is runtime. Java's approach is more automated; C++ gives explicit control.
+**Key Differences:** C++ has explicit `inline` keyword (compiler hint). Java JVM automatically inlines methods at runtime (JIT optimization). C++ inlining is compile-time; Java's is runtime. Java's approach is more automated; C++ gives explicit control. Python has no `inline` keyword; the interpreter (CPython) does not perform inlining. Small functions can be written as `lambda` expressions or simple `def` blocks; performance optimization is handled by the runtime.
 
 ---
 
@@ -5363,7 +5363,7 @@ print(c.radius)    # 5
 # c.radius = 10    # AttributeError (no setter)
 ```
 
-**Key Differences:** C++ has const member functions for const-correctness. Java doesn't have this feature; relies on documentation and conventions. C++ enforces immutability at compile-time; Java uses final for variables but not for methods preventing modification.
+**Key Differences:** C++ has const member functions for const-correctness. Java doesn't have this feature; relies on documentation and conventions. C++ enforces immutability at compile-time; Java uses final for variables but not for methods preventing modification. Python has no `const` member functions; use `@property` without a setter to expose read-only attributes, and document read-only intent in docstrings. Frozen dataclasses (`@dataclass(frozen=True)`) provide immutable objects.
 
 ---
 
@@ -5446,7 +5446,7 @@ c.debug = True  # Can modify
 print(c.debug)  # True
 ```
 
-**Key Differences:** C++ has mutable keyword for selective mutability in const contexts. Java doesn't have const member functions, so mutable isn't needed. C++ provides finer control over constness; Java has simpler model.
+**Key Differences:** C++ has mutable keyword for selective mutability in const contexts. Java doesn't have const member functions, so mutable isn't needed. C++ provides finer control over constness; Java has simpler model. Python has no `mutable` keyword; all instance attributes are mutable by default. To make an attribute effectively read-only, use `@property` without a setter or `__slots__`.
 
 ---
 
@@ -5522,7 +5522,7 @@ e2 = Employee("Bob")
 print(Employee.total_employees)  # 2
 ```
 
-**Key Differences:** C++ requires separate definition outside class (except inline static). Java allows initialization at declaration. Both access via ClassName::member (C++) or ClassName.member (Java). Both share single copy across all instances.
+**Key Differences:** C++ requires separate definition outside class (except inline static). Java allows initialization at declaration. Both access via ClassName::member (C++) or ClassName.member (Java). Both share single copy across all instances. Python class variables (defined at class level, outside `__init__`) are shared across all instances, equivalent to static member variables. Access via `ClassName.var` or `self.__class__.var`.
 
 ---
 
@@ -5604,7 +5604,7 @@ print(MathUtils.square(4))        # 16
 print(MathUtils.circle_area(5))   # 78.53975
 ```
 
-**Key Differences:** Both implement static member functions identically. C++ uses :: for access; Java uses . Both can't access instance members or use this. Both are called with class name. Functionality is essentially the same.
+**Key Differences:** Both implement static member functions identically. C++ uses :: for access; Java uses . Both can't access instance members or use this. Both are called with class name. Functionality is essentially the same. Python uses the `@staticmethod` decorator for static methods (no `self` or `cls` parameter); `@classmethod` receives `cls` as the first parameter and can access class-level state.
 
 ---
 
@@ -5683,7 +5683,7 @@ dog = Dog("Rex", "Labrador")
 dog.speak()
 ```
 
-**Key Differences:** Java has super keyword for parent class access. C++ uses BaseClassName:: syntax. Java super() must be first in constructor; C++ uses initializer list. Java's super is simpler; C++ requires class name.
+**Key Differences:** Java has super keyword for parent class access. C++ uses BaseClassName:: syntax. Java super() must be first in constructor; C++ uses initializer list. Java's super is simpler; C++ requires class name. Python uses `super()` (no arguments needed in Python 3) to call parent class methods; it works with MRO to correctly resolve method calls in multiple inheritance hierarchies.
 
 ---
 
