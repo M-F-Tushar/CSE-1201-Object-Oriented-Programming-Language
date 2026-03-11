@@ -5758,7 +5758,7 @@ print(isinstance(dog, Animal))  # True (RTTI check)
 print(isinstance(dog, Cat))     # False
 ```
 
-**Key Differences:** C++ requires virtual functions in the base class for RTTI to work with pointers/references. Java has built-in RTTI for all objects through the `getClass()` method and `instanceof` operator.
+**Key Differences:** C++ requires virtual functions in the base class for RTTI to work with pointers/references. Java has built-in RTTI for all objects through the `getClass()` method and `instanceof` operator. Python provides built-in RTTI through `type()`, `isinstance()`, and `issubclass()`; every object carries full type information at runtime, making RTTI always available.
 
 ---
 
@@ -5813,7 +5813,7 @@ print(type(c) is Circle) # True
 print(type(c) is Shape)  # False (exact type check)
 ```
 
-**Key Differences:** C++ has the `typeid` operator, while Java uses the `getClass()` method. C++ returns a `type_info` object, while Java returns a `Class` object.
+**Key Differences:** C++ has the `typeid` operator, while Java uses the `getClass()` method. C++ returns a `type_info` object, while Java returns a `Class` object. Python uses `type(obj)` to get the exact type of an object and `isinstance(obj, Type)` for type checking; `obj.__class__.__name__` gives the class name as a string.
 
 ---
 
@@ -5879,7 +5879,7 @@ process(Dog())      # Woof!
 process(Animal())   # Not a Dog
 ```
 
-**Key Differences:** C++ has `dynamic_cast` operator, while Java uses `instanceof` check followed by explicit casting. C++ returns `nullptr` on failure for pointers; Java throws `ClassCastException` on invalid casts.
+**Key Differences:** C++ has `dynamic_cast` operator, while Java uses `instanceof` check followed by explicit casting. C++ returns `nullptr` on failure for pointers; Java throws `ClassCastException` on invalid casts. Python has no explicit casting; use `isinstance()` to check type before accessing derived-class-specific attributes. Duck typing reduces the need for explicit downcasting.
 
 ---
 
@@ -5939,7 +5939,7 @@ conf.__dict__['_value'] = 100  # Bypass property (use with caution)
 print(conf.value)  # 100
 ```
 
-**Key Differences:** C++ has `const_cast` to modify constness. Java has no equivalent; `final` variables cannot have their immutability removed.
+**Key Differences:** C++ has `const_cast` to modify constness. Java has no equivalent; `final` variables cannot have their immutability removed. Python has no `const_cast`; there is no const qualifier to remove. Use `@property` without setter for read-only attributes; immutability is enforced at the design level.
 
 ---
 
@@ -5994,7 +5994,7 @@ c = Celsius(100)
 print(int(c.to_fahrenheit()))  # 212
 ```
 
-**Key Differences:** C++ uses `static_cast<Type>(value)` syntax, while Java uses `(Type) value` syntax. Both perform compile-time conversions without runtime overhead.
+**Key Differences:** C++ uses `static_cast<Type>(value)` syntax, while Java uses `(Type) value` syntax. Both perform compile-time conversions without runtime overhead. Python uses built-in conversion functions for type casting: `int()`, `float()`, `str()`, `bool()`; there is no static_cast keyword — all casting is explicit via constructor-like calls.
 
 ---
 
@@ -6050,7 +6050,7 @@ print(hex(i_val))  # Raw bit representation of 3.14
 # This is dangerous (equivalent to reinterpret_cast)
 ```
 
-**Key Differences:** C++ allows `reinterpret_cast` for low-level bit manipulation. Java doesn't allow arbitrary pointer casting; uses `ByteBuffer` or similar classes for byte-level operations.
+**Key Differences:** C++ allows `reinterpret_cast` for low-level bit manipulation. Java doesn't allow arbitrary pointer casting; uses `ByteBuffer` or similar classes for byte-level operations. Python has no `reinterpret_cast`; low-level memory reinterpretation can be done with the `struct` or `ctypes` modules, but is rarely needed due to Python's managed memory model.
 
 ---
 
@@ -6108,7 +6108,7 @@ animal.speak()        # Still calls Dog.speak() - dynamic dispatch
 print(type(animal))   # <class '__main__.Dog'>
 ```
 
-**Key Differences:** Both languages perform upcasting implicitly and safely. The mechanism is essentially the same in both languages.
+**Key Differences:** Both languages perform upcasting implicitly and safely. The mechanism is essentially the same in both languages. Python upcasting is implicit and automatic; assigning a derived class instance to a base class variable or parameter works naturally due to Python's duck typing and inheritance model.
 
 ---
 
@@ -6171,7 +6171,7 @@ process(Dog())    # Fetching!
 process(Animal()) # Sound
 ```
 
-**Key Differences:** C++ uses `dynamic_cast` for safe downcasting. Java uses `instanceof` check with explicit cast. Both require runtime verification.
+**Key Differences:** C++ uses `dynamic_cast` for safe downcasting. Java uses `instanceof` check with explicit cast. Both require runtime verification. Python downcasting is implicit; use `isinstance()` to verify the type before accessing subclass-specific attributes. No explicit cast syntax is needed.
 
 ---
 
@@ -6235,7 +6235,7 @@ print(isinstance(c, Rectangle)) # False
 print(issubclass(Circle, Shape))# True  (class hierarchy check)
 ```
 
-**Key Differences:** Java has the `instanceof` operator. C++ uses `dynamic_cast` and checks for `nullptr` (pointers) or catches `bad_cast` (references).
+**Key Differences:** Java has the `instanceof` operator. C++ uses `dynamic_cast` and checks for `nullptr` (pointers) or catches `bad_cast` (references). Python uses `isinstance(obj, ClassName)` for type checking, equivalent to Java's `instanceof`; `type(obj) is ClassName` gives exact type without considering inheritance.
 
 ---
 
@@ -6298,7 +6298,7 @@ print(type(car) == Car)      # True
 print(type(car) == Vehicle)  # False
 ```
 
-**Key Differences:** C++ uses `type_info` class. Java uses `Class` object with more extensive reflection capabilities. Java's `Class` provides more runtime information.
+**Key Differences:** C++ uses `type_info` class. Java uses `Class` object with more extensive reflection capabilities. Java's `Class` provides more runtime information. Python's equivalent is the `type` object returned by `type(obj)`; `obj.__class__` gives the class, and the `inspect` module provides detailed type information.
 
 ---
 
@@ -6366,7 +6366,7 @@ print(find_max(3.14, 2.71))     # 3.14 (float)
 print(find_max("apple", "banana"))  # banana (str)
 ```
 
-**Key Differences:** C++ templates are compiled for each type used (code generation at compile time). Java generics use type erasure (single compiled version with runtime type checking). C++ templates are more powerful but increase code size.
+**Key Differences:** C++ templates are compiled for each type used (code generation at compile time). Java generics use type erasure (single compiled version with runtime type checking). C++ templates are more powerful but increase code size. Python functions are inherently generic due to duck typing; `functools.singledispatch` enables type-based dispatch; `TypeVar` from `typing` module adds optional type hints for generic functions.
 
 ---
 
@@ -6513,7 +6513,7 @@ s.push(2)
 print(s.pop())  # 2
 ```
 
-**Key Differences:** C++ template classes generate separate code for each type. Java generic classes use type erasure (runtime type information is lost). C++ allows non-type template parameters (e.g., integers).
+**Key Differences:** C++ template classes generate separate code for each type. Java generic classes use type erasure (runtime type information is lost). C++ allows non-type template parameters (e.g., integers). Python classes are inherently generic due to duck typing; use `TypeVar` and `Generic` from the `typing` module to create type-annotated generic classes (e.g., `class Stack(Generic[T]):`).
 
 ---
 
@@ -6578,7 +6578,7 @@ class GeometryUtils:
 print(GeometryUtils.circle_area(5))
 ```
 
-**Key Differences:** C++ uses `namespace` keyword. Java uses `package` system with directory structure. C++ namespaces can be nested and reopened; Java packages correspond to directory hierarchy.
+**Key Differences:** C++ uses `namespace` keyword. Java uses `package` system with directory structure. C++ namespaces can be nested and reopened; Java packages correspond to directory hierarchy. Python uses modules as its primary namespace mechanism; `import module` and `from module import name` provide namespace control. Python also has local, enclosing, global, and built-in scopes (LEGB rule).
 
 ---
 
@@ -6626,7 +6626,7 @@ import numpy as np  # Create alias (like 'using np = numpy')
 # np.array([1, 2, 3])
 ```
 
-**Key Differences:** C++ `using namespace` can be used anywhere in code. Java `import` statements must be at the top of file. C++ can import entire namespaces into local scopes; Java imports are file-level only.
+**Key Differences:** C++ `using namespace` can be used anywhere in code. Java `import` statements must be at the top of file. C++ can import entire namespaces into local scopes; Java imports are file-level only. Python uses `from module import name` or `import module as alias` for namespace imports; `with` statement is Python's equivalent for resource management (context managers).
 
 ---
 
@@ -6699,7 +6699,7 @@ print(int_box.get())  # 42
 print(str_box.get())  # Hello
 ```
 
-**Key Differences:** Both languages use similar syntax with angle brackets. C++ uses `typename` or `class` keyword before the parameter; Java uses just the identifier. Terminology is the same in both.
+**Key Differences:** Both languages use similar syntax with angle brackets. C++ uses `typename` or `class` keyword before the parameter; Java uses just the identifier. Terminology is the same in both. Python uses `TypeVar` from the `typing` module to define formal generic type parameters (e.g., `T = TypeVar('T')`); at runtime, Python classes and functions work with any type due to duck typing.
 
 ---
 
@@ -6770,7 +6770,7 @@ print(process(42))
 print(process("world"))
 ```
 
-**Key Differences:** Java has wildcard types (`?`, `? extends`, `? super`) for flexible generic parameters. C++ doesn't have wildcards; uses template parameters that can accept any type or constrained with concepts (C++20).
+**Key Differences:** Java has wildcard types (`?`, `? extends`, `? super`) for flexible generic parameters. C++ doesn't have wildcards; uses template parameters that can accept any type or constrained with concepts (C++20). Python uses `Any` from `typing` for unconstrained types, and `Union[A, B]` or `A | B` (Python 3.10+) for bounded alternatives; covariance/contravariance is specified with `TypeVar(covariant=True)` or `contravariant=True`.
 
 ---
 
@@ -6844,7 +6844,7 @@ swapped = int_pair.swap()
 print(swapped.first, swapped.second)  # 2 1
 ```
 
-**Key Differences:** C++ creates separate compiled code for each type (template instantiation). Java creates one version and uses type erasure (type information removed at runtime, only one compiled version exists).
+**Key Differences:** C++ creates separate compiled code for each type (template instantiation). Java creates one version and uses type erasure (type information removed at runtime, only one compiled version exists). Python has no template instantiation step; generic classes using `TypeVar` and `Generic` are instantiated like regular classes at runtime, with type checking done by static analyzers like `mypy`.
 
 ---
 
@@ -6927,7 +6927,7 @@ print(my_list)
 print(my_deque)
 ```
 
-**Key Differences:** C++ has STL (part of C++ Standard Library). Java has Collections Framework. STL uses templates; Java uses generics. STL has more emphasis on iterators; Java uses interfaces like `Iterable`.
+**Key Differences:** C++ has STL (part of C++ Standard Library). Java has Collections Framework. STL uses templates; Java uses generics. STL has more emphasis on iterators; Java uses interfaces like `Iterable`. Python's standard library includes rich built-in data structures (list, dict, set, tuple) and the `collections` module (deque, OrderedDict, Counter); the `heapq`, `bisect`, and `itertools` modules provide algorithmic utilities.
 
 ---
 
@@ -6985,7 +6985,7 @@ print(3 in my_set)    # True
 print("key" in my_dict)  # True
 ```
 
-**Key Differences:** C++ STL containers are template-based. Java Collections are interface-based with implementations. C++ has more variety (e.g., `deque`, `multiset`). Both provide similar functionality with different syntax.
+**Key Differences:** C++ STL containers are template-based. Java Collections are interface-based with implementations. C++ has more variety (e.g., `deque`, `multiset`). Both provide similar functionality with different syntax. Python's built-in containers include `list` (dynamic array), `dict` (hash map), `set` (hash set), `tuple` (immutable sequence); the `collections` module adds `deque`, `OrderedDict`, `Counter`, `defaultdict`.
 
 ---
 
@@ -7052,7 +7052,7 @@ evens = list(filter(lambda x: x % 2 == 0, nums))
 print(evens)  # [4, 2, 6]
 ```
 
-**Key Differences:** C++ STL algorithms are in `<algorithm>` header and use iterators. Java algorithms are in `Collections` class and work with collection objects. C++ has more extensive algorithm library.
+**Key Differences:** C++ STL algorithms are in `<algorithm>` header and use iterators. Java algorithms are in `Collections` class and work with collection objects. C++ has more extensive algorithm library. Python provides built-in functions (`sorted()`, `min()`, `max()`, `sum()`) and the `functools`, `itertools`, and `heapq` modules for algorithmic operations; the `collections` module adds higher-level data structure algorithms.
 
 ---
 
@@ -7119,7 +7119,7 @@ for i in MyRange(0, 5):
     print(i, end=" ")  # 0 1 2 3 4
 ```
 
-**Key Differences:** C++ iterators behave like pointers with `*` dereference and `++` increment. Java iterators use `hasNext()` and `next()` methods. C++ has multiple iterator categories; Java has simpler iterator interface.
+**Key Differences:** C++ iterators behave like pointers with `*` dereference and `++` increment. Java iterators use `hasNext()` and `next()` methods. C++ has multiple iterator categories; Java has simpler iterator interface. Python has first-class iterator support; any object implementing `__iter__` and `__next__` is an iterator. Generator functions (using `yield`) provide a concise way to create iterators.
 
 ---
 
@@ -7182,7 +7182,7 @@ vector.pop()            # pop_back
 print(vector)           # [10, 15, 20]
 ```
 
-**Key Differences:** C++ `vector` uses `push_back()` and `[]` operator. Java `ArrayList` uses `add()` and `get()` methods. Both provide dynamic arrays with similar performance characteristics.
+**Key Differences:** C++ `vector` uses `push_back()` and `[]` operator. Java `ArrayList` uses `add()` and `get()` methods. Both provide dynamic arrays with similar performance characteristics. Python's `list` is the equivalent of C++ `vector`; it is a dynamic array that supports `append()`, `extend()`, `insert()`, `pop()`, and indexing. No type constraint — lists can hold mixed types.
 
 ---
 
@@ -7248,7 +7248,7 @@ dll.popleft()       # pop_front
 print(list(dll))    # [1, 2]
 ```
 
-**Key Differences:** C++ `list` is a doubly-linked list with `push_front()` and `push_back()`. Java `LinkedList` is similar with `addFirst()` and `add()`. Both provide O(1) insertion/deletion but O(n) access.
+**Key Differences:** C++ `list` is a doubly-linked list with `push_front()` and `push_back()`. Java `LinkedList` is similar with `addFirst()` and `add()`. Both provide O(1) insertion/deletion but O(n) access. Python's `collections.deque` is the closest equivalent to C++ `std::list` (doubly-linked list); Python's built-in `list` is a dynamic array. `deque` supports O(1) append/pop from both ends.
 
 ---
 
@@ -7313,7 +7313,7 @@ print(queue.popleft())   # dequeue: second
 print(len(queue))        # 1
 ```
 
-**Key Differences:** C++ `queue` uses `push()`, `pop()`, `front()`. Java `Queue` interface uses `offer()`, `poll()`, `peek()`. C++ is a container adapter; Java is an interface with various implementations.
+**Key Differences:** C++ `queue` uses `push()`, `pop()`, `front()`. Java `Queue` interface uses `offer()`, `poll()`, `peek()`. C++ is a container adapter; Java is an interface with various implementations. Python provides `queue.Queue` (thread-safe), `collections.deque` (general use), and `heapq` (priority queue); `deque.appendleft()`/`popleft()` implement FIFO queue behavior.
 
 ---
 
@@ -7376,7 +7376,7 @@ print(stack.pop())  # pop: 20
 print(len(stack))   # 1
 ```
 
-**Key Differences:** Both languages have similar `Stack` classes with `push()`, `pop()`, and `top()`/`peek()` methods. C++ stack is a container adapter; Java `Stack` is a legacy class (Deque recommended for new code).
+**Key Differences:** Both languages have similar `Stack` classes with `push()`, `pop()`, and `top()`/`peek()` methods. C++ stack is a container adapter; Java `Stack` is a legacy class (Deque recommended for new code). Python uses a `list` as a stack with `append()` (push) and `pop()` (pop) operations; `collections.deque` can also be used. There is no dedicated `Stack` class in the standard library.
 
 ---
 
@@ -7438,7 +7438,7 @@ del scores["Bob"]  # Erase
 print("Bob" in scores)  # False
 ```
 
-**Key Differences:** C++ `map` uses `[]` operator and maintains sorted order (typically red-black tree). Java `TreeMap` uses `put()`/`get()` and is also sorted. Java also has `HashMap` for unsorted, faster access.
+**Key Differences:** C++ `map` uses `[]` operator and maintains sorted order (typically red-black tree). Java `TreeMap` uses `put()`/`get()` and is also sorted. Java also has `HashMap` for unsorted, faster access. Python's `dict` is the equivalent of C++ `std::map`/`std::unordered_map`; Python dicts are ordered by insertion order (Python 3.7+) and use hash tables for O(1) average access.
 
 ---
 
@@ -7501,7 +7501,7 @@ idx = 2
 print(my_list[idx + 1])  # 40
 ```
 
-**Key Differences:** C++ has random-access iterators for containers like `vector` and `deque`. Java doesn't have iterator categories; uses `ListIterator` for bidirectional access or direct indexing for random access.
+**Key Differences:** C++ has random-access iterators for containers like `vector` and `deque`. Java doesn't have iterator categories; uses `ListIterator` for bidirectional access or direct indexing for random access. Python supports random access via indexing (`seq[i]`) on sequences like `list` and `tuple`; the `__getitem__` dunder method enables random-access iteration in custom classes.
 
 ---
 
@@ -7570,7 +7570,7 @@ while i < len(lst):
     i += 1
 ```
 
-**Key Differences:** C++ uses `++` and `--` operators on iterators. Java uses `ListIterator` with `next()` and `previous()` methods. C++ has explicit iterator categories; Java doesn't.
+**Key Differences:** C++ uses `++` and `--` operators on iterators. Java uses `ListIterator` with `next()` and `previous()` methods. C++ has explicit iterator categories; Java doesn't. Python supports bidirectional iteration through `reversed()` on sequences and `__reversed__` dunder method; generators only support forward iteration.
 
 ---
 
@@ -7637,7 +7637,7 @@ for val in it:
     print(val, end=" ")  # 1 2 3 4
 ```
 
-**Key Differences:** C++ has explicit forward iterator category for containers like `forward_list`. Java's default `Iterator` is forward-only but isn't categorized as such. Functionality is similar.
+**Key Differences:** C++ has explicit forward iterator category for containers like `forward_list`. Java's default `Iterator` is forward-only but isn't categorized as such. Functionality is similar. Python iterators are forward-only by default; any object implementing `__iter__` and `__next__` provides forward iteration; generators and `iter()` built-in create forward iterators.
 
 ---
 
@@ -7703,7 +7703,7 @@ for val in read_numbers(5):
     print(val, end=" ")  # 0 1 4 9 16
 ```
 
-**Key Differences:** C++ has explicit input iterator category (`istream_iterator`). Java doesn't categorize iterators but uses classes like `Scanner` for input. C++ iterators are more generic; Java uses specialized input classes.
+**Key Differences:** C++ has explicit input iterator category (`istream_iterator`). Java doesn't categorize iterators but uses classes like `Scanner` for input. C++ iterators are more generic; Java uses specialized input classes. Python's iterator protocol (`__iter__`/`__next__`) is the equivalent of input iterators; `for` loops, `map()`, and `filter()` consume iterators sequentially.
 
 ---
 
@@ -7772,7 +7772,7 @@ for i in range(3):
     sys.stdout.write(str(i) + " ")  # 0 1 2
 ```
 
-**Key Differences:** C++ has explicit output iterator category (`ostream_iterator`). Java doesn't have output iterators; uses output stream classes directly. C++ integrates iterators with algorithms; Java uses different approach.
+**Key Differences:** C++ has explicit output iterator category (`ostream_iterator`). Java doesn't have output iterators; uses output stream classes directly. C++ integrates iterators with algorithms; Java uses different approach. Python uses generators, list comprehensions, and `yield` for output-like iteration patterns; `itertools` provides many output-style iterator tools.
 
 ---
 
@@ -7839,7 +7839,7 @@ import sys
 print(sys.getsizeof(my_list))  # Memory size in bytes
 ```
 
-**Key Differences:** C++ containers define `size_type` (usually `std::size_t`, unsigned). Java uses `int` for sizes (signed, limited to 2^31-1). C++ is more flexible for very large containers.
+**Key Differences:** C++ containers define `size_type` (usually `std::size_t`, unsigned). Java uses `int` for sizes (signed, limited to 2^31-1). C++ is more flexible for very large containers. Python uses `len(container)` to get the size of any container; the return type is a plain `int` (arbitrary precision). No separate `size_type` is needed.
 
 ---
 
@@ -7902,7 +7902,7 @@ from collections.abc import Iterator
 print(isinstance(it, Iterator))  # True
 ```
 
-**Key Differences:** C++ containers have `iterator` and `const_iterator` typedefs specific to each container. Java uses generic `Iterator<T>` interface for all collections. C++ iterators act like pointers; Java iterators use methods.
+**Key Differences:** C++ containers have `iterator` and `const_iterator` typedefs specific to each container. Java uses generic `Iterator<T>` interface for all collections. C++ iterators act like pointers; Java iterators use methods. Python iterators are objects implementing `__iter__` and `__next__`; use `iter(collection)` to get an iterator and `next(iterator)` to advance it; `type()` returns the iterator's type.
 
 ---
 
@@ -7968,7 +7968,7 @@ strings = ["a", "b", "c"]
 print(type(strings[0]))  # <class 'str'>
 ```
 
-**Key Differences:** C++ containers define `value_type` typedef for element type. Java uses the generic type parameter directly (no separate typedef). Both achieve type safety but with different mechanisms.
+**Key Differences:** C++ containers define `value_type` typedef for element type. Java uses the generic type parameter directly (no separate typedef). Both achieve type safety but with different mechanisms. Python containers hold references to objects of any type (no explicit `value_type`); use `type(element)` to get the type of a stored value. Type hints like `List[int]` from `typing` add optional static type annotations.
 
 ## Exception Handling
 
