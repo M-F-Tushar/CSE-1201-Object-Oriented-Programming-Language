@@ -8044,7 +8044,7 @@ finally:
     print("Always executed")
 ```
 
-**Key Differences:** Java has a more structured exception hierarchy with checked and unchecked exceptions. C++ doesn't distinguish between checked/unchecked exceptions and allows throwing any type.
+**Key Differences:** Java has a more structured exception hierarchy with checked and unchecked exceptions. C++ doesn't distinguish between checked/unchecked exceptions and allows throwing any type. Python uses `try`/`except`/`else`/`finally` blocks; `raise` is used to throw exceptions. Python exceptions are classes inheriting from `BaseException`; the `else` clause runs when no exception occurs.
 
 ---
 
@@ -8084,7 +8084,7 @@ divide(10, 2)   # Result: 5.0
 divide(10, 0)   # Cannot divide by zero
 ```
 
-**Key Differences:** Both work similarly, but Java's try block can be used with resources (try-with-resources) for automatic resource management.
+**Key Differences:** Both work similarly, but Java's try block can be used with resources (try-with-resources) for automatic resource management. Python's `try` block is identical in concept; Python additionally supports an `else` clause that runs only if no exception was raised, and a `finally` clause that always runs.
 
 ---
 
@@ -8127,7 +8127,7 @@ except ValueError as e:
     print(f"Caught: {e}")  # Caught: Age cannot be negative
 ```
 
-**Key Differences:** C++ can throw any type (int, string, custom objects). Java typically throws objects that inherit from Throwable.
+**Key Differences:** C++ can throw any type (int, string, custom objects). Java typically throws objects that inherit from Throwable. Python uses `raise ExceptionType('message')` to throw exceptions; `raise` alone (inside `except`) re-raises the current exception; `raise ExceptionType() from original` chains exceptions.
 
 ---
 
@@ -8175,7 +8175,7 @@ def process_file(filename):
 process_file("missing.txt")  # File not found: missing.txt
 ```
 
-**Key Differences:** C++ uses `catch(...)` to catch all exceptions. Java uses `catch(Exception e)` for general exceptions but cannot catch Errors this way.
+**Key Differences:** C++ uses `catch(...)` to catch all exceptions. Java uses `catch(Exception e)` for general exceptions but cannot catch Errors this way. Python uses `except ExceptionType as e:` to catch exceptions; multiple exception types can be caught in a tuple: `except (TypeError, ValueError) as e:`; a bare `except:` catches all exceptions.
 
 ---
 
@@ -8225,7 +8225,7 @@ class BankAccount:
         self.balance -= amount
 ```
 
-**Key Differences:** Checked exceptions exist only in Java. C++ treats all exceptions as unchecked, giving more flexibility but less compile-time safety.
+**Key Differences:** Checked exceptions exist only in Java. C++ treats all exceptions as unchecked, giving more flexibility but less compile-time safety. Python has no checked exceptions; all exceptions are unchecked (like Java's unchecked exceptions). Handling exceptions is the programmer's responsibility, not enforced by the compiler.
 
 ---
 
@@ -8266,7 +8266,7 @@ except IndexError as e:
     print(f"Index error: {e}")  # list index out of range
 ```
 
-**Key Differences:** In C++, all exceptions are unchecked. In Java, RuntimeException and its subclasses are unchecked.
+**Key Differences:** In C++, all exceptions are unchecked. In Java, RuntimeException and its subclasses are unchecked. Python's exception model is entirely unchecked (similar to Java's unchecked exceptions); all exceptions are optional to handle. Common Python unchecked exceptions include `ValueError`, `TypeError`, `KeyError`, `IndexError`.
 
 ---
 
@@ -8313,7 +8313,7 @@ except TypeError as e:
     print(f"TypeError: {e}")
 ```
 
-**Key Differences:** Java has RuntimeException as a specific unchecked exception class. C++ has std::runtime_error but all exceptions are unchecked.
+**Key Differences:** Java has RuntimeException as a specific unchecked exception class. C++ has std::runtime_error but all exceptions are unchecked. Python's equivalent is `Exception` (base for most non-system-exiting exceptions); common runtime exceptions include `ValueError`, `TypeError`, `AttributeError`, `KeyError`, `IndexError`, `ZeroDivisionError`.
 
 ---
 
@@ -8354,7 +8354,7 @@ except MemoryError as e:
 # import sys; sys.exit(1)  # Raises SystemExit
 ```
 
-**Key Differences:** Java has a distinct Error class hierarchy separate from Exception. C++ doesn't make this distinction.
+**Key Differences:** Java has a distinct Error class hierarchy separate from Exception. C++ doesn't make this distinction. Python's `BaseException` hierarchy includes `SystemExit`, `KeyboardInterrupt`, and `GeneratorExit` as non-error system exceptions; `Exception` is the base for regular errors. `MemoryError` and `RecursionError` are Python equivalents of Java Errors.
 
 ---
 
@@ -8421,7 +8421,7 @@ except AppError as e:
     print(f"Caused by: {e.__cause__}")
 ```
 
-**Key Differences:** Java has built-in support for chained exceptions via constructors and getCause(). C++ requires manual implementation.
+**Key Differences:** Java has built-in support for chained exceptions via constructors and getCause(). C++ requires manual implementation. Python supports exception chaining with `raise NewException() from original_exception`; the `__cause__` attribute stores the explicit chain, and `__context__` stores the implicit chain.
 
 ---
 
@@ -8471,7 +8471,7 @@ except CustomException as e:
     print(e)  # [Error 404] Something went wrong
 ```
 
-**Key Differences:** Java uses Throwable as the root. C++ uses std::exception as the base but allows throwing any type.
+**Key Differences:** Java uses Throwable as the root. C++ uses std::exception as the base but allows throwing any type. Python's `BaseException` is the equivalent of Java's `Throwable`; all exceptions and system exits derive from it. `Exception` is the base for all regular (catchable) exceptions.
 
 ---
 
@@ -8551,7 +8551,7 @@ c.draw()
 c.resize(2)
 ```
 
-**Key Differences:** C++ uses abstract classes with pure virtual functions. Java has dedicated 'interface' keyword. Java 8+ allows default methods in interfaces.
+**Key Differences:** C++ uses abstract classes with pure virtual functions. Java has dedicated 'interface' keyword. Java 8+ allows default methods in interfaces. Python uses abstract base classes (`abc.ABC` with `@abstractmethod`) to simulate interfaces; duck typing allows interface-like behavior without formal inheritance. Python 3.8+ introduced `Protocol` from `typing` for structural subtyping.
 
 ---
 
@@ -8613,7 +8613,7 @@ class Car(Vehicle):
         print("Car engine stopped")
 ```
 
-**Key Differences:** C++ uses `= 0` syntax for pure virtual functions. Java uses 'abstract' keyword explicitly.
+**Key Differences:** C++ uses `= 0` syntax for pure virtual functions. Java uses 'abstract' keyword explicitly. Python uses `@abstractmethod` decorator from the `abc` module to declare abstract methods; a class containing abstract methods cannot be instantiated and must be subclassed.
 
 ---
 
@@ -8675,7 +8675,7 @@ class JsonDoc(Serializable):
         return json.loads(data)
 ```
 
-**Key Differences:** Java interfaces can have default implementations (Java 8+). C++ abstract classes can have any member types including fields and constructors.
+**Key Differences:** Java interfaces can have default implementations (Java 8+). C++ abstract classes can have any member types including fields and constructors. Python abstract base classes can have abstract methods (`@abstractmethod`), concrete methods (with default implementations), class methods, static methods, and abstract properties (`@property` with `@abstractmethod`).
 
 ---
 
@@ -8735,7 +8735,7 @@ doc.print_info()
 doc.save()
 ```
 
-**Key Differences:** Java uses 'implements' keyword for interfaces and 'extends' for classes. C++ uses inheritance (`:`) for both.
+**Key Differences:** Java uses 'implements' keyword for interfaces and 'extends' for classes. C++ uses inheritance (`:`) for both. Python has no `implements` keyword; implementation of an interface (ABC) is achieved by inheriting from the ABC and providing concrete implementations of all abstract methods.
 
 ---
 
@@ -8791,7 +8791,7 @@ for s in students:
     print(s.name, s.gpa)
 ```
 
-**Key Differences:** C++ uses operator overloading (`<`, `>`, etc.). Java uses the Comparable interface with compareTo() method.
+**Key Differences:** C++ uses operator overloading (`<`, `>`, etc.). Java uses the Comparable interface with compareTo() method. Python uses `functools.total_ordering` combined with `__eq__` and one of `__lt__`, `__le__`, `__gt__`, `__ge__` to implement comparison; `__lt__` enables `sorted()` and `min()`/`max()`.
 
 ---
 
@@ -8852,7 +8852,7 @@ e2 = copy.deepcopy(e1)  # Clone
 print(e2.name, e2.skills)
 ```
 
-**Key Differences:** C++ uses copy constructors and assignment operators. Java uses Cloneable interface and clone() method.
+**Key Differences:** C++ uses copy constructors and assignment operators. Java uses Cloneable interface and clone() method. Python uses the `copy` module (`copy.copy()` for shallow, `copy.deepcopy()` for deep copy) and implements `__copy__`/`__deepcopy__` dunder methods; no `Cloneable` interface is needed.
 
 ---
 
@@ -8904,7 +8904,7 @@ print(isinstance(profile, Serializable))  # True
 print(isinstance(profile, Cacheable))     # True
 ```
 
-**Key Differences:** Java has explicit marker interfaces (Serializable, Cloneable). C++ achieves similar effects through templates, traits, or empty base classes.
+**Key Differences:** Java has explicit marker interfaces (Serializable, Cloneable). C++ achieves similar effects through templates, traits, or empty base classes. Python has no formal marker interface; use abstract base classes with `register()` method or `isinstance()` checks to mark classes. The `__slots__` declaration or custom metaclasses can also serve marking purposes.
 
 ---
 
@@ -8958,7 +8958,7 @@ print(apply(cube, 3))      # 27
 print(apply(lambda x: x + 1, 5))  # 6
 ```
 
-**Key Differences:** C++ uses std::function and lambdas directly. Java uses @FunctionalInterface annotation and has built-in functional interfaces (Predicate, Function, Consumer).
+**Key Differences:** C++ uses std::function and lambdas directly. Java uses @FunctionalInterface annotation and has built-in functional interfaces (Predicate, Function, Consumer). Python uses `Callable` from `typing` for type hints and lambda expressions or regular functions as first-class callable objects; `functools.singledispatch` enables function overloading by type.
 
 ---
 
@@ -9018,7 +9018,7 @@ fs.read()
 fs.write("Hello")
 ```
 
-**Key Differences:** Both support interface inheritance. Java uses 'extends' for interface-to-interface relationships. C++ uses standard inheritance.
+**Key Differences:** Both support interface inheritance. Java uses 'extends' for interface-to-interface relationships. C++ uses standard inheritance. Python ABC subclassing works the same: a child ABC inheriting from a parent ABC must implement all abstract methods from both, or remain abstract itself.
 
 ---
 
@@ -9072,7 +9072,7 @@ dog.breathe() # From Mammal
 dog.bark()    # Own method
 ```
 
-**Key Differences:** Java uses 'extends' keyword. C++ uses colon (`:`) with access specifiers (public, private, protected).
+**Key Differences:** Java uses 'extends' keyword. C++ uses colon (`:`) with access specifiers (public, private, protected). Python uses `class Child(Parent):` syntax for both class inheritance and ABC extension; for multiple inheritance, `class Child(Parent1, Parent2):` is used. There is no separate `extends` keyword.
 
 ---
 
@@ -9151,7 +9151,7 @@ acc.deposit(500)
 print(acc.get_balance())  # 1500
 ```
 
-**Key Differences:** Both languages support encapsulation similarly through access modifiers (private, public, protected).
+**Key Differences:** Both languages support encapsulation similarly through access modifiers (private, public, protected). Python achieves encapsulation through naming conventions (`_` for protected, `__` for name-mangled private) and `@property` decorators; enforcement is by convention rather than compiler restriction.
 
 ---
 
@@ -9207,7 +9207,7 @@ print(c.color)     # red (inherited)
 print(c.area())    # 78.5
 ```
 
-**Key Differences:** C++ supports multiple inheritance. Java allows single inheritance for classes but multiple inheritance through interfaces.
+**Key Differences:** C++ supports multiple inheritance. Java allows single inheritance for classes but multiple inheritance through interfaces. Python supports both single and multiple inheritance with `class Child(Parent):` or `class C(A, B):`; uses MRO (C3 linearization) for method resolution. `super()` works correctly in multiple inheritance hierarchies.
 
 ---
 
@@ -9271,7 +9271,7 @@ make_sound(Dog("Rex"))   # Rex: Woof!
 make_sound(Cat("Whiskers"))  # Whiskers: Meow!
 ```
 
-**Key Differences:** Both support polymorphism. C++ requires 'virtual' keyword for runtime polymorphism. Java methods are virtual by default.
+**Key Differences:** Both support polymorphism. C++ requires 'virtual' keyword for runtime polymorphism. Java methods are virtual by default. Python achieves polymorphism through duck typing (no type declaration needed) and method overriding; any object with the required method can be used polymorphically without a shared base class.
 
 ---
 
@@ -9334,7 +9334,7 @@ db.connect()
 db.execute("SELECT * FROM users")
 ```
 
-**Key Differences:** Both support abstraction through abstract classes and interfaces. Implementation is very similar.
+**Key Differences:** Both support abstraction through abstract classes and interfaces. Implementation is very similar. Python implements abstraction using `abc.ABC` and `@abstractmethod`; abstract classes define the interface (what), and concrete subclasses provide the implementation (how).
 
 ---
 
@@ -9390,7 +9390,7 @@ student.set_teacher(teacher)
 print(f"{student.name}'s teacher: {student.teacher.name}")
 ```
 
-**Key Differences:** No significant difference. Both use references/pointers to establish associations.
+**Key Differences:** No significant difference. Both use references/pointers to establish associations. Python implements association by storing references to other objects as instance attributes; the associated objects' lifetimes are independent of each other.
 
 ---
 
@@ -9453,7 +9453,7 @@ car = Car("Tesla", engine)
 car.drive()
 ```
 
-**Key Differences:** Implementation is similar. The conceptual difference between aggregation and association is more about design intent than syntax.
+**Key Differences:** Implementation is similar. The conceptual difference between aggregation and association is more about design intent than syntax. Python implements aggregation by passing existing objects to a class constructor and storing references; the contained objects can exist independently of the container.
 
 ---
 
@@ -9515,7 +9515,7 @@ h.live()
 del h  # Heart also destroyed
 ```
 
-**Key Differences:** C++ can use value semantics (member objects) for true composition. Java uses references but implies ownership through design.
+**Key Differences:** C++ can use value semantics (member objects) for true composition. Java uses references but implies ownership through design. Python implements composition by creating contained objects inside `__init__` so they are tightly coupled to the owning object's lifetime; when the owner is garbage collected, contained objects may be too (if no other references exist).
 
 ---
 
@@ -9561,7 +9561,7 @@ print(isinstance(dog, Animal)) # True (Dog is-a Animal)
 print(issubclass(Dog, Animal)) # True
 ```
 
-**Key Differences:** Both languages implement "is-a" through inheritance with similar semantics.
+**Key Differences:** Both languages implement "is-a" through inheritance with similar semantics. Python implements 'is-a' relationships through class inheritance; `isinstance(obj, ParentClass)` verifies the relationship at runtime. Duck typing also enables 'is-a' without explicit inheritance.
 
 ---
 
@@ -9607,7 +9607,7 @@ car = Car("BMW")
 car.describe()  # BMW has 4 wheels of size 18
 ```
 
-**Key Differences:** Implementation is nearly identical. Both use member variables to establish "has-a" relationships.
+**Key Differences:** Implementation is nearly identical. Both use member variables to establish "has-a" relationships. Python implements 'has-a' relationships through composition and aggregation; an object stores references to other objects as instance attributes (`self.engine = Engine()`).
 
 ---
 
@@ -9651,7 +9651,7 @@ print(isinstance(apple, Apple))       # True
 print(apple.taste())                   # sweet (inherited)
 ```
 
-**Key Differences:** No technical difference; it's a semantic interpretation of inheritance in both languages.
+**Key Differences:** No technical difference; it's a semantic interpretation of inheritance in both languages. Python's `isinstance()` and `issubclass()` functions verify 'is-kind-of' relationships; the MRO makes the full inheritance chain queryable via `ClassName.__mro__`.
 
 ---
 
@@ -9703,7 +9703,7 @@ dog.nurse_young()  # From Mammal
 dog.bark()       # From Dog
 ```
 
-**Key Differences:** Both support class hierarchies through inheritance with similar structures.
+**Key Differences:** Both support class hierarchies through inheritance with similar structures. Python supports hierarchical classification through class inheritance; the `__mro__` attribute shows the full class hierarchy, and `issubclass()` verifies hierarchical relationships.
 
 ---
 
@@ -9774,7 +9774,7 @@ fm = FileManager()
 fm.open_file("data.txt")
 ```
 
-**Key Differences:** Both achieve code reusability through similar OOP mechanisms.
+**Key Differences:** Both achieve code reusability through similar OOP mechanisms. Python promotes code reusability through inheritance, mixins, modules, and composition; Python's dynamic nature and duck typing make it easy to reuse code across different class hierarchies.
 
 ---
 
@@ -9829,7 +9829,7 @@ emp.give_raise(10)
 print(emp.get_salary())  # 55000.0
 ```
 
-**Key Differences:** Both use private access modifiers for data hiding with identical semantics.
+**Key Differences:** Both use private access modifiers for data hiding with identical semantics. Python implements data hiding through naming conventions: single underscore (`_attr`) signals 'internal use', and double underscore (`__attr`) triggers name mangling (`_ClassName__attr`). No true private access enforcement exists.
 
 ---
 
@@ -9889,7 +9889,7 @@ tv.turn_on()   # Simple interface
 # tv.__initialize_hardware()  # AttributeError (hidden)
 ```
 
-**Key Differences:** Both implement information hiding through private members and methods identically.
+**Key Differences:** Both implement information hiding through private members and methods identically. Python uses `@property` decorators and underscore naming conventions for information hiding; the `__slots__` attribute can restrict attribute access, and modules hide internals via `_` prefix (excluded from `import *`).
 
 ---
 
@@ -9960,7 +9960,7 @@ s.push(2)
 print(s.peek())  # 2
 ```
 
-**Key Differences:** Both achieve class abstraction through encapsulation with similar approaches.
+**Key Differences:** Both achieve class abstraction through encapsulation with similar approaches. Python achieves class abstraction using `abc.ABC` with `@abstractmethod`; the abstract interface is defined in the ABC, and concrete classes provide implementations. Duck typing offers an alternative without formal inheritance.
 
 ---
 
